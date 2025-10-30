@@ -48,7 +48,7 @@
 
 <div
   id="three-pillars"
-  class="relative w-full min-h-screen flex flex-col justify-center items-center bg-white text-gray-900 py-16 px-6"
+  class="relative w-full min-h-screen flex flex-col justify-center items-center text-gray-900 py-16 px-6"
 >
   <div class="max-w-3xl text-center mb-16">
     <h2
