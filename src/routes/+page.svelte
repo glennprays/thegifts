@@ -14,7 +14,6 @@
       Take the Spiritual Gift Test and uncover how you were designed to serve.
     </p>
 
-    <!-- Animated Arrow -->
     <button
       aria-label="Scroll to Three Pillars Section"
       on:click={() => {
@@ -36,7 +35,6 @@
     </button>
   </div>
 
-  <!-- Image Section -->
   <div
     class="relative w-full h-[200px] sm:h-[260px] md:h-[300px] lg:h-[360px] overflow-hidden"
   >
@@ -166,7 +164,7 @@
     and purpose.
   </p>
   <a
-    href="/start-test"
+    href="/onboarding"
     class="bg-white text-primary font-graphik font-semibold px-6 py-3 rounded-md text-lg hover:bg-accent transition"
   >
     Start the Test

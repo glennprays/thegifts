@@ -1,6 +1,7 @@
 <script lang="ts">
   import logoUrl from "$lib/assets/logo.svg";
   export let logoSrc: string = logoUrl;
+  import { page } from "$app/stores";
 </script>
 
 <nav
@@ -11,12 +12,14 @@
     <span class="text-2xl font-sans font-medium select-none"> TheGifts </span>
   </div>
 
-  <div>
-    <a
-      href="/start-test"
-      class="bg-primary hover:bg-secondary text-white rounded-md text-sm font-semibold px-3.5 py-1.5 transition-colors duration-200 shadow-sm"
-    >
-      Start Test
-    </a>
-  </div>
+  {#if $page.url.pathname === "/"}
+    <div>
+      <a
+        href="/onboarding"
+        class="bg-primary hover:bg-secondary text-white rounded-md text-sm font-semibold px-3.5 py-1.5 transition-colors duration-200 shadow-sm"
+      >
+        Start Test
+      </a>
+    </div>
+  {/if}
 </nav>
