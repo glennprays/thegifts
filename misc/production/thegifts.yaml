@@ -25,6 +25,9 @@ spec:
           env:
             - name: NODE_ENV
               value: "production"
+          envFrom:
+            - secretRef:
+                name: thegifts-secret
           resources:
             requests:
               cpu: "100m"
