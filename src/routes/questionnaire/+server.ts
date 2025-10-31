@@ -1,7 +1,6 @@
-import prisma from '$lib/server/prisma';
 import { CalculateCategoryScores } from '$lib/utils/category';
 import { json } from '@sveltejs/kit';
-import type { Prisma } from '../../../prisma/src/generated/prisma/client';
+import db from '$lib/server/db';
 
 // @ts-ignore
 export async function POST({ request }) {
@@ -27,16 +26,14 @@ export async function POST({ request }) {
 
 
   try {
-    const safeAnswers = JSON.parse(JSON.stringify(data));
-    const safeResults = JSON.parse(JSON.stringify(results));
-    const saved = await prisma.assessmentResult.create({
-      data: {
-        name,
-        answer: safeAnswers,
-        result: safeResults
-      }
-    })
-    return json({ success: true, id: saved.id, createdAt: saved.createdAt });
+    const query = `
+      INSERT INTO assessment_result (name, answer, result)
+      VALUES ($1, $2, $3)
+      RETURNING id
+    `;
+    const values = [name, JSON.stringify(data), JSON.stringify(results)];
+    const { rows } = await db.query(query, values);
+    return json({ success: true, id: rows[0].id });
   } catch (err) {
     console.error('DB save error', err);
     return json({ error: 'Failed to save' }, { status: 500 });
