@@ -23,7 +23,6 @@
 		"eslint": "^9.36.0",
 		"eslint-plugin-svelte": "^3.12.4",
 		"globals": "^16.4.0",
-		"prisma": "^6.18.0",
 		"svelte": "^5.39.5",
 		"svelte-check": "^4.3.2",
 		"tsx": "^4.20.6",
@@ -32,7 +31,6 @@
 		"vite": "^7.1.7"
 	},
 	"dependencies": {
-		"@prisma/client": "^6.18.0",
 		"@prisma/extension-accelerate": "^2.0.2",
 		"@tailwindcss/vite": "^4.1.16",
 		"dotenv": "^17.2.3",
