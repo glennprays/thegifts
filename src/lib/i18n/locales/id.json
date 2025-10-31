@@ -1,0 +1,63 @@
+{
+  "components": {
+    "navbar": {
+      "startTest": "Mulai Tes",
+      "restartTest": "Ulangi Tes",
+      "continueTest": "Lanjutkan Tes"
+    },
+    "controller": {
+      "next": "Berikutnya",
+      "previous": "Sebelumnya",
+      "submit": "Kirim"
+    },
+    "progressBar": {
+      "step": "Langkah",
+      "of": "dari"
+    },
+    "assesment": {
+      "title": "Pilih seberapa akurat setiap pernyataan mencerminkan diri Anda."
+    }
+  },
+  "pages": {
+    "home": {
+      "greeting": {
+        "text": "Pahami Tujuan yang Telah Ditanamkan Tuhan di Dalam",
+        "subject": "Dirimu",
+        "subtext": "Ikuti Tes Karunia Rohani dan temukan bagaimana Anda dirancang untuk melayani."
+      },
+      "description": {
+        "heading": "Temukan Karunia Anda, Hidup dengan Tujuan.",
+        "subheading": "Setiap orang memiliki karunia unik. Pelajari untuk memahaminya, mengembangkannya, dan menggunakannya untuk memberi dampak positif.",
+        "pillars": {
+          "pillar1": {
+            "title": "Belajar",
+            "text": "Perdalam pemahaman tentang siapa diri Anda dan apa yang membuat Anda unik melalui pembelajaran dan refleksi."
+          },
+          "pillar2": {
+            "title": "Bertumbuh",
+            "text": "Kembangkan talenta Anda, perkuat iman, dan bangun karakter untuk menjalani panggilan hidup Anda."
+          },
+          "pillar3": {
+            "title": "Melayani",
+            "text": "Gunakan karunia Anda untuk memberi dampak bagi orang lain, membangun komunitas, dan mencerminkan kasih melalui tindakan nyata."
+          }
+        }
+      },
+      "callToAction": {
+        "text": "Siap Menemukan Karunia Anda?",
+        "subtext": "Ikuti Tes Karunia Rohani hari ini dan mulailah perjalanan menuju penemuan diri dan tujuan hidup yang sejati.",
+        "buttons": {
+          "startTest": "Mulai Tes",
+          "restartTest": "Ulangi Tes",
+          "continueTest": "Lanjutkan Tes"
+        }
+      }
+    },
+    "onboarding": {
+      "title": "Mari Kita Mulai!",
+      "formTitle": "Siapa nama Anda?",
+      "formPlaceholder": "Masukkan nama Anda",
+      "formButton": "Lanjutkan"
+    }
+  }
+}

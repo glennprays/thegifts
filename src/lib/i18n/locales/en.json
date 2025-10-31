@@ -1,0 +1,63 @@
+{
+  "components": {
+    "navbar": {
+      "startTest": "Start Test",
+      "restartTest": "Restart Test",
+      "continueTest": "Continue Test"
+    },
+    "controller": {
+      "next": "Next",
+      "previous": "Previous",
+      "submit": "Submit"
+    },
+    "progressBar": {
+      "step": "Step",
+      "of": "of"
+    },
+    "assesment": {
+      "title": "Choose how accurately each statement reflects you."
+    }
+  },
+  "pages": {
+    "home": {
+      "greeting": {
+        "text": "Understand the Purpose God Planted in",
+        "subject": "You",
+        "subtext": "Take the Spiritual Gift Test and uncover how you were designed to serve."
+      },
+      "description": {
+        "heading": "Discover Your Gifts, Live with Purpose.",
+        "subheading": "Everyone has a unique gift. Learn to understand it, nurture it, and use it to make a difference.",
+        "pillars": {
+          "pillar1": {
+            "title": "Learn",
+            "text": "Deepen your understanding of who you are and what makes you unique through study and reflection."
+          },
+          "pillar2": {
+            "title": "Grow",
+            "text": "Cultivate your talents, strengthen your faith, and develop the character to live your calling."
+          },
+          "pillar3": {
+            "title": "Serve",
+            "text": "Use your gifts to impact others, build community, and reflect compassion through action."
+          }
+        }
+      },
+      "callToAction": {
+        "text": "Ready to Discover Your Gifts?",
+        "subtext": "Take the Spiritual Gift Test today and embark on a journey of self-discovery and purpose.",
+        "buttons": {
+          "startTest": "Start Test",
+          "restartTest": "Restart Test",
+          "continueTest": "Continue Test"
+        }
+      }
+    },
+    "onboarding": {
+      "title": "Let's Get Started!",
+      "formTitle": "What's your name?",
+      "formPlaceholder": "Enter your name",
+      "formButton": "Continue"
+    }
+  }
+}

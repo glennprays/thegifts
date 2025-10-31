@@ -6,6 +6,7 @@
   import Sprout from "$lib/icons/Sprout.svelte";
   import { RestartTest } from "$lib/utils/utils";
   import { onMount } from "svelte";
+  import { _ } from "svelte-i18n";
 
   let savedName: string | null = null;
   onMount(() => {
@@ -22,11 +23,11 @@
     <h1
       class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold font-graphik leading-tight text-gray-900"
     >
-      Understand the Purpose God Planted in
-      <span class="text-secondary">You</span>.
+      {$_("pages.home.greeting.text")}
+      <span class="text-secondary">{$_("pages.home.greeting.subject")}</span>.
     </h1>
     <p class="mt-6 text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl">
-      Take the Spiritual Gift Test and uncover how you were designed to serve.
+      {$_("pages.home.greeting.subtext")}
     </p>
 
     <button
@@ -69,11 +70,10 @@
     <h2
       class="text-3xl sm:text-4xl md:text-5xl font-semibold font-graphik leading-tight mb-4"
     >
-      Discover Your Gifts, Live with Purpose.
+      {$_("pages.home.description.heading")}
     </h2>
     <p class="text-gray-600 text-base sm:text-lg">
-      Everyone has a unique gift. Learn to understand it, nurture it, and use it
-      to make a difference.
+      {$_("pages.home.description.subheading")}
     </p>
   </div>
 
@@ -88,10 +88,11 @@
       >
         <Book />
       </div>
-      <h3 class="text-xl font-semibold mb-2">Learn</h3>
+      <h3 class="text-xl font-semibold mb-2">
+        {$_("pages.home.description.pillars.pillar1.title")}
+      </h3>
       <p class="text-gray-600 text-sm sm:text-base">
-        Deepen your understanding of who you are and what makes you unique
-        through study and reflection.
+        {$_("pages.home.description.pillars.pillar1.text")}
       </p>
     </div>
 
@@ -103,10 +104,11 @@
       >
         <Sprout />
       </div>
-      <h3 class="text-xl font-semibold mb-2">Grow</h3>
+      <h3 class="text-xl font-semibold mb-2">
+        {$_("pages.home.description.pillars.pillar2.title")}
+      </h3>
       <p class="text-gray-600 text-sm sm:text-base">
-        Cultivate your talents, strengthen your faith, and develop the character
-        to live your calling.
+        {$_("pages.home.description.pillars.pillar2.text")}
       </p>
     </div>
 
@@ -118,10 +120,11 @@
       >
         <Diversity />
       </div>
-      <h3 class="text-xl font-semibold mb-2">Serve</h3>
+      <h3 class="text-xl font-semibold mb-2">
+        {$_("pages.home.description.pillars.pillar3.title")}
+      </h3>
       <p class="text-gray-600 text-sm sm:text-base">
-        Use your gifts to impact others, build community, and reflect compassion
-        through action.
+        {$_("pages.home.description.pillars.pillar3.text")}
       </p>
     </div>
   </div>
@@ -136,18 +139,19 @@
     </h2>
   {/if}
   <h2 class="text-3xl sm:text-4xl md:text-5xl font-graphik font-semibold mb-4">
-    Ready to Discover Your Gifts?
+    {$_("pages.home.callToAction.text")}
   </h2>
   <p class="text-lg sm:text-xl mb-8 max-w-2xl font-graphik">
-    Take the Spiritual Gift Test today and embark on a journey of self-discovery
-    and purpose.
+    {$_("pages.home.callToAction.subtext")}
   </p>
   <div class="flex flex-col md:flex-row gap-4">
     <a
       href={savedName ? "/questionnaire" : "/onboarding"}
       class="bg-white text-primary font-graphik font-semibold px-6 py-3 rounded-md text-lg hover:bg-accent transition"
     >
-      {savedName ? "Continue Test" : "Start Test"}
+      {savedName
+        ? $_("pages.home.callToAction.buttons.continueTest")
+        : $_("pages.home.callToAction.buttons.startTest")}
     </a>
     {#if savedName}
       <a

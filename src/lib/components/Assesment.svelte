@@ -1,39 +1,47 @@
 <script lang="ts">
+  import { _ } from "svelte-i18n";
   export let questions: { id: number; en: string; in: string }[] = [];
 
   export let results: ResultsMap = {};
+  import { locale } from "svelte-i18n";
+  $: currentLocale = $locale;
 
   const options: RatingOption[] = [
     {
-      text: "Strongly Disagree",
+      text_en: "Strongly Disagree",
+      text_id: "Sangat Tidak Setuju",
       rating: 1,
       color: "text-red-400",
       bg: "bg-red-100",
       checked: "bg-red-400",
     },
     {
-      text: "Disagree",
+      text_en: "Disagree",
+      text_id: "Tidak Setuju",
       rating: 2,
       color: "text-orange-400",
       bg: "bg-orange-100",
       checked: "bg-orange-400",
     },
     {
-      text: "Neutral",
+      text_en: "Neutral",
+      text_id: "Netral",
       rating: 3,
       color: "text-gray-400",
       bg: "bg-gray-100",
       checked: "bg-gray-400",
     },
     {
-      text: "Agree",
+      text_en: "Agree",
+      text_id: "Setuju",
       rating: 4,
       color: "text-green-500",
       bg: "bg-green-100",
       checked: "bg-green-500",
     },
     {
-      text: "Strongly Agree",
+      text_en: "Strongly Agree",
+      text_id: "Sangat Setuju",
       rating: 5,
       color: "text-teal-500",
       bg: "bg-teal-100",
@@ -51,7 +59,7 @@
     <h2
       class="text-xl md:text-2xl font-semibold text-gray-800 mb-6 text-center"
     >
-      Choose how accurately each statement reflects you.
+      {$_("components.assesment.title")}
     </h2>
 
     <div class="flex justify-between items-baseline text-center px-4">
@@ -68,7 +76,7 @@
             </div>
           </div>
           <span class="text-xs font-medium text-gray-600 mt-1"
-            >{option.text}</span
+            >{currentLocale === "id" ? option.text_id : option.text_en}</span
           >
         </div>
       {/each}
@@ -78,14 +86,16 @@
   <div class="space-y-4">
     {#each questions as question}
       <div class="p-5 rounded-lg shadow-md border border-gray-100">
-        <h3 class="font-medium text-gray-700 mb-4">{question.in}</h3>
+        <h3 class="font-medium text-gray-700 mb-4">
+          {currentLocale === "id" ? question.in : question.en}
+        </h3>
 
         <div class="flex justify-between items-center text-center px-2">
           {#each options as option}
             <button
               class="w-1/5 flex justify-center items-center p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 {option.color} rounded-full"
               on:click={() => selectOption(question.id, option.rating)}
-              aria-label={`Rate: ${option.text}`}
+              aria-label={`Rate: ${option.text_en}`}
             >
               <div
                 class="
