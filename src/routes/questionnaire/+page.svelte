@@ -32,6 +32,16 @@
     if (savedResult) {
       try {
         assessmentResults = JSON.parse(savedResult);
+        if (assessmentResults && Object.keys(assessmentResults).length > 0) {
+          const answeredIds = Object.keys(assessmentResults);
+          const lastAnsweredIndex = assessmentQuestions.findIndex(
+            (q) => q.id === Number(answeredIds[answeredIds.length - 1]),
+          );
+          if (lastAnsweredIndex >= 0) {
+            currentPage =
+              Math.floor(lastAnsweredIndex / QUESTIONS_PER_PAGE) + 1;
+          }
+        }
       } catch (e) {
         localStorage.removeItem(RESULTS_STORAGE_KEY);
         console.error("Could not parse saved results:", e);
@@ -66,6 +76,10 @@
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  $: isDisabledNext =
+    currentPage === totalPages ||
+    pagedQuestions.some((q) => !assessmentResults[q.id]);
 </script>
 
 <div
@@ -74,7 +88,7 @@
   <ProgressBar {currentPage} {totalPages} color="var(--color-accent)" />
   <Assesment questions={pagedQuestions} bind:results={assessmentResults} />
   <Controller
-    isDisabledNext={currentPage === totalPages}
+    {isDisabledNext}
     isDisabledPrev={currentPage === 1}
     on:next={handleNext}
     on:prev={handlePrev}
