@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 /* Graphik - Thin (100) */
@@ -145,10 +146,11 @@
 
 @theme {
   --font-graphik: 'Graphik', sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
 
   /* ========== COLOR SYSTEM ========== */
-  --color-primary: #4A6FA5; /* Deep Serenity Blue */
-  --color-secondary: #A8C686; /* Olive Renewal */
+  --color-primary: #1B1B1B; 
+  --color-secondary: #7c9a2f; /* Olive Renewal */
   --color-accent: #F6D167; /* Faithful Gold */
 
   --color-bg: #F9FAFB; /* Off-white background */
@@ -162,7 +164,11 @@
   --color-error: #E63946;
 }
 
-* {
-  font-family: var(--font-graphik);
+:root {
+  color-scheme: light;
+}
+
+body {
+  font-family: var(--font-poppins);
   color: var(--color-text-primary);
 }
