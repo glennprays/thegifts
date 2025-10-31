@@ -5,6 +5,7 @@
     RESULTS_STORAGE_KEY,
   } from "$lib/constants/constants";
   import { onMount } from "svelte";
+  import { _ } from "svelte-i18n";
 
   let name = "";
 
@@ -33,7 +34,7 @@
 >
   <div class="text-center mt-[-90px]">
     <h1 class="text-4xl md:text-5xl font-graphik font-bold">
-      Let's Get Started!
+      {$_("pages.onboarding.title")}
     </h1>
     <form class="mt-8" on:submit|preventDefault={handleSubmit}>
       <div class="mb-4">
@@ -41,7 +42,7 @@
           for="name"
           class="block text-gray-700 text-sm font-semibold mb-2"
         >
-          What's your name?
+          {$_("pages.onboarding.formTitle")}
         </label>
         <input
           type="text"
@@ -50,7 +51,7 @@
           bind:value={name}
           required
           maxlength="50"
-          placeholder="Enter your name"
+          placeholder={$_("pages.onboarding.formPlaceholder")}
           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
         />
       </div>
@@ -58,7 +59,7 @@
         type="submit"
         class="bg-primary hover:bg-secondary text-white rounded-md text-sm font-semibold px-4 py-2 transition-colors duration-200 shadow-sm"
       >
-        Start the Test
+        {$_("pages.onboarding.formButton")}
       </button>
     </form>
   </div>

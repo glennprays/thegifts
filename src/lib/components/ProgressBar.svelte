@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { _, isLoading } from "svelte-i18n";
   export let currentPage: number = 0;
   export let totalPages: number = 1;
   export let color: string = "var(--color-accent)";
@@ -17,7 +18,10 @@
         {Math.round(progress)}%
       </span>
       <span>
-        Step {currentPage} of {totalPages}
+        {$_("components.progressBar.step")}
+        {currentPage}
+        {$_("components.progressBar.of")}
+        {totalPages}
       </span>
     </div>
   {/if}
