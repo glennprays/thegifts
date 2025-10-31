@@ -5,43 +5,48 @@
 
   const options: RatingOption[] = [
     {
-      value: "Strongly Disagree",
+      text: "Strongly Disagree",
+      rating: 1,
       color: "text-red-400",
       bg: "bg-red-100",
       checked: "bg-red-400",
     },
     {
-      value: "Disagree",
+      text: "Disagree",
+      rating: 2,
       color: "text-orange-400",
       bg: "bg-orange-100",
       checked: "bg-orange-400",
     },
     {
-      value: "Neutral",
+      text: "Neutral",
+      rating: 3,
       color: "text-gray-400",
       bg: "bg-gray-100",
       checked: "bg-gray-400",
     },
     {
-      value: "Agree",
+      text: "Agree",
+      rating: 4,
       color: "text-green-500",
       bg: "bg-green-100",
       checked: "bg-green-500",
     },
     {
-      value: "Strongly Agree",
+      text: "Strongly Agree",
+      rating: 5,
       color: "text-teal-500",
       bg: "bg-teal-100",
       checked: "bg-teal-500",
     },
   ];
 
-  function selectOption(question: string, rating: string): void {
-    results = { ...results, [question]: rating };
+  function selectOption(id: number, rating: number): void {
+    results = { ...results, [id]: rating };
   }
 </script>
 
-<div class="p-4 rounded-xl shadow-lg max-w-3xl mx-auto space-y-4 mb-8">
+<div class="p-4 rounded-xl md:shadow-lg max-w-3xl mx-auto space-y-4 mb-8">
   <div class="p-6 pb-2 rounded-t-xl">
     <h2
       class="text-xl md:text-2xl font-semibold text-gray-800 mb-6 text-center"
@@ -63,7 +68,7 @@
             </div>
           </div>
           <span class="text-xs font-medium text-gray-600 mt-1"
-            >{option.value}</span
+            >{option.text}</span
           >
         </div>
       {/each}
@@ -79,19 +84,19 @@
           {#each options as option}
             <button
               class="w-1/5 flex justify-center items-center p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 {option.color} rounded-full"
-              on:click={() => selectOption(question.in, option.value)}
-              aria-label={`Rate: ${option.value}`}
+              on:click={() => selectOption(question.id, option.rating)}
+              aria-label={`Rate: ${option.text}`}
             >
               <div
                 class="
                 w-8 h-8 rounded-full border-2 border-gray-300 transition-all duration-150 ease-in-out
                 flex items-center justify-center
-                {results[question.in] === option.value
+                {results[question.id] === option.rating
                   ? option.checked + ' border-transparent'
                   : 'hover:border-gray-500'}
               "
               >
-                {#if results[question.in] === option.value}
+                {#if results[question.id] === option.rating}
                   <svg
                     class="w-5 h-5 text-white"
                     fill="currentColor"

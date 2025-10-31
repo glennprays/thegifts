@@ -1,8 +1,9 @@
 interface ResultsMap {
-  [question: string]: string;
+  [id: number]: number;
 }
 interface RatingOption {
-  value: string;
+  text: string;
+  rating: number;
   color: string;
   bg: string;
   checked: string;

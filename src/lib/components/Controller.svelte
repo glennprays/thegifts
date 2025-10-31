@@ -1,8 +1,8 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
 
-  export let currentPage = 1;
-  export let totalPages = 5;
+  export let isDisabledNext = false;
+  export let isDisabledPrev = false;
 
   const dispatch = createEventDispatcher();
   const handleNext = () => dispatch("next");
@@ -13,14 +13,14 @@
   <button
     class="px-4 py-2 bg-gray-300 rounded-full disabled:opacity-50"
     on:click={handlePrev}
-    disabled={currentPage === 1}
+    disabled={isDisabledPrev}
   >
     Previous
   </button>
   <button
     class="px-4 py-2 bg-primary text-white rounded-full disabled:opacity-50 hover:bg-secondary"
     on:click={handleNext}
-    disabled={currentPage === totalPages}
+    disabled={isDisabledNext}
   >
     Next
   </button>

@@ -1,3 +1,15 @@
+<script lang="ts">
+  import { NAME_STORAGE_KEY } from "$lib/constants/constants";
+  import Restart from "$lib/icons/Restart.svelte";
+  import { RestartTest } from "$lib/utils/utils";
+  import { onMount } from "svelte";
+
+  let savedName: string | null = null;
+  onMount(() => {
+    savedName = localStorage.getItem(NAME_STORAGE_KEY);
+  });
+</script>
+
 <div
   class="relative w-full min-h-screen flex flex-col justify-between items-center overflow-hidden"
 >
@@ -130,20 +142,7 @@
     >
       <div
         class="flex items-center justify-center w-16 h-16 rounded-full bg-yellow-100 mb-4 group-hover:bg-yellow-200 transition"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-8 h-8 text-yellow-600"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="1.8"
-        >
-          <path
-            d="M20.5,4.609A5.811,5.811,0,0,0,16,2.5a5.75,5.75,0,0,0-4,1.455A5.75,5.75,0,0,0,8,2.5,5.811,5.811,0,0,0,3.5,4.609c-.953,1.156-1.95,3.249-1.289,6.66,1.055,5.447,8.966,9.917,9.3,10.1a1,1,0,0,0,.974,0c.336-.187,8.247-4.657,9.3-10.1C22.45,7.858,21.453,5.765,20.5,4.609Zm-.674,6.28C19.08,14.74,13.658,18.322,12,19.34c-2.336-1.41-7.142-4.95-7.821-8.451-.513-2.646.189-4.183.869-5.007A3.819,3.819,0,0,1,8,4.5a3.493,3.493,0,0,1,3.115,1.469,1.005,1.005,0,0,0,1.76.011A3.489,3.489,0,0,1,16,4.5a3.819,3.819,0,0,1,2.959,1.382C19.637,6.706,20.339,8.243,19.826,10.889Z"
-          />
-        </svg>
-      </div>
+      ></div>
       <h3 class="text-xl font-semibold mb-2">Serve</h3>
       <p class="text-gray-600 text-sm sm:text-base">
         Use your gifts to impact others, build community, and reflect compassion
@@ -156,6 +155,11 @@
 <div
   class="w-full bg-primary text-white py-16 px-6 flex flex-col items-center text-center"
 >
+  {#if savedName}
+    <h2 class="text-xl sm:text-2xl md:text-3xl font-graphik font-semibold mb-4">
+      Hi {savedName}!
+    </h2>
+  {/if}
   <h2 class="text-3xl sm:text-4xl md:text-5xl font-graphik font-semibold mb-4">
     Ready to Discover Your Gifts?
   </h2>
@@ -163,10 +167,22 @@
     Take the Spiritual Gift Test today and embark on a journey of self-discovery
     and purpose.
   </p>
-  <a
-    href="/onboarding"
-    class="bg-white text-primary font-graphik font-semibold px-6 py-3 rounded-md text-lg hover:bg-accent transition"
-  >
-    Start the Test
-  </a>
+  <div class="flex flex-col md:flex-row gap-4">
+    <a
+      href={savedName ? "/questionnaire" : "/onboarding"}
+      class="bg-white text-primary font-graphik font-semibold px-6 py-3 rounded-md text-lg hover:bg-accent transition"
+    >
+      {savedName ? "Continue Test" : "Start Test"}
+    </a>
+    {#if savedName}
+      <a
+        href="/onboarding"
+        on:click={RestartTest}
+        class="text-secondary hover:text-white hover:bg-red-400 rounded-md text-sm font-semibold px-6 py-3 transition-colors duration-200 flex items-center gap-1 border border-secondary hover:border-accent"
+      >
+        Restart Test
+        <Restart />
+      </a>
+    {/if}
+  </div>
 </div>
