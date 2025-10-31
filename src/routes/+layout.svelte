@@ -29,7 +29,7 @@
     url: "https://thegifts.site",
     images: [
       {
-        url: "https://thegifts.site/images/og.png",
+        url: "https://thegifts.site/images/og.jpg",
         width: 1200,
         height: 630,
         alt: "Spiritual Gift Test",
