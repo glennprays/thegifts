@@ -1,19 +1,27 @@
-# Stage 1: build the app
+# 1️⃣ Build Stage
 FROM node:20-alpine AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci                        # install all deps (including dev)
-COPY . .                         
-RUN npm run build                 # compile SvelteKit (includes TypeScript => JS)
-RUN npm prune --production        # remove devDependencies
 
-# Stage 2: create production image
-FROM node:20-alpine
 WORKDIR /app
-COPY --from=builder /app/build build    # copy built app
-COPY --from=builder /app/node_modules node_modules
-COPY package.json .
-ENV NODE_ENV=production
-USER node                           # run as non-root user for security
+
+COPY package*.json ./
+
+RUN npm ci --include=dev
+
+COPY . .
+RUN npm run build
+RUN npm prune --production
+
+
+# 2️⃣ Runtime Stage
+FROM node:20-alpine AS runner
+
+WORKDIR /app
+
+COPY --from=builder /app/build ./build
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/node_modules ./node_modules
+
 EXPOSE 3000
-CMD ["node", "build/index.js"]      # start the server
+
+ENV NODE_ENV=production
+CMD ["node", "build"]
