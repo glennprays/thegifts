@@ -8,6 +8,7 @@ COPY package*.json ./
 RUN npm ci --include=dev
 
 COPY . .
+ENV DATABASE_URL="postgresql://user:password@localhost:5432/dbname?schema=public"
 RUN npx prisma generate
 RUN npm run build
 RUN npm prune --production
