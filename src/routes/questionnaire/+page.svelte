@@ -2,14 +2,15 @@
   import { goto } from "$app/navigation";
   import Assesment from "$lib/components/Assesment.svelte";
   import Controller from "$lib/components/Controller.svelte";
+  import Loading from "$lib/components/Loading.svelte";
   import ProgressBar from "$lib/components/ProgressBar.svelte";
   import {
     NAME_STORAGE_KEY,
     RESULTS_STORAGE_KEY,
   } from "$lib/constants/constants";
-  import assessmentQuestions from "$lib/questions.json";
+  import assessmentQuestions from "$lib/data/questions.json";
   import { onMount } from "svelte";
-
+  let isLoading = false;
   const QUESTIONS_PER_PAGE = 5;
   let currentPage = 1;
   const totalPages = Math.ceil(assessmentQuestions.length / QUESTIONS_PER_PAGE);
@@ -19,7 +20,7 @@
     currentPage * QUESTIONS_PER_PAGE,
   );
 
-  let assessmentResults: ResultsMap = {};
+  let assessmentResults: AnswerMap = {};
   let finishedLoadFromStorage = false;
   onMount(() => {
     const savedName = localStorage.getItem(NAME_STORAGE_KEY);
@@ -77,11 +78,39 @@
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  $: isDisabledNext =
-    currentPage === totalPages ||
-    pagedQuestions.some((q) => !assessmentResults[q.id]);
+  const handleSubmit = async () => {
+    isLoading = true;
+    isDisabledNext = true;
+    const results = localStorage.getItem(RESULTS_STORAGE_KEY);
+    if (results) {
+      try {
+        const res = await fetch("/questionnaire", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: results,
+        });
+        const result = await res.json();
+        console.log("selesai", result);
+      } catch (error) {
+        console.error("Error submitting results:", error);
+      } finally {
+        isLoading = false;
+        isDisabledNext = false;
+      }
+    } else {
+      isLoading = false;
+      isDisabledNext = false;
+    }
+  };
+
+  $: isDisabledNext = pagedQuestions.some((q) => !assessmentResults[q.id]);
 </script>
 
+{#if isLoading}
+  <Loading />
+{/if}
 <div
   class="relative w-full min-h-screen flex flex-col items-center overflow-hidden py-4 mb-10"
 >
@@ -90,7 +119,10 @@
   <Controller
     {isDisabledNext}
     isDisabledPrev={currentPage === 1}
+    isDisableSubmit={isDisabledNext}
+    isHideSubmit={currentPage < totalPages}
     on:next={handleNext}
     on:prev={handlePrev}
+    on:submit={handleSubmit}
   />
 </div>

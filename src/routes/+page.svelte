@@ -159,7 +159,7 @@
         on:click={RestartTest}
         class="text-secondary hover:text-white hover:bg-red-400 rounded-md text-sm font-semibold px-6 py-3 transition-colors duration-200 flex items-center gap-1 border border-secondary hover:border-accent"
       >
-        Restart Test
+        {$_("pages.home.callToAction.buttons.restartTest")}
         <Restart />
       </a>
     {/if}
