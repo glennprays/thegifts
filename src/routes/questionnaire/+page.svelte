@@ -77,9 +77,7 @@
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  $: isDisabledNext =
-    currentPage === totalPages ||
-    pagedQuestions.some((q) => !assessmentResults[q.id]);
+  $: isDisabledNext = pagedQuestions.some((q) => !assessmentResults[q.id]);
 </script>
 
 <div
@@ -90,6 +88,8 @@
   <Controller
     {isDisabledNext}
     isDisabledPrev={currentPage === 1}
+    isDisableSubmit={isDisabledNext}
+    isHideSubmit={currentPage < totalPages}
     on:next={handleNext}
     on:prev={handlePrev}
   />
