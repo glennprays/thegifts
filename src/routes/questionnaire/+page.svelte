@@ -81,25 +81,24 @@
   const handleSubmit = async () => {
     isLoading = true;
     isDisabledNext = true;
-    const results = localStorage.getItem(RESULTS_STORAGE_KEY);
-    if (results) {
-      try {
-        const res = await fetch("/questionnaire", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: results,
-        });
-        const result = await res.json();
-        console.log("selesai", result);
-      } catch (error) {
-        console.error("Error submitting results:", error);
-      } finally {
-        isLoading = false;
-        isDisabledNext = false;
-      }
-    } else {
+
+    const body = {
+      name: localStorage.getItem(NAME_STORAGE_KEY),
+      answers: assessmentResults,
+    };
+    try {
+      const res = await fetch("/questionnaire", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+      const result = await res.json();
+      console.log(result);
+    } catch (error) {
+      console.error("Error submitting results:", error);
+    } finally {
       isLoading = false;
       isDisabledNext = false;
     }
