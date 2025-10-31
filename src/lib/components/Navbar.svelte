@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { _ } from "svelte-i18n";
   import logoUrl from "$lib/assets/logo.svg";
   export let logoSrc: string = logoUrl;
   import { page } from "$app/stores";
@@ -44,14 +45,14 @@
             href="/questionnaire"
             class="bg-primary hover:bg-secondary text-white rounded-md text-sm font-semibold px-4 py-2 transition-colors duration-200 shadow-md"
           >
-            Continue Test
+            {$_("components.navbar.continueTest")}
           </a>
           <a
             href="/onboarding"
             class="text-secondary hover:text-white hover:bg-red-400 rounded-md text-sm font-semibold px-4 py-2 transition-colors duration-200 flex items-center gap-1 border border-secondary hover:border-accent"
             on:click={RestartTest}
           >
-            Restart Test
+            {$_("components.navbar.restartTest")}
             <Restart />
           </a>
         {:else}
@@ -59,7 +60,7 @@
             href="/onboarding"
             class="bg-primary hover:bg-secondary text-white rounded-md text-sm font-semibold px-4 py-2 transition-colors duration-200 shadow-md"
           >
-            Start Test
+            {$_("components.navbar.startTest")}
           </a>
         {/if}
       </div>
@@ -92,7 +93,7 @@
             href="/onboarding"
             class="bg-primary hover:bg-secondary text-white rounded-md text-sm font-semibold px-3 py-1.5 transition-colors duration-200 shadow-sm"
           >
-            Start Test
+            {$_("components.navbar.startTest")}
           </a>
         {/if}
       </div>
@@ -114,14 +115,14 @@
         on:click={toggleMenu}
         class="text-base text-gray-700 font-medium p-2 rounded-lg hover:bg-primary/75 bg-primary text-white transition-colors"
       >
-        Continue Test
+        {$_("components.navbar.continueTest")}
       </a>
       <a
         href="/onboarding"
         on:click={RestartTest}
         class="text-base text-gray-700 font-medium p-2 rounded-lg hover:bg-gray-50 transition-colors"
       >
-        Restart Test
+        {$_("components.navbar.restartTest")}
       </a>
     </div>
   </div>
