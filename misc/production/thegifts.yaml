@@ -1,0 +1,86 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: thegifts
+  namespace: jia
+  labels:
+    app: thegifts
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: thegifts
+  template:
+    metadata:
+      labels:
+        app: thegifts
+    spec:
+      containers:
+        - name: thegifts
+          image: jiadocker777/bold-plastic:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "production"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 30
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: thegifts
+  namespace: jia
+  labels:
+    app: thegifts
+spec:
+  type: ClusterIP
+  selector:
+    app: thegifts
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 3000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: thegifts-ingress
+  namespace: jia
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.priority: "9"
+spec:
+  rules:
+    - host: thegifts.site
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: thegifts
+                port:
+                  number: 80
+---
