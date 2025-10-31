@@ -1,8 +1,8 @@
 <div
-  class="relative w-full min-h-screen flex flex-col items-center overflow-hidden py-48"
+  class="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden"
 >
-  <div class="text-center px-6 mt-20">
-    <h1 class="text-4xl md:text-5xl font-graphik font-bold mb-4">
+  <div class="text-center mt-[-90px]">
+    <h1 class="text-4xl md:text-5xl font-graphik font-bold">
       Let's Get Started!
     </h1>
     <form class="mt-8" action="/onboarding" method="get">
