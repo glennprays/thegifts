@@ -1,4 +1,4 @@
-interface ResultsMap {
+interface AnswerMap {
   [id: number]: number;
 }
 interface RatingOption {
@@ -9,3 +9,5 @@ interface RatingOption {
   bg: string;
   checked: string;
 }
+
+type AssesmentResult = { category: string; score: number }[];

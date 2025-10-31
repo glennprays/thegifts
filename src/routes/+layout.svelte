@@ -7,19 +7,17 @@
   import { page } from "$app/stores";
   import "../app.css";
   import { MetaTags } from "svelte-meta-tags";
+  import Loading from "$lib/components/Loading.svelte";
 
   const hideFooterPaths = ["/questionnaire", "/onboarding"];
 
   if (browser) {
-    // Fallback safety if locale isn't set yet
     locale.set(window.navigator.language.split("-")[0]);
   }
 </script>
 
 {#if $isLoading}
-  <div class="flex items-center justify-center min-h-screen">
-    <p>Loading translations...</p>
-  </div>
+  <Loading text="" />
 {:else}
   <Navbar />
   <slot />

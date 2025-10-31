@@ -2,7 +2,7 @@
   import { _ } from "svelte-i18n";
   export let questions: { id: number; en: string; in: string }[] = [];
 
-  export let results: ResultsMap = {};
+  export let results: AnswerMap = {};
   import { locale } from "svelte-i18n";
   $: currentLocale = $locale;
 
