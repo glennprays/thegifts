@@ -95,7 +95,11 @@
         body: JSON.stringify(body),
       });
       const result = await res.json();
-      console.log(result);
+      if (res.ok) {
+        goto(`/questionnaire/result/${result.id}`);
+      } else {
+        console.error("Submission failed:", result.message);
+      }
     } catch (error) {
       console.error("Error submitting results:", error);
     } finally {

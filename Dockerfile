@@ -9,8 +9,6 @@ RUN npm ci --include=dev
 
 COPY . .
 RUN npm run build
-ENV DATABASE_URL="postgresql://user:password@localhost:5432/dbname?schema=public"
-RUN npx prisma generate
 RUN npm prune --production
 
 
@@ -27,4 +25,4 @@ COPY --from=builder /app/prisma ./prisma
 EXPOSE 3000
 
 ENV NODE_ENV=production
-CMD npx prisma migrate deploy && node build
+CMD node build
