@@ -1,11 +1,11 @@
 import pkg from 'pg';
 const { Pool } = pkg;
 import type { Pool as PoolType } from 'pg';
-import { DATABASE_URL } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 
 // Create a connection pool
 const pool = new Pool({
-  connectionString: DATABASE_URL,
+  connectionString: env.DATABASE_URL,
   // Optional production tuning
   max: 10, // max number of clients
   idleTimeoutMillis: 30000 // close idle connections after 30s
@@ -13,7 +13,7 @@ const pool = new Pool({
 
 let activePool: PoolType;
 // Reuse the pool across hot reloads in dev
-if (process.env.NODE_ENV !== 'production') {
+if (env.NODE_ENV !== 'production') {
   // @ts-ignore
   globalThis.__pgPool ??= pool;
   // @ts-ignore
