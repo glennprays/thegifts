@@ -96,6 +96,8 @@
       });
       const result = await res.json();
       if (res.ok) {
+        localStorage.removeItem(NAME_STORAGE_KEY);
+        localStorage.removeItem(RESULTS_STORAGE_KEY);
         goto(`/questionnaire/result/${result.id}`);
       } else {
         console.error("Submission failed:", result.message);

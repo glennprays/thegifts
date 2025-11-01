@@ -10,8 +10,8 @@
 
   function shareResults() {
     const url = window.location.href;
-    const text = `${data.name}'s assessment results — check out their performance and insights!`;
-    const title = "Assessment Results";
+    const text = `${data.name}'s Spiritual Gifts assessment results — check out their gifts!`;
+    const title = "Spiritual Gifts Assessment Results";
 
     if (navigator.share) {
       navigator
