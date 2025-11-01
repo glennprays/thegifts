@@ -11,3 +11,8 @@ interface RatingOption {
 }
 
 type AssesmentResult = { category: string; score: number }[];
+
+interface CategoryScore {
+  category: string;
+  score: number;
+}
