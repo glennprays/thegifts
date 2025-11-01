@@ -58,6 +58,10 @@
       "formTitle": "Siapa nama Anda?",
       "formPlaceholder": "Masukkan nama Anda",
       "formButton": "Lanjutkan"
+    },
+    "result": {
+      "title": "Hasil Tes Karunia Rohani Anda",
+      "intro": "Berdasarkan jawaban Anda, berikut adalah karunia rohani teratas Anda:"
     }
   }
 }

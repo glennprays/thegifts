@@ -58,6 +58,10 @@
       "formTitle": "What's your name?",
       "formPlaceholder": "Enter your name",
       "formButton": "Continue"
+    },
+    "result": {
+      "title": "Your Spiritual Gifts Result",
+      "intro": "Based on your responses, here are your top spiritual gifts:"
     }
   }
 }
