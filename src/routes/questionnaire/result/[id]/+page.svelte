@@ -3,6 +3,11 @@
   import Arrow from "$lib/icons/Arrow.svelte";
   import Share from "$lib/icons/Share.svelte";
   import { _ } from "svelte-i18n";
+  import { locale } from "svelte-i18n";
+  import categoryEnIdRaw from "$lib/data/category-en-id.json";
+  const categoryEnId = categoryEnIdRaw as Record<string, string>;
+  $: currentLocale = $locale;
+
   export let data: {
     name: string;
     result: { category: string; score: number }[];
@@ -57,7 +62,9 @@
           >
             <div class="flex justify-between items-center text-sm mb-1">
               <span class="font-medium text-gray-700 capitalize">
-                {item.category}
+                {currentLocale === "id"
+                  ? categoryEnId[item.category]
+                  : item.category}
               </span>
               <div class="flex items-center gap-2">
                 <span class="text-gray-600 font-semibold"

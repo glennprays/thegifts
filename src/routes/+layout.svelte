@@ -19,8 +19,8 @@
 <svelte:head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="/favicon.ico" />
-  <title>Spiritual Gift Test - Discover Your God-Given Gifts</title>
+  <link rel="icon" href="/favicon.svg" />
+  <title>Spiritual Gift Test - Discover Your Given Gifts</title>
   <meta
     name="description"
     content="Discover your given spiritual gifts with our comprehensive Spiritual Gift Test. Uncover your unique purpose and how you can serve others effectively."
