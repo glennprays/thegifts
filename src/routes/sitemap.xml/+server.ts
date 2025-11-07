@@ -1,3 +1,6 @@
+export async function GET() {
+  return new Response(
+    `
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <url>
 <loc>https://thegifts.site/</loc>
@@ -10,3 +13,11 @@
 <priority>0.80</priority>
 </url>
 </urlset>
+`.trim(),
+    {
+      headers: {
+        'Content-Type': 'application/xml'
+      }
+    }
+  )
+}
