@@ -56,6 +56,7 @@
   >
     <img
       src="/images/home-mozaic.webp"
+      fetchpriority="high"
       alt="Home Mosaic"
       class="absolute inset-0 w-full h-full object-cover object-center scale-110 sm:scale-125 md:scale-100"
     />
