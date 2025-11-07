@@ -55,7 +55,7 @@
     class="relative w-full h-[200px] sm:h-[260px] md:h-[300px] lg:h-[360px] overflow-hidden"
   >
     <img
-      src="/images/home-mozaic.png"
+      src="/images/home-mozaic.webp"
       alt="Home Mosaic"
       class="absolute inset-0 w-full h-full object-cover object-center scale-110 sm:scale-125 md:scale-100"
     />
