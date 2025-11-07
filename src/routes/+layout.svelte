@@ -16,6 +16,16 @@
   }
 </script>
 
+<svelte:head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="/favicon.ico" />
+  <title>Spiritual Gift Test - Discover Your God-Given Gifts</title>
+  <meta
+    name="description"
+    content="Discover your given spiritual gifts with our comprehensive Spiritual Gift Test. Uncover your unique purpose and how you can serve others effectively."
+  />
+</svelte:head>
+
 {#if $isLoading}
   <Loading text="" />
 {:else}
@@ -28,27 +38,6 @@
 
 <MetaTags
   openGraph={{
-    title: "Spiritual Gift Test",
-    description:
-      "Discover your God-given spiritual gifts with our comprehensive Spiritual Gift Test. Uncover your unique purpose and how you can serve others effectively.",
-    type: "website",
-    url: "https://thegifts.site",
-    images: [
-      {
-        url: "https://thegifts.site/images/og.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Spiritual Gift Test",
-      },
-    ],
-  }}
-/>
-
-<MetaTags
-  openGraph={{
-    title: "Spiritual Gift Test",
-    description:
-      "Discover your God-given spiritual gifts with our comprehensive Spiritual Gift Test. Uncover your unique purpose and how you can serve others effectively.",
     type: "website",
     url: "https://thegifts.site",
     images: [
