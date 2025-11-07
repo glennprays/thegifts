@@ -61,7 +61,8 @@
     },
     "result": {
       "title": "Hasil Tes Karunia Rohani Anda",
-      "intro": "Berdasarkan jawaban Anda, berikut adalah karunia rohani teratas Anda:"
+      "intro": "Berdasarkan jawaban Anda, berikut adalah karunia rohani teratas Anda:",
+      "name": "Nama"
     }
   }
 }

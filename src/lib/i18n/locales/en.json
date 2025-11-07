@@ -61,7 +61,8 @@
     },
     "result": {
       "title": "Your Spiritual Gifts Result",
-      "intro": "Based on your responses, here are your top spiritual gifts:"
+      "intro": "Based on your responses, here are your top spiritual gifts:",
+      "name": "Name"
     }
   }
 }
