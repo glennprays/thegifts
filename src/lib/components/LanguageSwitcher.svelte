@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { goto } from '$app/navigation';
   import { page } from '$app/stores';
 
   let open = false;
@@ -19,9 +18,8 @@
     // Set cookie (client-side)
     document.cookie = `lang=${newLang}; path=/; max-age=31536000; SameSite=Lax`;
 
-    // Navigate to new locale
-    goto(newPath);
-    open = false;
+    // Force full page reload to re-initialize i18n with new locale
+    window.location.href = newPath;
   }
 </script>
 

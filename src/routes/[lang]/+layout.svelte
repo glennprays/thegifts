@@ -6,8 +6,9 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import Loading from '$lib/components/Loading.svelte';
 	import type { LayoutData } from './$types';
+	import type { Snippet } from 'svelte';
 
-	let { data }: { data: LayoutData } = $props();
+	let { data, children }: { data: LayoutData; children: Snippet } = $props();
 
 	// Initialize i18n with server-provided locale (NOT in onMount)
 	initI18n(data.lang);
@@ -29,7 +30,7 @@
 	<Loading text="" />
 {:else}
 	<Navbar />
-	<slot />
+	{@render children()}
 	{#if !hideFooter}
 		<Footer />
 	{/if}
