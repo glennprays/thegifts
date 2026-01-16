@@ -1,5 +1,6 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
+  import { page } from "$app/stores";
   import Assesment from "$lib/components/Assesment.svelte";
   import Controller from "$lib/components/Controller.svelte";
   import Loading from "$lib/components/Loading.svelte";
@@ -26,7 +27,7 @@
     const savedName = localStorage.getItem(NAME_STORAGE_KEY);
     if (!savedName) {
       localStorage.removeItem(RESULTS_STORAGE_KEY);
-      goto("/onboarding");
+      goto(`/${$page.params.lang}/onboarding`);
     }
 
     const savedResult = localStorage.getItem(RESULTS_STORAGE_KEY);
@@ -98,7 +99,7 @@
       if (res.ok) {
         localStorage.removeItem(NAME_STORAGE_KEY);
         localStorage.removeItem(RESULTS_STORAGE_KEY);
-        goto(`/questionnaire/result/${result.id}`);
+        goto(`/${$page.params.lang}/questionnaire/result/${result.id}`);
       } else {
         console.error("Submission failed:", result.message);
       }

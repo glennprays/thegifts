@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { getLocaleFromNavigator, isLoading, locale } from "svelte-i18n";
-  import { browser } from "$app/environment";
+  import { isLoading } from "svelte-i18n";
   import "$lib/i18n";
   import Navbar from "$lib/components/Navbar.svelte";
   import Footer from "$lib/components/Footer.svelte";
@@ -9,11 +8,9 @@
   import { MetaTags } from "svelte-meta-tags";
   import Loading from "$lib/components/Loading.svelte";
 
-  const hideFooterPaths = ["/questionnaire", "/onboarding"];
-
-  if (browser) {
-    locale.set(window.navigator.language.split("-")[0]);
-  }
+  $: hideFooter = ['/onboarding', '/questionnaire'].some(path =>
+    $page.url.pathname.endsWith(path)
+  );
 </script>
 
 <svelte:head>
@@ -43,7 +40,7 @@
 {:else}
   <Navbar />
   <slot />
-  {#if !hideFooterPaths.includes($page.url.pathname)}
+  {#if !hideFooter}
     <Footer />
   {/if}
 {/if}
