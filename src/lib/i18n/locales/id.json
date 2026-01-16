@@ -64,5 +64,25 @@
       "intro": "Berdasarkan jawaban Anda, berikut adalah karunia rohani teratas Anda:",
       "name": "Nama"
     }
+  },
+  "categories": {
+    "administration": "Administrasi",
+    "discernment": "Pembedaan Roh",
+    "evangelist": "Penginjil",
+    "exhortation": "Penasehat",
+    "faith": "Iman",
+    "giving": "Memberi",
+    "healing": "Penyembuhan",
+    "helps": "Pertolongan",
+    "hospitality": "Keramahtamahan",
+    "intercession": "Perantaraan Doa",
+    "knowledge": "Pengetahuan",
+    "leadership": "Kepemimpinan",
+    "mercy": "Belas Kasihan",
+    "missionary": "Misionaris",
+    "pastor": "Gembala",
+    "service": "Pelayanan",
+    "teacher": "Pengajar",
+    "wisdom": "Hikmat"
   }
 }

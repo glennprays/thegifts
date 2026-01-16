@@ -64,5 +64,25 @@
       "intro": "Based on your responses, here are your top spiritual gifts:",
       "name": "Name"
     }
+  },
+  "categories": {
+    "administration": "Administration",
+    "discernment": "Discernment",
+    "evangelist": "Evangelist",
+    "exhortation": "Exhortation",
+    "faith": "Faith",
+    "giving": "Giving",
+    "healing": "Healing",
+    "helps": "Helps",
+    "hospitality": "Hospitality",
+    "intercession": "Intercession",
+    "knowledge": "Knowledge",
+    "leadership": "Leadership",
+    "mercy": "Mercy",
+    "missionary": "Missionary",
+    "pastor": "Pastor",
+    "service": "Service",
+    "teacher": "Teacher",
+    "wisdom": "Wisdom"
   }
 }
