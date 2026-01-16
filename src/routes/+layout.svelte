@@ -1,16 +1,6 @@
 <script lang="ts">
-  import { isLoading } from "svelte-i18n";
-  import "$lib/i18n";
-  import Navbar from "$lib/components/Navbar.svelte";
-  import Footer from "$lib/components/Footer.svelte";
-  import { page } from "$app/stores";
   import "../app.css";
   import { MetaTags } from "svelte-meta-tags";
-  import Loading from "$lib/components/Loading.svelte";
-
-  $: hideFooter = ['/onboarding', '/questionnaire'].some(path =>
-    $page.url.pathname.endsWith(path)
-  );
 </script>
 
 <svelte:head>
@@ -35,15 +25,7 @@
   />
 </svelte:head>
 
-{#if $isLoading}
-  <Loading text="" />
-{:else}
-  <Navbar />
-  <slot />
-  {#if !hideFooter}
-    <Footer />
-  {/if}
-{/if}
+<slot />
 
 <MetaTags
   openGraph={{

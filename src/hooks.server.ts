@@ -23,7 +23,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	// Redirect root
 	if (pathname === '/') {
 		const lang = getPreferredLocale(event.cookies, event.request.headers);
-		throw redirect(302, `${event.url.origin}/${lang}`);
+		throw redirect(302, `/${lang}`);
 	}
 
 	// Redirect old URLs without lang prefix
@@ -34,7 +34,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	if (needsLocale && !hasLangPrefix) {
 		const lang = getPreferredLocale(event.cookies, event.request.headers);
-		throw redirect(302, `${event.url.origin}/${lang}${pathname}`);
+		throw redirect(302, `/${lang}${pathname}`);
 	}
 
 	return resolve(event);

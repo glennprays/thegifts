@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { initI18n } from '$lib/i18n';
 	import { page } from '$app/stores';
+	import { isLoading } from 'svelte-i18n';
+	import Navbar from '$lib/components/Navbar.svelte';
+	import Footer from '$lib/components/Footer.svelte';
+	import Loading from '$lib/components/Loading.svelte';
 	import type { LayoutData } from './$types';
 
 	let { data }: { data: LayoutData } = $props();
@@ -10,6 +14,9 @@
 
 	const currentPath = $derived($page.url.pathname.replace(/^\/[a-z]{2}/, ''));
 	const baseUrl = $derived($page.url.origin);
+	const hideFooter = $derived(
+		['/onboarding', '/questionnaire'].some((path) => $page.url.pathname.endsWith(path))
+	);
 </script>
 
 <svelte:head>
@@ -18,4 +25,12 @@
 	<link rel="alternate" hreflang="x-default" href="{baseUrl}/en{currentPath}" />
 </svelte:head>
 
-<slot />
+{#if $isLoading}
+	<Loading text="" />
+{:else}
+	<Navbar />
+	<slot />
+	{#if !hideFooter}
+		<Footer />
+	{/if}
+{/if}
