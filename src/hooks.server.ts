@@ -15,24 +15,25 @@ function getPreferredLocale(cookies: any, headers: Headers): string {
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const pathname = event.url.pathname;
+	const method = event.request.method;
 
 	// Extract locale from pathname
 	const langMatch = pathname.match(/^\/([a-z]{2})(?:\/|$)/);
 	const hasLangPrefix = langMatch && supportedLocales.includes(langMatch[1]);
 
-	// Redirect root
-	if (pathname === '/') {
+	// Redirect root (only for GET requests)
+	if (pathname === '/' && method === 'GET') {
 		const lang = getPreferredLocale(event.cookies, event.request.headers);
 		throw redirect(302, `/${lang}`);
 	}
 
-	// Redirect old URLs without lang prefix
+	// Redirect old URLs without lang prefix (only for GET requests, not API calls)
 	const userRoutes = ['/onboarding', '/questionnaire'];
 	const needsLocale = userRoutes.some(
 		(route) => pathname === route || pathname.startsWith(route + '/')
 	);
 
-	if (needsLocale && !hasLangPrefix) {
+	if (needsLocale && !hasLangPrefix && method === 'GET') {
 		const lang = getPreferredLocale(event.cookies, event.request.headers);
 		throw redirect(302, `/${lang}${pathname}`);
 	}
