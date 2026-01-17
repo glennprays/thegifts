@@ -5,8 +5,19 @@
   import Restart from "$lib/icons/Restart.svelte";
   import Sprout from "$lib/icons/Sprout.svelte";
   import { RestartTest } from "$lib/utils/utils";
+  import { getAllCategoryExplanations } from "$lib/utils/category-explanation";
   import { onMount } from "svelte";
   import { _ } from "svelte-i18n";
+  import { page } from "$app/stores";
+
+  const lang = ($page.params.lang as 'en' | 'id') || 'en';
+  const allCategories = getAllCategoryExplanations(lang);
+
+  // Filter to show only 6 featured gifts on homepage
+  const selectedGiftKeys = ['faith', 'healing', 'leadership', 'mercy', 'wisdom', 'service'];
+  const featuredCategories = allCategories.filter(cat =>
+    selectedGiftKeys.includes(cat.key)
+  );
 
   let savedName: string | null = null;
   onMount(() => {
@@ -81,11 +92,12 @@
   <div
     class="grid grid-cols-1 sm:grid-cols-3 gap-10 max-w-5xl w-full text-center"
   >
+    <!-- Learn Card -->
     <div
-      class="group flex flex-col items-center bg-gray-50 rounded-2xl p-8 transition hover:-translate-y-2 hover:shadow-lg hover:bg-white duration-300"
+      class="group flex flex-col items-center bg-white rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-gray-100 hover:border-indigo-100"
     >
       <div
-        class="flex items-center justify-center w-16 h-16 rounded-full bg-indigo-100 mb-4 group-hover:bg-indigo-200 transition"
+        class="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-indigo-50 to-indigo-100 mb-4 group-hover:from-indigo-100 group-hover:to-indigo-200 transition-all duration-300"
       >
         <Book />
       </div>
@@ -97,11 +109,12 @@
       </p>
     </div>
 
+    <!-- Grow Card -->
     <div
-      class="group flex flex-col items-center bg-gray-50 rounded-2xl p-8 transition hover:-translate-y-2 hover:shadow-lg hover:bg-white duration-300"
+      class="group flex flex-col items-center bg-white rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-gray-100 hover:border-green-100"
     >
       <div
-        class="flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-4 group-hover:bg-green-200 transition"
+        class="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-green-50 to-green-100 mb-4 group-hover:from-green-100 group-hover:to-green-200 transition-all duration-300"
       >
         <Sprout />
       </div>
@@ -113,11 +126,12 @@
       </p>
     </div>
 
+    <!-- Serve Card -->
     <div
-      class="group flex flex-col items-center bg-gray-50 rounded-2xl p-8 transition hover:-translate-y-2 hover:shadow-lg hover:bg-white duration-300"
+      class="group flex flex-col items-center bg-white rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-gray-100 hover:border-yellow-100"
     >
       <div
-        class="flex items-center justify-center w-16 h-16 rounded-full bg-yellow-100 mb-4 group-hover:bg-yellow-200 transition"
+        class="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-yellow-50 to-yellow-100 mb-4 group-hover:from-yellow-100 group-hover:to-yellow-200 transition-all duration-300"
       >
         <Diversity />
       </div>
@@ -127,6 +141,44 @@
       <p class="text-gray-600 text-sm sm:text-base">
         {$_("pages.home.description.pillars.pillar3.text")}
       </p>
+    </div>
+  </div>
+</div>
+
+<!-- Explore Spiritual Gifts Section -->
+<div class="w-full bg-gradient-to-br from-gray-50 to-indigo-50/30 py-20 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-semibold font-graphik text-gray-900 mb-4">
+        {$_('pages.home.exploreGifts.title')}
+      </h2>
+      <p class="text-gray-600 text-lg max-w-2xl mx-auto mb-8">
+        {$_('pages.home.exploreGifts.subtitle')}
+      </p>
+    </div>
+
+    <!-- Featured 6 gift categories in responsive grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 md:gap-4 mb-10">
+      {#each featuredCategories as category}
+        <a
+          href="/{lang}/gifts/{category.key}"
+          class="group bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-1 text-center"
+        >
+          <h3 class="font-semibold text-gray-900 text-sm md:text-base group-hover:text-primary transition">
+            {category.name}
+          </h3>
+        </a>
+      {/each}
+    </div>
+
+    <!-- CTA Button to All Gifts Page -->
+    <div class="text-center">
+      <a
+        href="/{lang}/gifts"
+        class="inline-block bg-primary hover:bg-secondary text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 shadow-md hover:shadow-xl hover:-translate-y-0.5"
+      >
+        {$_('pages.home.exploreGifts.viewAllDetails')}
+      </a>
     </div>
   </div>
 </div>

@@ -1,32 +1,25 @@
 <script lang="ts">
-  import { locale } from "svelte-i18n";
-  import { browser } from "$app/environment";
-  import { onMount } from "svelte";
+  import { page } from '$app/stores';
 
   let open = false;
-  let currentLocale = "en";
 
   const languages = [
     { code: "en", label: "EN" },
     { code: "id", label: "ID" },
   ];
 
-  onMount(() => {
-    if (browser) {
-      const userLang =
-        window.localStorage.getItem("lang") ||
-        // locale.get() ||
-        window.navigator.language.split("-")[0];
-      currentLocale = userLang === "id" ? "id" : "en"; // fallback safety
-      locale.set(currentLocale);
-    }
-  });
+  $: currentLocale = $page.params.lang || 'en';
 
-  function changeLanguage(lang: string) {
-    currentLocale = lang;
-    locale.set(lang);
-    if (browser) localStorage.setItem("lang", lang);
-    open = false;
+  function switchLanguage(newLang: 'en' | 'id') {
+    // Compute new URL
+    const currentPath = $page.url.pathname;
+    const newPath = currentPath.replace(/^\/[a-z]{2}/, `/${newLang}`);
+
+    // Set cookie (client-side)
+    document.cookie = `lang=${newLang}; path=/; max-age=31536000; SameSite=Lax`;
+
+    // Force full page reload to re-initialize i18n with new locale
+    window.location.href = newPath;
   }
 </script>
 
@@ -60,7 +53,7 @@
     >
       {#each languages as lang}
         <button
-          on:click={() => changeLanguage(lang.code)}
+          on:click={() => switchLanguage(lang.code as 'en' | 'id')}
           class="flex items-center w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-all"
         >
           <span>{lang.label}</span>

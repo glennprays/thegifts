@@ -1,5 +1,6 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
+  import { page } from "$app/stores";
   import {
     NAME_STORAGE_KEY,
     RESULTS_STORAGE_KEY,
@@ -16,13 +17,13 @@
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
       .join(" ");
     localStorage.setItem(NAME_STORAGE_KEY, capitalizedName);
-    goto("/questionnaire");
+    goto(`/${$page.params.lang}/questionnaire`);
   }
 
   onMount(() => {
     const savedName = localStorage.getItem(NAME_STORAGE_KEY);
     if (savedName) {
-      goto("/questionnaire");
+      goto(`/${$page.params.lang}/questionnaire`);
     } else {
       localStorage.removeItem(RESULTS_STORAGE_KEY);
     }

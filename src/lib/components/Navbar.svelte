@@ -12,6 +12,11 @@
   let isContinueTestVisible = false;
   let mobileMenuOpen = false;
 
+  // Check if current page is homepage (/, /en, /id)
+  $: isHomePage = $page.url.pathname === "/" ||
+                  $page.url.pathname === "/en" ||
+                  $page.url.pathname === "/id";
+
   onMount(() => {
     if (typeof window !== "undefined") {
       const savedResults = localStorage.getItem(RESULTS_STORAGE_KEY);
@@ -38,7 +43,7 @@
 
   <div class="flex items-center gap-3">
     <LanguageSwitcher />
-    {#if $page.url.pathname === "/"}
+    {#if isHomePage}
       <div class="hidden md:flex items-center gap-3">
         {#if isContinueTestVisible}
           <a
@@ -101,7 +106,7 @@
   </div>
 </nav>
 
-{#if $page.url.pathname === "/" && isContinueTestVisible}
+{#if isHomePage && isContinueTestVisible}
   <div
     class="md:hidden absolute top-[60px] left-0 w-full bg-white shadow-lg transition-transform duration-300 ease-in-out z-40"
     class:transform={true}

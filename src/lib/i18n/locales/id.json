@@ -5,6 +5,15 @@
       "restartTest": "Ulangi Tes",
       "continueTest": "Lanjutkan Tes"
     },
+    "footer": {
+      "about": "Temukan karunia rohani Anda dan pelajari bagaimana Tuhan memberdayakan Anda secara unik untuk melayani. Ikuti tes kami untuk mengungkap panggilan Anda dan hidup dengan tujuan.",
+      "copyright": "Semua hak dilindungi.",
+      "links": {
+        "home": "Beranda",
+        "gifts": "Karunia Rohani",
+        "takeTest": "Ikuti Tes"
+      }
+    },
     "controller": {
       "next": "Berikutnya",
       "previous": "Sebelumnya",
@@ -43,6 +52,11 @@
           }
         }
       },
+      "exploreGifts": {
+        "title": "Jelajahi 18 Karunia Rohani",
+        "subtitle": "Pelajari berbagai karunia rohani dan temukan bagaimana Tuhan memberdayakan orang percaya secara unik untuk melayani.",
+        "viewAllDetails": "Lihat Deskripsi Lengkap"
+      },
       "callToAction": {
         "text": "Siap Menemukan Karunia Anda?",
         "subtext": "Ikuti Tes Karunia Rohani hari ini dan mulailah perjalanan menuju penemuan diri dan tujuan hidup yang sejati.",
@@ -62,7 +76,48 @@
     "result": {
       "title": "Hasil Tes Karunia Rohani Anda",
       "intro": "Berdasarkan jawaban Anda, berikut adalah karunia rohani teratas Anda:",
-      "name": "Nama"
+      "name": "Nama",
+      "topGifts": "Karunia Teratas Anda",
+      "otherGifts": "Karunia Lainnya",
+      "showAll": "Tampilkan Semua Karunia",
+      "showLess": "Tampilkan Lebih Sedikit",
+      "shareCopied": "Tautan berhasil disalin!",
+      "shareTitle": "Bagikan Hasil",
+      "clickToLearnMore": "Klik untuk mempelajari lebih lanjut tentang karunia ini"
+    },
+    "gifts": {
+      "title": "Karunia Rohani",
+      "subtitle": "Temukan dan jelajahi 18 karunia rohani. Setiap karunia adalah cara unik Tuhan memberdayakan orang percaya untuk melayani dan membangun tubuh Kristus.",
+      "back": "Kembali ke Semua Karunia",
+      "backToResults": "Kembali ke Hasil Anda",
+      "viewAllGifts": "Lihat Semua Karunia",
+      "learnMore": "Pelajari Lebih Lanjut",
+      "sections": {
+        "description": "Deskripsi",
+        "characteristics": "Karakteristik Utama",
+        "biblical_references": "Referensi Alkitab",
+        "practical_applications": "Penerapan Praktis"
+      }
     }
+  },
+  "categories": {
+    "administration": "Administrasi",
+    "discernment": "Pembedaan Roh",
+    "evangelist": "Penginjil",
+    "exhortation": "Penasehat",
+    "faith": "Iman",
+    "giving": "Memberi",
+    "healing": "Penyembuhan",
+    "helps": "Pertolongan",
+    "hospitality": "Keramahtamahan",
+    "intercession": "Perantaraan Doa",
+    "knowledge": "Pengetahuan",
+    "leadership": "Kepemimpinan",
+    "mercy": "Belas Kasihan",
+    "missionary": "Misionaris",
+    "pastor": "Gembala",
+    "service": "Pelayanan",
+    "teacher": "Pengajar",
+    "wisdom": "Hikmat"
   }
 }

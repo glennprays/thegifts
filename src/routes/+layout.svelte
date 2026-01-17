@@ -1,19 +1,9 @@
 <script lang="ts">
-  import { getLocaleFromNavigator, isLoading, locale } from "svelte-i18n";
-  import { browser } from "$app/environment";
-  import "$lib/i18n";
-  import Navbar from "$lib/components/Navbar.svelte";
-  import Footer from "$lib/components/Footer.svelte";
-  import { page } from "$app/stores";
   import "../app.css";
   import { MetaTags } from "svelte-meta-tags";
-  import Loading from "$lib/components/Loading.svelte";
+  import type { Snippet } from 'svelte';
 
-  const hideFooterPaths = ["/questionnaire", "/onboarding"];
-
-  if (browser) {
-    locale.set(window.navigator.language.split("-")[0]);
-  }
+  let { children }: { children: Snippet } = $props();
 </script>
 
 <svelte:head>
@@ -35,18 +25,11 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
     rel="preload"
+    as="style"
   />
 </svelte:head>
 
-{#if $isLoading}
-  <Loading text="" />
-{:else}
-  <Navbar />
-  <slot />
-  {#if !hideFooterPaths.includes($page.url.pathname)}
-    <Footer />
-  {/if}
-{/if}
+{@render children()}
 
 <MetaTags
   openGraph={{
