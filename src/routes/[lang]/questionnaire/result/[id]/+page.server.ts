@@ -2,13 +2,22 @@ import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import db from '$lib/server/db';
 
+/**
+ * Detect if the ID is a UUID or a short_id
+ */
+function isUUID(id: string): boolean {
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
+}
+
 export const load: PageServerLoad = async ({ params }) => {
   const { id } = params;
 
-  const { rows } = await db.query(
-    'SELECT name, result FROM assessment_result WHERE id = $1',
-    [id]
-  );
+  // Determine which column to query based on ID format
+  const query = isUUID(id)
+    ? 'SELECT name, result, short_id FROM assessment_result WHERE id = $1'
+    : 'SELECT name, result, short_id FROM assessment_result WHERE short_id = $1';
+
+  const { rows } = await db.query(query, [id]);
 
   if (!rows.length) {
     error(404, 'Not found');
@@ -18,6 +27,7 @@ export const load: PageServerLoad = async ({ params }) => {
   const result: CategoryScore[] = row.result;
   return {
     name: row.name,
-    result
+    result,
+    short_id: row.short_id
   };
 };
