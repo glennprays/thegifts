@@ -10,7 +10,12 @@
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "eslint ."
+		"lint": "eslint .",
+		"db:migrate": "tsx scripts/migrate.ts",
+		"db:rollback": "tsx scripts/rollback.ts",
+		"db:status": "tsx scripts/migration-status.ts",
+		"predev": "npm run db:migrate",
+		"prebuild": "npm run db:migrate"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.4.0",
