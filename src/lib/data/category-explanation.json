@@ -1,0 +1,560 @@
+[
+  {
+    "key": "administration",
+    "name_en": "Administration",
+    "name_id": "Administrasi",
+    "description_en": "[TODO: Add description]",
+    "description_id": "[TODO: Add description]",
+    "characteristics_en": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "characteristics_id": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "biblical_references": [
+      {
+        "verse": "1 Corinthians 12:28",
+        "text": "[TODO: Add biblical text]"
+      }
+    ],
+    "practical_applications_en": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ],
+    "practical_applications_id": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ]
+  },
+  {
+    "key": "discernment",
+    "name_en": "Discernment",
+    "name_id": "Penghakiman",
+    "description_en": "[TODO: Add description]",
+    "description_id": "[TODO: Add description]",
+    "characteristics_en": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "characteristics_id": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "biblical_references": [
+      {
+        "verse": "1 Corinthians 12:10",
+        "text": "[TODO: Add biblical text]"
+      }
+    ],
+    "practical_applications_en": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ],
+    "practical_applications_id": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ]
+  },
+  {
+    "key": "evangelist",
+    "name_en": "Evangelism",
+    "name_id": "Penginjilan",
+    "description_en": "[TODO: Add description]",
+    "description_id": "[TODO: Add description]",
+    "characteristics_en": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "characteristics_id": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "biblical_references": [
+      {
+        "verse": "Ephesians 4:11",
+        "text": "[TODO: Add biblical text]"
+      }
+    ],
+    "practical_applications_en": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ],
+    "practical_applications_id": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ]
+  },
+  {
+    "key": "exhortation",
+    "name_en": "Exhortation",
+    "name_id": "Penguatan",
+    "description_en": "[TODO: Add description]",
+    "description_id": "[TODO: Add description]",
+    "characteristics_en": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "characteristics_id": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "biblical_references": [
+      {
+        "verse": "Romans 12:8",
+        "text": "[TODO: Add biblical text]"
+      }
+    ],
+    "practical_applications_en": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ],
+    "practical_applications_id": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ]
+  },
+  {
+    "key": "faith",
+    "name_en": "Faith",
+    "name_id": "Iman",
+    "description_en": "[TODO: Add description]",
+    "description_id": "[TODO: Add description]",
+    "characteristics_en": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "characteristics_id": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "biblical_references": [
+      {
+        "verse": "1 Corinthians 12:9",
+        "text": "[TODO: Add biblical text]"
+      }
+    ],
+    "practical_applications_en": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ],
+    "practical_applications_id": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ]
+  },
+  {
+    "key": "giving",
+    "name_en": "Giving",
+    "name_id": "Memberi",
+    "description_en": "[TODO: Add description]",
+    "description_id": "[TODO: Add description]",
+    "characteristics_en": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "characteristics_id": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "biblical_references": [
+      {
+        "verse": "Romans 12:8",
+        "text": "[TODO: Add biblical text]"
+      }
+    ],
+    "practical_applications_en": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ],
+    "practical_applications_id": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ]
+  },
+  {
+    "key": "healing",
+    "name_en": "Healing",
+    "name_id": "Kesembuhan",
+    "description_en": "[TODO: Add description]",
+    "description_id": "[TODO: Add description]",
+    "characteristics_en": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "characteristics_id": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "biblical_references": [
+      {
+        "verse": "1 Corinthians 12:9",
+        "text": "[TODO: Add biblical text]"
+      }
+    ],
+    "practical_applications_en": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ],
+    "practical_applications_id": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ]
+  },
+  {
+    "key": "helps",
+    "name_en": "Helps",
+    "name_id": "Pertolongan",
+    "description_en": "[TODO: Add description]",
+    "description_id": "[TODO: Add description]",
+    "characteristics_en": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "characteristics_id": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "biblical_references": [
+      {
+        "verse": "1 Corinthians 12:28",
+        "text": "[TODO: Add biblical text]"
+      }
+    ],
+    "practical_applications_en": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ],
+    "practical_applications_id": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ]
+  },
+  {
+    "key": "hospitality",
+    "name_en": "Hospitality",
+    "name_id": "Keramahan",
+    "description_en": "[TODO: Add description]",
+    "description_id": "[TODO: Add description]",
+    "characteristics_en": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "characteristics_id": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "biblical_references": [
+      {
+        "verse": "1 Peter 4:9",
+        "text": "[TODO: Add biblical text]"
+      }
+    ],
+    "practical_applications_en": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ],
+    "practical_applications_id": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ]
+  },
+  {
+    "key": "intercession",
+    "name_en": "Intercession",
+    "name_id": "Doa Syafaat",
+    "description_en": "[TODO: Add description]",
+    "description_id": "[TODO: Add description]",
+    "characteristics_en": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "characteristics_id": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "biblical_references": [
+      {
+        "verse": "Romans 8:26-27",
+        "text": "[TODO: Add biblical text]"
+      }
+    ],
+    "practical_applications_en": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ],
+    "practical_applications_id": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ]
+  },
+  {
+    "key": "knowledge",
+    "name_en": "Knowledge",
+    "name_id": "Pengetahuan",
+    "description_en": "[TODO: Add description]",
+    "description_id": "[TODO: Add description]",
+    "characteristics_en": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "characteristics_id": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "biblical_references": [
+      {
+        "verse": "1 Corinthians 12:8",
+        "text": "[TODO: Add biblical text]"
+      }
+    ],
+    "practical_applications_en": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ],
+    "practical_applications_id": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ]
+  },
+  {
+    "key": "leadership",
+    "name_en": "Leadership",
+    "name_id": "Kepemimpinan",
+    "description_en": "[TODO: Add description]",
+    "description_id": "[TODO: Add description]",
+    "characteristics_en": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "characteristics_id": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "biblical_references": [
+      {
+        "verse": "Romans 12:8",
+        "text": "[TODO: Add biblical text]"
+      }
+    ],
+    "practical_applications_en": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ],
+    "practical_applications_id": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ]
+  },
+  {
+    "key": "mercy",
+    "name_en": "Mercy",
+    "name_id": "Belas Kasihan",
+    "description_en": "[TODO: Add description]",
+    "description_id": "[TODO: Add description]",
+    "characteristics_en": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "characteristics_id": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "biblical_references": [
+      {
+        "verse": "Romans 12:8",
+        "text": "[TODO: Add biblical text]"
+      }
+    ],
+    "practical_applications_en": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ],
+    "practical_applications_id": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ]
+  },
+  {
+    "key": "missionary",
+    "name_en": "Missionary",
+    "name_id": "Misionaris",
+    "description_en": "[TODO: Add description]",
+    "description_id": "[TODO: Add description]",
+    "characteristics_en": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "characteristics_id": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "biblical_references": [
+      {
+        "verse": "1 Corinthians 9:19-23",
+        "text": "[TODO: Add biblical text]"
+      }
+    ],
+    "practical_applications_en": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ],
+    "practical_applications_id": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ]
+  },
+  {
+    "key": "pastor",
+    "name_en": "Pastor/Shepherd",
+    "name_id": "Gembala",
+    "description_en": "[TODO: Add description]",
+    "description_id": "[TODO: Add description]",
+    "characteristics_en": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "characteristics_id": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "biblical_references": [
+      {
+        "verse": "Ephesians 4:11",
+        "text": "[TODO: Add biblical text]"
+      }
+    ],
+    "practical_applications_en": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ],
+    "practical_applications_id": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ]
+  },
+  {
+    "key": "service",
+    "name_en": "Service",
+    "name_id": "Pelayanan",
+    "description_en": "[TODO: Add description]",
+    "description_id": "[TODO: Add description]",
+    "characteristics_en": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "characteristics_id": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "biblical_references": [
+      {
+        "verse": "Romans 12:7",
+        "text": "[TODO: Add biblical text]"
+      }
+    ],
+    "practical_applications_en": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ],
+    "practical_applications_id": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ]
+  },
+  {
+    "key": "teacher",
+    "name_en": "Teaching",
+    "name_id": "Pengajaran",
+    "description_en": "[TODO: Add description]",
+    "description_id": "[TODO: Add description]",
+    "characteristics_en": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "characteristics_id": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "biblical_references": [
+      {
+        "verse": "Romans 12:7",
+        "text": "[TODO: Add biblical text]"
+      }
+    ],
+    "practical_applications_en": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ],
+    "practical_applications_id": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ]
+  },
+  {
+    "key": "wisdom",
+    "name_en": "Wisdom",
+    "name_id": "Hikmat",
+    "description_en": "[TODO: Add description]",
+    "description_id": "[TODO: Add description]",
+    "characteristics_en": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "characteristics_id": [
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]",
+      "[TODO: Add characteristic]"
+    ],
+    "biblical_references": [
+      {
+        "verse": "1 Corinthians 12:8",
+        "text": "[TODO: Add biblical text]"
+      }
+    ],
+    "practical_applications_en": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ],
+    "practical_applications_id": [
+      "[TODO: Add application]",
+      "[TODO: Add application]"
+    ]
+  }
+]
