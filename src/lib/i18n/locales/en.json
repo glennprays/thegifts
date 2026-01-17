@@ -5,6 +5,15 @@
       "restartTest": "Restart Test",
       "continueTest": "Continue Test"
     },
+    "footer": {
+      "about": "Discover your spiritual gifts and learn how God uniquely empowers you to serve. Take our assessment to uncover your calling and live with purpose.",
+      "copyright": "All rights reserved.",
+      "links": {
+        "home": "Home",
+        "gifts": "Spiritual Gifts",
+        "takeTest": "Take the Test"
+      }
+    },
     "controller": {
       "next": "Next",
       "previous": "Previous",
@@ -43,6 +52,11 @@
           }
         }
       },
+      "exploreGifts": {
+        "title": "Explore All 18 Spiritual Gifts",
+        "subtitle": "Learn about the different spiritual gifts and discover how God uniquely empowers believers to serve.",
+        "viewAllDetails": "View Full Descriptions"
+      },
       "callToAction": {
         "text": "Ready to Discover Your Gifts?",
         "subtext": "Take the Spiritual Gift Test today and embark on a journey of self-discovery and purpose.",
@@ -75,7 +89,8 @@
       "title": "Spiritual Gifts",
       "subtitle": "Discover and explore the 18 spiritual gifts. Each gift is a unique way God empowers believers to serve and build up the body of Christ.",
       "back": "Back to All Gifts",
-      "backToResults": "Back to Results",
+      "backToResults": "Back to Your Results",
+      "viewAllGifts": "View All Gifts",
       "learnMore": "Learn More",
       "sections": {
         "description": "Description",

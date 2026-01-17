@@ -8,7 +8,21 @@
   const lang = $page.params.lang;
   const { category } = data;
 
+  // Check if we came from result page
+  const fromResult = $page.url.searchParams.get('from') === 'result';
+  const resultId = $page.url.searchParams.get('id');
+
   function goBack() {
+    if (fromResult && resultId) {
+      // Return to result page
+      goto(`/${lang}/questionnaire/result/${resultId}`);
+    } else {
+      // Default: go to all gifts page
+      goto(`/${lang}/gifts`);
+    }
+  }
+
+  function viewAllGifts() {
     goto(`/${lang}/gifts`);
   }
 </script>
@@ -20,16 +34,30 @@
 
 <div class="min-h-screen bg-white py-16 px-6">
   <div class="max-w-4xl mx-auto">
-    <!-- Back Button -->
-    <button
-      on:click={goBack}
-      class="flex items-center text-gray-600 hover:text-primary transition mb-8"
-    >
-      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-      </svg>
-      {$_('pages.gifts.back')}
-    </button>
+    <!-- Navigation Buttons: Back + View All Gifts (side by side) -->
+    <div class="flex items-center gap-3 mb-8">
+      <!-- Back Button (conditional text) -->
+      <button
+        on:click={goBack}
+        class="flex items-center text-gray-600 hover:text-primary transition"
+      >
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        {fromResult ? $_('pages.gifts.backToResults') : $_('pages.gifts.back')}
+      </button>
+
+      <!-- View All Gifts Button (shown when from result page, next to back button) -->
+      {#if fromResult}
+        <span class="text-gray-300">|</span>
+        <button
+          on:click={viewAllGifts}
+          class="text-primary hover:text-primary-dark font-medium transition"
+        >
+          {$_('pages.gifts.viewAllGifts')}
+        </button>
+      {/if}
+    </div>
 
     <!-- Title -->
     <h1 class="text-4xl md:text-5xl font-semibold font-graphik text-gray-900 mb-8">

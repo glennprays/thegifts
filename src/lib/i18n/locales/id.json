@@ -5,6 +5,15 @@
       "restartTest": "Ulangi Tes",
       "continueTest": "Lanjutkan Tes"
     },
+    "footer": {
+      "about": "Temukan karunia rohani Anda dan pelajari bagaimana Tuhan memberdayakan Anda secara unik untuk melayani. Ikuti tes kami untuk mengungkap panggilan Anda dan hidup dengan tujuan.",
+      "copyright": "Semua hak dilindungi.",
+      "links": {
+        "home": "Beranda",
+        "gifts": "Karunia Rohani",
+        "takeTest": "Ikuti Tes"
+      }
+    },
     "controller": {
       "next": "Berikutnya",
       "previous": "Sebelumnya",
@@ -43,6 +52,11 @@
           }
         }
       },
+      "exploreGifts": {
+        "title": "Jelajahi 18 Karunia Rohani",
+        "subtitle": "Pelajari berbagai karunia rohani dan temukan bagaimana Tuhan memberdayakan orang percaya secara unik untuk melayani.",
+        "viewAllDetails": "Lihat Deskripsi Lengkap"
+      },
       "callToAction": {
         "text": "Siap Menemukan Karunia Anda?",
         "subtext": "Ikuti Tes Karunia Rohani hari ini dan mulailah perjalanan menuju penemuan diri dan tujuan hidup yang sejati.",
@@ -75,7 +89,8 @@
       "title": "Karunia Rohani",
       "subtitle": "Temukan dan jelajahi 18 karunia rohani. Setiap karunia adalah cara unik Tuhan memberdayakan orang percaya untuk melayani dan membangun tubuh Kristus.",
       "back": "Kembali ke Semua Karunia",
-      "backToResults": "Kembali ke Hasil",
+      "backToResults": "Kembali ke Hasil Anda",
+      "viewAllGifts": "Lihat Semua Karunia",
       "learnMore": "Pelajari Lebih Lanjut",
       "sections": {
         "description": "Deskripsi",

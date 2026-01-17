@@ -43,7 +43,8 @@
   }
 
   function viewGift(category: string) {
-    goto(`/${lang}/gifts/${category.toLowerCase()}`);
+    const resultId = data.short_id;
+    goto(`/${lang}/gifts/${category.toLowerCase()}?from=result&id=${resultId}`);
   }
 </script>
 
