@@ -15,8 +15,7 @@
 		"db:rollback": "tsx scripts/rollback.ts",
 		"db:status": "tsx scripts/migration-status.ts",
 		"db:backfill-short-ids": "tsx scripts/backfill-short-ids.ts",
-		"predev": "npm run db:migrate",
-		"prebuild": "npm run db:migrate"
+		"predev": "npm run db:migrate"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.4.0",
