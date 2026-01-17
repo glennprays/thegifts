@@ -62,7 +62,27 @@
     "result": {
       "title": "Your Spiritual Gifts Result",
       "intro": "Based on your responses, here are your top spiritual gifts:",
-      "name": "Name"
+      "name": "Name",
+      "topGifts": "Your Top Gifts",
+      "otherGifts": "Other Gifts",
+      "showAll": "Show All Gifts",
+      "showLess": "Show Less",
+      "shareCopied": "Link copied to clipboard!",
+      "shareTitle": "Share Results",
+      "clickToLearnMore": "Click to learn more about this gift"
+    },
+    "gifts": {
+      "title": "Spiritual Gifts",
+      "subtitle": "Discover and explore the 18 spiritual gifts. Each gift is a unique way God empowers believers to serve and build up the body of Christ.",
+      "back": "Back to All Gifts",
+      "backToResults": "Back to Results",
+      "learnMore": "Learn More",
+      "sections": {
+        "description": "Description",
+        "characteristics": "Key Characteristics",
+        "biblical_references": "Biblical References",
+        "practical_applications": "Practical Applications"
+      }
     }
   },
   "categories": {

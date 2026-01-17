@@ -62,7 +62,27 @@
     "result": {
       "title": "Hasil Tes Karunia Rohani Anda",
       "intro": "Berdasarkan jawaban Anda, berikut adalah karunia rohani teratas Anda:",
-      "name": "Nama"
+      "name": "Nama",
+      "topGifts": "Karunia Teratas Anda",
+      "otherGifts": "Karunia Lainnya",
+      "showAll": "Tampilkan Semua Karunia",
+      "showLess": "Tampilkan Lebih Sedikit",
+      "shareCopied": "Tautan berhasil disalin!",
+      "shareTitle": "Bagikan Hasil",
+      "clickToLearnMore": "Klik untuk mempelajari lebih lanjut tentang karunia ini"
+    },
+    "gifts": {
+      "title": "Karunia Rohani",
+      "subtitle": "Temukan dan jelajahi 18 karunia rohani. Setiap karunia adalah cara unik Tuhan memberdayakan orang percaya untuk melayani dan membangun tubuh Kristus.",
+      "back": "Kembali ke Semua Karunia",
+      "backToResults": "Kembali ke Hasil",
+      "learnMore": "Pelajari Lebih Lanjut",
+      "sections": {
+        "description": "Deskripsi",
+        "characteristics": "Karakteristik Utama",
+        "biblical_references": "Referensi Alkitab",
+        "practical_applications": "Penerapan Praktis"
+      }
     }
   },
   "categories": {
