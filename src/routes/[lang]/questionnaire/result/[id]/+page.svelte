@@ -4,12 +4,9 @@
   import Arrow from "$lib/icons/Arrow.svelte";
   import Share from "$lib/icons/Share.svelte";
   import { _ } from "svelte-i18n";
+  import type { PageData } from "./$types";
 
-  export let data: {
-    name: string;
-    result: { category: string; score: number }[];
-    short_id: string;
-  };
+  let { data }: { data: PageData } = $props();
 
   const lang = $page.params.lang;
   const maxScore = 25;
