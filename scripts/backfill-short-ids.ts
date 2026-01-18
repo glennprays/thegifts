@@ -2,8 +2,11 @@ import { Pool } from 'pg';
 import { nanoid } from 'nanoid';
 import dotenv from 'dotenv';
 
-// Load environment variables
-dotenv.config();
+// Load environment variables from .env file (only in development)
+// In production/Kubernetes, env vars come from secrets
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
 
 async function backfillShortIds(): Promise<void> {
   const pool = new Pool({
