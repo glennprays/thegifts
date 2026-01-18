@@ -19,7 +19,7 @@ async function checkRecord() {
     );
 
     if (result.rows.length === 0) {
-      console.log('❌ No record found with that short_id');
+      console.log('No record found with that short_id');
 
       // Check if it exists as UUID
       const uuidResult = await pool.query(
@@ -28,16 +28,16 @@ async function checkRecord() {
       );
 
       if (uuidResult.rows.length > 0) {
-        console.log('✅ Found as UUID instead:');
+        console.log('Found as UUID instead:');
         console.log(uuidResult.rows[0]);
       }
     } else {
-      console.log('✅ Record found:');
+      console.log('Record found:');
       console.log(result.rows[0]);
     }
 
     // Show all recent records
-    console.log('\n📋 Recent records:');
+    console.log('\nRecent records:');
     const recent = await pool.query(
       'SELECT id, short_id, name, "createdAt" FROM assessment_result ORDER BY "createdAt" DESC LIMIT 5'
     );

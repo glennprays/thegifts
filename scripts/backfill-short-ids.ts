@@ -14,7 +14,7 @@ async function backfillShortIds(): Promise<void> {
   });
 
   try {
-    console.log('🔄 Backfilling short_ids for existing records...\n');
+    console.log('Backfilling short_ids for existing records...\n');
 
     // Get all records without short_id
     const result = await pool.query(
@@ -42,21 +42,21 @@ async function backfillShortIds(): Promise<void> {
           [shortId, record.id]
         );
 
-        console.log(`✅ Updated record ${record.id} with short_id: ${shortId}`);
+        console.log(`Updated record ${record.id} with short_id: ${shortId}`);
         updated++;
       } catch (error) {
-        console.error(`❌ Failed to update record ${record.id}:`, error);
+        console.error(`Failed to update record ${record.id}:`, error);
         failed++;
       }
     }
 
     console.log(`\n${'='.repeat(60)}`);
-    console.log(`✨ Backfill completed!`);
+    console.log(`   Backfill completed!`);
     console.log(`   Updated: ${updated}`);
     console.log(`   Failed: ${failed}`);
     console.log(`${'='.repeat(60)}\n`);
   } catch (error) {
-    console.error('\n❌ Backfill failed:', error);
+    console.error('\nBackfill failed:', error);
     process.exit(1);
   } finally {
     await pool.end();

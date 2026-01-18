@@ -75,7 +75,7 @@ async function applyMigration(pool: Pool, migration: Migration): Promise<void> {
     );
 
     await client.query('COMMIT');
-    console.log(`✅ Applied migration: ${migration.name}`);
+    console.log(`Applied migration: ${migration.name}`);
   } catch (error) {
     await client.query('ROLLBACK');
     throw error;
@@ -90,7 +90,7 @@ async function runMigrations(): Promise<void> {
   });
 
   try {
-    console.log('🔄 Running database migrations...\n');
+    console.log('Running database migrations...\n');
 
     // Ensure migrations tracking table exists
     await ensureMigrationsTable(pool);
@@ -99,11 +99,11 @@ async function runMigrations(): Promise<void> {
     const pending = await getPendingMigrations(pool);
 
     if (pending.length === 0) {
-      console.log('✨ No pending migrations. Database is up to date.\n');
+      console.log('No pending migrations. Database is up to date.\n');
       return;
     }
 
-    console.log(`📋 Found ${pending.length} pending migration(s):\n`);
+    console.log(`Found ${pending.length} pending migration(s):\n`);
     pending.forEach((m) => console.log(`   - ${m.name}`));
     console.log('');
 
@@ -112,9 +112,9 @@ async function runMigrations(): Promise<void> {
       await applyMigration(pool, migration);
     }
 
-    console.log(`\n✨ Successfully applied ${pending.length} migration(s).\n`);
+    console.log(`\nSuccessfully applied ${pending.length} migration(s).\n`);
   } catch (error) {
-    console.error('\n❌ Migration failed:', error);
+    console.error('\nMigration failed:', error);
     process.exit(1);
   } finally {
     await pool.end();

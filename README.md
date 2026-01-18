@@ -2,7 +2,7 @@
 
 A multilingual web application for discovering and understanding spiritual gifts through a comprehensive 90-question assessment. Built with SvelteKit 5, featuring SSR-driven internationalization and optimized SEO.
 
-## 🌟 Features
+## Features
 
 - **Comprehensive Assessment**: 90 questions across 18 spiritual gift categories
 - **Multilingual Support**: Full support for English (EN) and Indonesian (ID) with SSR-driven i18n
@@ -11,7 +11,7 @@ A multilingual web application for discovering and understanding spiritual gifts
 - **Responsive Design**: Modern UI with TailwindCSS v4
 - **Share Results**: Share assessment results via native share API or clipboard
 
-## 📊 Spiritual Gift Categories
+## Spiritual Gift Categories
 
 The assessment evaluates 18 spiritual gift categories:
 
@@ -34,7 +34,7 @@ The assessment evaluates 18 spiritual gift categories:
 - Teacher
 - Wisdom
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -92,7 +92,7 @@ npm run build
 npm run preview
 ```
 
-## 🏗️ Architecture
+## Architecture
 
 ### Tech Stack
 
@@ -181,7 +181,7 @@ Each category contains 5 questions. Scores are calculated by:
 2. Sorting categories by score (descending)
 3. Maximum score per category: 25 (5 questions × 5 rating)
 
-## 🗄️ Database Schema
+## Database Schema
 
 ```sql
 -- assessment_result table
@@ -211,7 +211,7 @@ Example data:
 }
 ```
 
-## 🔧 Available Scripts
+## Available Scripts
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
@@ -220,12 +220,12 @@ Example data:
 - `npm run check:watch` - Type-check in watch mode
 - `npm run lint` - Run ESLint
 
-## 🌍 Supported Locales
+## Supported Locales
 
 - `en` - English (default, x-default)
 - `id` - Indonesian (Bahasa Indonesia)
 
-## 📝 Environment Variables
+## Environment Variables
 
 Create a `.env` file with:
 
@@ -237,7 +237,7 @@ DATABASE_URL=postgresql://user:password@localhost:5432/dbname
 PUBLIC_SITE_URL=https://thegifts.site
 ```
 
-## 🚢 Deployment
+## Deployment
 
 The app uses `@sveltejs/adapter-node` and can be deployed to any Node.js hosting:
 
@@ -252,14 +252,6 @@ Recommended hosts:
 - DigitalOcean App Platform
 - Any VPS with Node.js
 
-## 📄 License
+## License
 
-[Your License Here]
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📧 Contact
-
-For questions or support, please open an issue or contact [your-email@example.com]
+This project is licensed under the terms specified in the [LICENSE](LICENSE) file.

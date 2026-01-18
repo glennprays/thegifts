@@ -33,5 +33,5 @@ EXPOSE 3000
 
 ENV NODE_ENV=production
 
-# Run migrations then start the app
-CMD npm run db:migrate && node build
+# Sync migration state, run migrations, then start the app
+CMD npm run db:sync && npm run db:migrate && node build
