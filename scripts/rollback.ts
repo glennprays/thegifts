@@ -36,7 +36,7 @@ async function rollbackMigration(pool: Pool, migrationName: string): Promise<voi
     await client.query('DELETE FROM _migrations WHERE name = $1', [migrationName]);
 
     await client.query('COMMIT');
-    console.log(`✅ Rolled back migration: ${migrationName}`);
+    console.log(`Rolled back migration: ${migrationName}`);
   } catch (error) {
     await client.query('ROLLBACK');
     throw error;
@@ -51,7 +51,7 @@ async function runRollback(): Promise<void> {
   });
 
   try {
-    console.log('🔄 Rolling back last migration...\n');
+    console.log('Rolling back last migration...\n');
 
     const lastMigration = await getLastMigration(pool);
 
@@ -60,13 +60,13 @@ async function runRollback(): Promise<void> {
       return;
     }
 
-    console.log(`📋 Rolling back: ${lastMigration.name}\n`);
+    console.log(`Rolling back: ${lastMigration.name}\n`);
 
     await rollbackMigration(pool, lastMigration.name);
 
-    console.log('\n✨ Rollback completed successfully.\n');
+    console.log('\nRollback completed successfully.\n');
   } catch (error) {
-    console.error('\n❌ Rollback failed:', error);
+    console.error('\nRollback failed:', error);
     process.exit(1);
   } finally {
     await pool.end();

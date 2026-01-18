@@ -29,7 +29,7 @@ async function getMigrationStatus(): Promise<void> {
     `);
 
     if (!tableCheck.rows[0].exists) {
-      console.log('⚠️  Migrations table does not exist yet. Run migrations first.\n');
+      console.log('Migrations table does not exist yet. Run migrations first.\n');
       return;
     }
 
@@ -48,7 +48,7 @@ async function getMigrationStatus(): Promise<void> {
       .map((f) => f.replace('_up.sql', ''))
       .sort();
 
-    console.log('📊 Database Migration Status\n');
+    console.log('Database Migration Status\n');
     console.log('═'.repeat(60));
     console.log('');
 
@@ -63,11 +63,11 @@ async function getMigrationStatus(): Promise<void> {
     for (const migration of allMigrations) {
       const applied = appliedMigrations.get(migration);
       if (applied) {
-        console.log(`✅ ${migration}`);
+        console.log(`${migration}`);
         console.log(`   Applied: ${new Date(applied).toLocaleString()}\n`);
         appliedCount++;
       } else {
-        console.log(`⏳ ${migration}`);
+        console.log(`${migration}`);
         console.log(`   Status: Pending\n`);
         pendingCount++;
       }
@@ -78,7 +78,7 @@ async function getMigrationStatus(): Promise<void> {
     console.log(`Applied: ${appliedCount}`);
     console.log(`Pending: ${pendingCount}\n`);
   } catch (error) {
-    console.error('❌ Error checking migration status:', error);
+    console.error('Error checking migration status:', error);
     process.exit(1);
   } finally {
     await pool.end();

@@ -1,4 +1,4 @@
-CREATE TABLE "assessment_result" (
+CREATE TABLE IF NOT EXISTS "assessment_result" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "name" TEXT NOT NULL,
     "answer" JSONB NOT NULL,

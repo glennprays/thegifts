@@ -1,8 +1,11 @@
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
 
-// Load environment variables
-dotenv.config();
+// Load environment variables from .env file (only in development)
+// In production/Kubernetes, env vars come from secrets
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
 
 async function markMigrationApplied(migrationName: string): Promise<void> {
   const pool = new Pool({
@@ -25,9 +28,9 @@ async function markMigrationApplied(migrationName: string): Promise<void> {
       [migrationName]
     );
 
-    console.log(`✅ Marked migration as applied: ${migrationName}`);
+    console.log(`Marked migration as applied: ${migrationName}`);
   } catch (error) {
-    console.error('❌ Error:', error);
+    console.error('Error:', error);
     process.exit(1);
   } finally {
     await pool.end();
