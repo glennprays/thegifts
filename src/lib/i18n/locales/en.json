@@ -77,13 +77,25 @@
       "title": "Your Spiritual Gifts Result",
       "intro": "Based on your responses, here are your top spiritual gifts:",
       "name": "Name",
+      "yourGifts": "Your Gifts",
       "topGifts": "Your Top Gifts",
       "otherGifts": "Other Gifts",
       "showAll": "Show All Gifts",
       "showLess": "Show Less",
       "shareCopied": "Link copied to clipboard!",
       "shareTitle": "Share Results",
-      "clickToLearnMore": "Click to learn more about this gift"
+      "clickToLearnMore": "Click to learn more about this gift",
+      "copyLink": "Copy Link",
+      "copyTextAndLink": "Copy Text & Link",
+      "copied": "Copied!",
+      "shareVia": "Share via",
+      "shareViaEmail": "Share via Email",
+      "downloadResult": "Download Result",
+      "storiesDownloadHint": "Image will be downloaded for you to share",
+      "generating": "Generating...",
+      "topGift": "Your Top Gift",
+      "imageDownloaded": "Image downloaded! Check your downloads folder.",
+      "emailSubject": "Spiritual Gifts Assessment Results"
     },
     "gifts": {
       "title": "Spiritual Gifts",
@@ -97,8 +109,12 @@
         "characteristics": "Key Characteristics",
         "biblical_references": "Biblical References",
         "practical_applications": "Practical Applications"
-      }
+      },
+      "clickToRead": "Click to read full verse"
     }
+  },
+  "common": {
+    "close": "Close"
   },
   "categories": {
     "administration": "Administration",
