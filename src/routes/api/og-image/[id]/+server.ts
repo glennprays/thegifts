@@ -16,7 +16,7 @@ interface CategoryScore {
   score: number;
 }
 
-export const GET: RequestHandler = async ({ params, request }) => {
+export const GET: RequestHandler = async ({ params }) => {
   const { id } = params;
 
   // Determine which column to query based on ID format
@@ -33,13 +33,9 @@ export const GET: RequestHandler = async ({ params, request }) => {
   const row = rows[0];
   const result: CategoryScore[] = row.result;
 
-  // Detect locale from Accept-Language header
-  const acceptLanguage = request.headers.get('accept-language') || '';
-  const locale: 'en' | 'id' = acceptLanguage.toLowerCase().includes('id') ? 'id' : 'en';
-
-  // Get top 3 gifts with descriptions for the top gift
+  // Always use English for image generation
   const topGifts = result.slice(0, 3).map((item, index) => {
-    const explanation = getCategoryExplanation(item.category, locale);
+    const explanation = getCategoryExplanation(item.category, 'en');
     return {
       name: explanation?.name || item.category,
       score: item.score,
@@ -50,15 +46,14 @@ export const GET: RequestHandler = async ({ params, request }) => {
   });
 
   // Get 4 practical applications for the top gift
-  const topGiftExplanation = getCategoryExplanation(result[0]?.category, locale);
+  const topGiftExplanation = getCategoryExplanation(result[0]?.category, 'en');
   const topGiftPracticals = (topGiftExplanation?.practical_applications || []).slice(0, 4);
 
   try {
     const imageBuffer = await generateStoriesImage({
       name: row.name,
       topGifts,
-      topGiftPracticals,
-      locale
+      topGiftPracticals
     });
 
     return new Response(new Uint8Array(imageBuffer), {

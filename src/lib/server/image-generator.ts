@@ -9,14 +9,25 @@ let cachedFonts: Record<string, Buffer> | null = null;
 async function loadFonts(): Promise<Record<string, Buffer>> {
   if (cachedFonts) return cachedFonts;
   cachedFonts = {
-    regular: fs.readFileSync(
-      path.join(process.cwd(), 'static/fonts/GraphikCompact-Regular-Trial.otf')
+    // DM Sans for body text
+    light: fs.readFileSync(
+      path.join(process.cwd(), 'static/fonts/DMSans-Light.ttf')
     ),
-    bold: fs.readFileSync(
-      path.join(process.cwd(), 'static/fonts/GraphikCompact-Bold-Trial.otf')
+    regular: fs.readFileSync(
+      path.join(process.cwd(), 'static/fonts/DMSans-Regular.ttf')
+    ),
+    medium: fs.readFileSync(
+      path.join(process.cwd(), 'static/fonts/DMSans-Medium.ttf')
     ),
     semibold: fs.readFileSync(
-      path.join(process.cwd(), 'static/fonts/GraphikCompact-Semibold-Trial.otf')
+      path.join(process.cwd(), 'static/fonts/DMSans-SemiBold.ttf')
+    ),
+    // DM Serif Display for headings
+    serif: fs.readFileSync(
+      path.join(process.cwd(), 'static/fonts/DMSerifDisplay-Regular.ttf')
+    ),
+    serifItalic: fs.readFileSync(
+      path.join(process.cwd(), 'static/fonts/DMSerifDisplay-Italic.ttf')
     )
   };
   return cachedFonts;
@@ -32,7 +43,6 @@ interface GenerateStoriesImageOptions {
   name: string;
   topGifts: TopGift[];
   topGiftPracticals: string[];
-  locale: 'en' | 'id';
 }
 
 // Satori constraints:
@@ -76,7 +86,7 @@ export async function generateStoriesImage(
   options: GenerateStoriesImageOptions
 ): Promise<Buffer> {
   const fonts = await loadFonts();
-  const { name, topGifts, topGiftPracticals, locale } = options;
+  const { name, topGifts, topGiftPracticals } = options;
 
   const qrDataUrl = await QRCode.toDataURL('https://thegifts.site', {
     width: 140,
@@ -85,10 +95,10 @@ export async function generateStoriesImage(
   });
   const qrBase64 = qrDataUrl.split(',')[1];
 
-  const titleText = locale === 'en' ? 'Spiritual Gifts Assessment' : 'Tes Karunia Rohani';
-  const yourGiftsText = locale === 'en' ? 'YOUR TOP GIFTS' : 'KARUNIA TERATAS';
-  const practicalText = locale === 'en' ? 'PRACTICAL APPLICATIONS' : 'PENERAPAN PRAKTIS';
-  const scanText = locale === 'en' ? 'Discover your gifts at' : 'Temukan karuniamu di';
+  const titleText = 'Spiritual Gifts Assessment';
+  const yourGiftsText = 'YOUR TOP GIFTS';
+  const practicalText = 'PRACTICAL APPLICATIONS';
+  const scanText = 'Discover your gifts at';
 
   function scoreText(score: number, max = 25) {
     return `${score} of ${max}`;
@@ -143,7 +153,7 @@ export async function generateStoriesImage(
           {
             type: 'span',
             props: {
-              style: { fontSize: `${F.sectionLabel}px`, fontWeight: 700, color: TEXT_DARK, letterSpacing: '1px' },
+              style: { fontSize: `${F.sectionLabel}px`, fontWeight: 600, color: TEXT_DARK, letterSpacing: '1px' },
               children: label
             }
           }
@@ -209,7 +219,7 @@ export async function generateStoriesImage(
               type: 'span',
               props: {
                 style: {
-                  fontSize: `${F.heroPill}px`, fontWeight: 700,
+                  fontSize: `${F.heroPill}px`, fontWeight: 600,
                   color: 'rgba(255,255,255,0.95)', letterSpacing: '3px'
                 },
                 children: 'TOP GIFT'
@@ -222,7 +232,8 @@ export async function generateStoriesImage(
           type: 'span',
           props: {
             style: {
-              fontSize: `${F.heroName}px`, fontWeight: 700,
+              fontSize: `${F.heroName}px`, fontWeight: 400,
+              fontFamily: '"DM Serif Display", serif',
               color: '#ffffff', marginBottom: '14px', lineHeight: 1.05
             },
             children: topGift.name
@@ -273,7 +284,7 @@ export async function generateStoriesImage(
               {
                 type: 'span',
                 props: {
-                  style: { fontSize: `${F.heroScore}px`, fontWeight: 700, color: '#ffffff' },
+                  style: { fontSize: `${F.heroScore}px`, fontWeight: 600, color: '#ffffff' },
                   children: scoreText(topGift.score)
                 }
               }
@@ -311,7 +322,7 @@ export async function generateStoriesImage(
             children: [{
               type: 'span',
               props: {
-                style: { fontSize: `${F.cardRank}px`, fontWeight: 700, color: PRIMARY_DARK },
+                style: { fontSize: `${F.cardRank}px`, fontWeight: 400, fontStyle: 'italic', fontFamily: '"DM Serif Display", serif', color: PRIMARY_DARK },
                 children: i === 0 ? '2nd' : '3rd'
               }
             }]
@@ -342,7 +353,7 @@ export async function generateStoriesImage(
                     {
                       type: 'span',
                       props: {
-                        style: { fontSize: `${F.cardScore}px`, fontWeight: 700, color: TEXT_MED },
+                        style: { fontSize: `${F.cardScore}px`, fontWeight: 600, color: TEXT_MED },
                         children: scoreText(gift.score)
                       }
                     }
@@ -401,7 +412,7 @@ export async function generateStoriesImage(
             children: [{
               type: 'span',
               props: {
-                style: { fontSize: `${F.practicalNum}px`, fontWeight: 700, color: '#ffffff' },
+                style: { fontSize: `${F.practicalNum}px`, fontWeight: 600, color: '#ffffff' },
                 children: String(i + 1)
               }
             }]
@@ -474,7 +485,7 @@ export async function generateStoriesImage(
         background: 'linear-gradient(170deg, #f7fbee 0%, #eef7d8 35%, #fafdf4 65%, #f0f8e4 100%)',
         paddingTop: `${PAD_Y}px`, paddingBottom: `${PAD_Y}px`,
         paddingLeft: `${PAD_X}px`, paddingRight: `${PAD_X}px`,
-        fontFamily: 'Graphik, sans-serif',
+        fontFamily: '"DM Sans", sans-serif',
         position: 'relative', overflow: 'hidden'
       },
       children: [
@@ -495,7 +506,7 @@ export async function generateStoriesImage(
               {
                 type: 'span',
                 props: {
-                  style: { fontSize: `${F.brandName}px`, fontWeight: 700, color: PRIMARY, letterSpacing: '1px' },
+                  style: { fontSize: `${F.brandName}px`, fontWeight: 400, fontFamily: '"DM Serif Display", serif', color: PRIMARY, letterSpacing: '1px' },
                   children: 'TheGifts'
                 }
               },
@@ -523,7 +534,8 @@ export async function generateStoriesImage(
                 type: 'span',
                 props: {
                   style: {
-                    fontSize: `${F.userName}px`, fontWeight: 700,
+                    fontSize: `${F.userName}px`, fontWeight: 400,
+                    fontFamily: '"DM Serif Display", serif',
                     color: TEXT_DARK, marginBottom: '8px', lineHeight: 1.0
                   },
                   children: name
@@ -591,7 +603,7 @@ export async function generateStoriesImage(
                     {
                       type: 'span',
                       props: {
-                        style: { fontSize: `${F.footerSite}px`, fontWeight: 700, color: PRIMARY, letterSpacing: '1px' },
+                        style: { fontSize: `${F.footerSite}px`, fontWeight: 600, color: PRIMARY, letterSpacing: '1px' },
                         children: 'thegifts.site'
                       }
                     }
@@ -610,9 +622,14 @@ export async function generateStoriesImage(
     width: W,
     height: renderH,
     fonts: [
-      { name: 'Graphik', data: fonts.regular, weight: 400 },
-      { name: 'Graphik', data: fonts.semibold, weight: 600 },
-      { name: 'Graphik', data: fonts.bold, weight: 700 }
+      // DM Sans
+      { name: 'DM Sans', data: fonts.light, weight: 300 },
+      { name: 'DM Sans', data: fonts.regular, weight: 400 },
+      { name: 'DM Sans', data: fonts.medium, weight: 500 },
+      { name: 'DM Sans', data: fonts.semibold, weight: 600 },
+      // DM Serif Display
+      { name: 'DM Serif Display', data: fonts.serif, weight: 400, style: 'normal' },
+      { name: 'DM Serif Display', data: fonts.serifItalic, weight: 400, style: 'italic' }
     ]
   });
 
