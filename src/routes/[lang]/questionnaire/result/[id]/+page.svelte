@@ -39,32 +39,22 @@
       viewGift(category);
     }
   }
-  // Share to Instagram Stories
+  // Share to Instagram Stories - Download only
   async function shareToStories() {
     try {
       const response = await fetch(`/api/og-image/${data.short_id}`);
       const blob = await response.blob();
-      const file = new File([blob], "my-spiritual-gifts.png", { type: "image/png" });
-      // Try Web Share API with files (newer browsers)
-      if (navigator.canShare?.({ files: [file] })) {
-        await navigator.share({
-          files: [file],
-          title: "My Spiritual Gifts"
-        });
-      } else {
-        // Fallback: Download the image
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "my-spiritual-gifts.png";
-        a.click();
-        URL.revokeObjectURL(url);
-        showDownloadToast = true;
-        setTimeout(() => (showDownloadToast = false), 3000);
-      }
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${data.short_id}.png`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showDownloadToast = true;
+      setTimeout(() => (showDownloadToast = false), 3000);
     } catch (err) {
-      console.error("Share to stories failed:", err);
-      alert("Failed to share image. Please try again.");
+      console.error("Download failed:", err);
+      alert("Failed to download image. Please try again.");
     }
   }
   // Animate on mount

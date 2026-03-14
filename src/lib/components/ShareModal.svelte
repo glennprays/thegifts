@@ -90,24 +90,35 @@
       onClose();
     }
   }
+
+  function handleBackdropKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      onClose();
+    }
+  }
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
 
 {#if show}
-  <!-- svelte-ignore a11y_no_static_element_interactions -->
+  <!-- svelte-ignore a11y_no_static_element_interactions a11y_click_events_have_key_events -->
   <div
     class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
     onclick={onClose}
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="share-modal-title"
+    onkeydown={handleBackdropKeydown}
+    role="button"
     tabindex="-1"
+    aria-label="Close modal"
   >
-    <!-- svelte-ignore a11y_no_static_element_interactions -->
+    <!-- svelte-ignore a11y_no_static_element_interactions a11y_click_events_have_key_events -->
     <div
       class="bg-white rounded-2xl shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto"
       onclick={(e) => e.stopPropagation()}
+      onkeydown={(e) => e.stopPropagation()}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="share-modal-title"
+      tabindex="-1"
     >
       <!-- Header -->
       <div class="flex items-center justify-between p-5 border-b">

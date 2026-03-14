@@ -27,6 +27,7 @@ async function loadFonts(): Promise<Record<string, Buffer>> {
 interface TopGift {
   name: string;
   score: number;
+  description?: string;
 }
 
 interface GenerateStoriesImageOptions {
@@ -65,31 +66,307 @@ export async function generateStoriesImage(
   }
 
   // Build gift items JSX
-  const giftItems = topGifts.slice(0, 3).map((gift, i) => ({
+  const giftItems = topGifts.slice(0, 3).map((gift, i) => {
+    if (i === 0) {
+      // Hero card for top gift
+      return {
+        type: 'div',
+        props: {
+          style: {
+            display: 'flex',
+            flexDirection: 'column',
+            background: 'linear-gradient(135deg, #7c9a2f 0%, #5a7a1f 100%)',
+            borderRadius: '24px',
+            padding: '40px',
+            marginBottom: '24px',
+            boxShadow: '0 20px 40px rgba(124, 154, 47, 0.3)'
+          },
+          children: [
+            // Header with badge and label
+            {
+              type: 'div',
+              props: {
+                style: {
+                  display: 'flex',
+                  alignItems: 'center',
+                  marginBottom: '20px'
+                },
+                children: [
+                  // Gold badge
+                  {
+                    type: 'div',
+                    props: {
+                      style: {
+                        display: 'flex',
+                        width: '60px',
+                        height: '60px',
+                        borderRadius: '50%',
+                        background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
+                        boxShadow: '0 4px 12px rgba(255, 215, 0, 0.4)',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        marginRight: '16px'
+                      },
+                      children: [
+                        {
+                          type: 'span',
+                          props: {
+                            style: {
+                              color: '#1B1B1B',
+                              fontWeight: 700,
+                              fontSize: '28px'
+                            },
+                            children: '1'
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    type: 'span',
+                    props: {
+                      style: {
+                        fontSize: '20px',
+                        fontWeight: 600,
+                        color: 'rgba(255, 255, 255, 0.9)'
+                      },
+                      children: yourGiftsText.split(' ')[0] + ' #' + (i + 1)
+                    }
+                  }
+                ]
+              }
+            },
+            // Gift name
+            {
+              type: 'h2',
+              props: {
+                style: {
+                  fontSize: '40px',
+                  fontWeight: 700,
+                  color: 'white',
+                  marginBottom: '16px'
+                },
+                children: gift.name
+              }
+            },
+            // Description (if available)
+            ...(gift.description ? [
+              {
+                type: 'p',
+                props: {
+                  style: {
+                    fontSize: '20px',
+                    lineHeight: 1.6,
+                    color: 'rgba(255, 255, 255, 0.9)',
+                    marginBottom: '20px'
+                  },
+                  children: gift.description
+                }
+              }
+            ] : []),
+            // Score with progress bar
+            {
+              type: 'div',
+              props: {
+                style: {
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '16px'
+                },
+                children: [
+                  {
+                    type: 'div',
+                    props: {
+                      style: {
+                        display: 'flex',
+                        flex: 1,
+                        height: '14px',
+                        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                        borderRadius: '9999px',
+                        overflow: 'hidden'
+                      },
+                      children: [
+                        {
+                          type: 'div',
+                          props: {
+                            style: {
+                              width: `${(gift.score / 25) * 100}%`,
+                              height: '100%',
+                              background: 'white',
+                              borderRadius: '9999px'
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    type: 'span',
+                    props: {
+                      style: {
+                        fontSize: '24px',
+                        fontWeight: 700,
+                        color: 'white'
+                      },
+                      children: `${gift.score}/25`
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      };
+    } else {
+      // Smaller cards for #2 and #3
+      return {
+        type: 'div',
+        props: {
+          style: {
+            display: 'flex',
+            alignItems: 'center',
+            marginBottom: '16px',
+            padding: '16px 20px',
+            backgroundColor: 'white',
+            borderRadius: '16px',
+            border: '2px solid #e5e7eb',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)'
+          },
+          children: [
+            // Rank badge
+            {
+              type: 'div',
+              props: {
+                style: {
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  background: `linear-gradient(135deg, ${getBarColor(i)}, ${getBarColor(i)})`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginRight: '16px',
+                  flexShrink: 0
+                },
+                children: [
+                  {
+                    type: 'span',
+                    props: {
+                      style: {
+                        color: 'white',
+                        fontWeight: 700,
+                        fontSize: '20px'
+                      },
+                      children: String(i + 1)
+                    }
+                  }
+                ]
+              }
+            },
+            // Gift name and score
+            {
+              type: 'div',
+              props: {
+                style: {
+                  display: 'flex',
+                  flexDirection: 'column',
+                  flex: 1
+                },
+                children: [
+                  {
+                    type: 'div',
+                    props: {
+                      style: {
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        marginBottom: '8px'
+                      },
+                      children: [
+                        {
+                          type: 'span',
+                          props: {
+                            style: {
+                              fontSize: '22px',
+                              fontWeight: 600,
+                              color: '#1B1B1B'
+                            },
+                            children: gift.name
+                          }
+                        },
+                        {
+                          type: 'span',
+                          props: {
+                            style: {
+                              fontSize: '18px',
+                              fontWeight: 700,
+                              color: '#1B1B1B'
+                            },
+                            children: `${gift.score}/25`
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  // Progress bar
+                  {
+                    type: 'div',
+                    props: {
+                      style: {
+                        display: 'flex',
+                        width: '100%',
+                        height: '8px',
+                        backgroundColor: '#e5e7eb',
+                        borderRadius: '9999px',
+                        overflow: 'hidden'
+                      },
+                      children: [
+                        {
+                          type: 'div',
+                          props: {
+                            style: {
+                              width: `${(gift.score / 25) * 100}%`,
+                              height: '100%',
+                              background: `linear-gradient(90deg, ${getBarColor(i)}, ${getBarColor(i)})`,
+                              borderRadius: '9999px'
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      };
+    }
+  });
+
+  // Build practical applications items (now showing 4)
+  const practicalItems = topGiftPracticals.slice(0, 4).map((app, i) => ({
     type: 'div',
     props: {
       style: {
         display: 'flex',
         alignItems: 'center',
         marginBottom: '16px',
-        padding: i === 0 ? '20px' : '12px 16px',
-        backgroundColor: i === 0 ? '#f0fdf4' : '#ffffff',
-        borderRadius: i === 0 ? '20px' : '12px',
-        border: i === 0 ? '3px solid #7c9a2f' : '1px solid #e5e7eb'
+        padding: '16px',
+        backgroundColor: '#f0fdf4',
+        borderRadius: '12px',
+        borderLeft: '4px solid #7c9a2f'
       },
       children: [
-        // Rank badge
         {
           type: 'div',
           props: {
             style: {
-              width: i === 0 ? '48px' : '36px',
-              height: i === 0 ? '48px' : '36px',
-              borderRadius: '50%',
-              background: i === 0
-                ? 'linear-gradient(135deg, #fbbf24, #f59e0b)'
-                : `linear-gradient(135deg, ${getBarColor(i)}, ${getBarColor(i)})`,
               display: 'flex',
+              width: '32px',
+              height: '32px',
+              borderRadius: '50%',
+              backgroundColor: '#7c9a2f',
               alignItems: 'center',
               justifyContent: 'center',
               marginRight: '16px',
@@ -102,7 +379,7 @@ export async function generateStoriesImage(
                   style: {
                     color: 'white',
                     fontWeight: 700,
-                    fontSize: i === 0 ? '24px' : '18px'
+                    fontSize: '16px'
                   },
                   children: String(i + 1)
                 }
@@ -110,115 +387,14 @@ export async function generateStoriesImage(
             ]
           }
         },
-        // Gift name and score
-        {
-          type: 'div',
-          props: {
-            style: {
-              flex: 1
-            },
-            children: [
-              {
-                type: 'div',
-                props: {
-                  style: {
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginBottom: '8px'
-                  },
-                  children: [
-                    {
-                      type: 'span',
-                      props: {
-                        style: {
-                          fontSize: i === 0 ? '28px' : '20px',
-                          fontWeight: i === 0 ? 700 : 600,
-                          color: '#1B1B1B'
-                        },
-                        children: gift.name
-                      }
-                    },
-                    {
-                      type: 'span',
-                      props: {
-                        style: {
-                          fontSize: i === 0 ? '24px' : '18px',
-                          fontWeight: 700,
-                          color: '#1B1B1B'
-                        },
-                        children: `${gift.score}/25`
-                      }
-                    }
-                  ]
-                }
-              },
-              // Progress bar
-              {
-                type: 'div',
-                props: {
-                  style: {
-                    width: '100%',
-                    height: i === 0 ? '12px' : '8px',
-                    backgroundColor: '#e5e7eb',
-                    borderRadius: '9999px',
-                    overflow: 'hidden'
-                  },
-                  children: [
-                    {
-                      type: 'div',
-                      props: {
-                        style: {
-                          width: `${(gift.score / 25) * 100}%`,
-                          height: '100%',
-                          background: `linear-gradient(90deg, ${getBarColor(i)}, ${getBarColor(i)})`,
-                          borderRadius: '9999px'
-                        },
-                        children: []
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        }
-      ]
-    }
-  }));
-
-  // Build practical applications items
-  const practicalItems = topGiftPracticals.slice(0, 3).map((app) => ({
-    type: 'div',
-    props: {
-      style: {
-        display: 'flex',
-        alignItems: 'flex-start',
-        marginBottom: '10px'
-      },
-      children: [
-        {
-          type: 'div',
-          props: {
-            style: {
-              width: '8px',
-              height: '8px',
-              borderRadius: '50%',
-              backgroundColor: '#7c9a2f',
-              marginTop: '8px',
-              marginRight: '12px',
-              flexShrink: 0
-            },
-            children: []
-          }
-        },
         {
           type: 'span',
           props: {
             style: {
-              fontSize: '18px',
-              color: '#374151',
-              lineHeight: 1.5
+              fontSize: '20px',
+              fontWeight: 500,
+              color: '#1B1B1B',
+              lineHeight: 1.4
             },
             children: app
           }
@@ -234,7 +410,7 @@ export async function generateStoriesImage(
       style: {
         width: '1080px',
         height: '1920px',
-        backgroundColor: '#ffffff',
+        background: 'linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%)',
         padding: '80px 60px',
         display: 'flex',
         flexDirection: 'column',
@@ -249,17 +425,21 @@ export async function generateStoriesImage(
               display: 'flex',
               flexDirection: 'column',
               textAlign: 'center',
-              marginBottom: '40px'
+              marginBottom: '30px',
+              padding: '20px',
+              background: 'linear-gradient(135deg, rgba(124, 154, 47, 0.1) 0%, rgba(124, 154, 47, 0.05) 100%)',
+              borderRadius: '16px',
+              border: '2px solid rgba(124, 154, 47, 0.2)'
             },
             children: [
               {
                 type: 'span',
                 props: {
                   style: {
-                    fontSize: '32px',
+                    fontSize: '36px',
                     fontWeight: 700,
                     color: '#7c9a2f',
-                    letterSpacing: '2px'
+                    letterSpacing: '3px'
                   },
                   children: 'thegifts.site'
                 }
@@ -275,17 +455,17 @@ export async function generateStoriesImage(
               display: 'flex',
               flexDirection: 'column',
               textAlign: 'center',
-              marginBottom: '20px'
+              marginBottom: '30px'
             },
             children: [
               {
                 type: 'h1',
                 props: {
                   style: {
-                    fontSize: '48px',
+                    fontSize: '52px',
                     fontWeight: 700,
                     color: '#1B1B1B',
-                    marginBottom: '8px'
+                    marginBottom: '12px'
                   },
                   children: name
                 }
@@ -294,7 +474,8 @@ export async function generateStoriesImage(
                 type: 'span',
                 props: {
                   style: {
-                    fontSize: '28px',
+                    fontSize: '24px',
+                    fontWeight: 500,
                     color: '#6b7280'
                   },
                   children: titleText
@@ -310,22 +491,9 @@ export async function generateStoriesImage(
             style: {
               display: 'flex',
               flexDirection: 'column',
-              marginTop: '30px',
-              marginBottom: '16px'
+              marginBottom: '30px'
             },
             children: [
-              {
-                type: 'h2',
-                props: {
-                  style: {
-                    fontSize: '24px',
-                    fontWeight: 600,
-                    color: '#374151',
-                    marginBottom: '20px'
-                  },
-                  children: yourGiftsText
-                }
-              },
               ...giftItems
             ]
           }
@@ -339,20 +507,44 @@ export async function generateStoriesImage(
                   style: {
                     display: 'flex',
                     flexDirection: 'column',
-                    marginTop: '30px',
+                    marginTop: '10px',
                     flex: 1
                   },
                   children: [
                     {
-                      type: 'h2',
+                      type: 'div',
                       props: {
                         style: {
-                          fontSize: '24px',
-                          fontWeight: 600,
-                          color: '#374151',
-                          marginBottom: '16px'
+                          display: 'flex',
+                          alignItems: 'center',
+                          marginBottom: '20px'
                         },
-                        children: practicalText
+                        children: [
+                          {
+                            type: 'div',
+                            props: {
+                              style: {
+                                width: '6px',
+                                height: '32px',
+                                backgroundColor: '#7c9a2f',
+                                borderRadius: '3px',
+                                marginRight: '12px'
+                              }
+                            }
+                          },
+                          {
+                            type: 'h2',
+                            props: {
+                              style: {
+                                display: 'block',
+                                fontSize: '28px',
+                                fontWeight: 700,
+                                color: '#1B1B1B'
+                              },
+                              children: practicalText
+                            }
+                          }
+                        ]
                       }
                     },
                     ...practicalItems
@@ -371,17 +563,18 @@ export async function generateStoriesImage(
               justifyContent: 'center',
               marginTop: 'auto',
               paddingTop: '40px',
-              borderTop: '2px solid #e5e7eb'
+              background: 'linear-gradient(to top, rgba(124, 154, 47, 0.05) 0%, transparent 100%)',
+              borderRadius: '20px'
             },
             children: [
               {
                 type: 'img',
                 props: {
                   src: `data:image/png;base64,${qrBase64}`,
-                  width: 150,
-                  height: 150,
+                  width: 140,
+                  height: 140,
                   style: {
-                    marginRight: '24px'
+                    marginRight: '28px'
                   }
                 }
               },
@@ -397,9 +590,10 @@ export async function generateStoriesImage(
                       type: 'span',
                       props: {
                         style: {
-                          fontSize: '20px',
+                          fontSize: '22px',
+                          fontWeight: 500,
                           color: '#6b7280',
-                          marginBottom: '4px'
+                          marginBottom: '6px'
                         },
                         children: scanText
                       }
@@ -408,7 +602,7 @@ export async function generateStoriesImage(
                       type: 'span',
                       props: {
                         style: {
-                          fontSize: '32px',
+                          fontSize: '36px',
                           fontWeight: 700,
                           color: '#7c9a2f',
                           letterSpacing: '2px'

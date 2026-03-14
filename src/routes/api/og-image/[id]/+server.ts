@@ -37,18 +37,21 @@ export const GET: RequestHandler = async ({ params, request }) => {
   const acceptLanguage = request.headers.get('accept-language') || '';
   const locale: 'en' | 'id' = acceptLanguage.toLowerCase().includes('id') ? 'id' : 'en';
 
-  // Get top 3 gifts
-  const topGifts = result.slice(0, 3).map((item) => {
+  // Get top 3 gifts with descriptions for the top gift
+  const topGifts = result.slice(0, 3).map((item, index) => {
     const explanation = getCategoryExplanation(item.category, locale);
     return {
       name: explanation?.name || item.category,
-      score: item.score
+      score: item.score,
+      description: index === 0 // Only for top gift
+        ? explanation?.description
+        : undefined
     };
   });
 
-  // Get practical applications for the top gift
+  // Get 4 practical applications for the top gift
   const topGiftExplanation = getCategoryExplanation(result[0]?.category, locale);
-  const topGiftPracticals = topGiftExplanation?.practical_applications || [];
+  const topGiftPracticals = (topGiftExplanation?.practical_applications || []).slice(0, 4);
 
   try {
     const imageBuffer = await generateStoriesImage({
