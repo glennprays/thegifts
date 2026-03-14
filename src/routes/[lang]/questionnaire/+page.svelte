@@ -147,24 +147,18 @@
   <div class="questions-area">
     <!-- Page intro -->
     <div class="page-intro">
-      <div class="intro-eyebrow">Assessment · Page {currentPage}</div>
+      <div class="intro-eyebrow">{$_("pages.questionnaire.pageLabel", { values: { currentPage } })}</div>
       {#if savedName}
-        <div class="intro-name">{savedName}'s Assessment</div>
+        <div class="intro-name">{$_("pages.questionnaire.personalAssessment", { values: { name: savedName } })}</div>
       {/if}
       <div class="intro-hint">
-        Answer honestly — there are no right or wrong answers.
+        {$_("pages.questionnaire.answerHint")}
         {#if answeredOnPage < pagedQuestions.length}
           <span style="color:#6b8f27;font-weight:500;">
-            {pagedQuestions.length - answeredOnPage} question{pagedQuestions.length -
-              answeredOnPage !==
-            1
-              ? "s"
-              : ""} left on this page.
+            {$_(pagedQuestions.length - answeredOnPage === 1 ? "pages.questionnaire.questionsLeft" : "pages.questionnaire.questionsLeft_plural", { values: { count: pagedQuestions.length - answeredOnPage } })}
           </span>
         {:else}
-          <span style="color:#4a6518;font-weight:600;"
-            >✓ All answered — you can continue.</span
-          >
+          <span style="color:#4a6518;font-weight:600;">{$_("pages.questionnaire.allAnswered")}</span>
         {/if}
       </div>
     </div>
@@ -202,7 +196,7 @@
           stroke-linecap="round"
           stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7" /></svg
         >
-        Back
+        {$_("pages.questionnaire.back")}
       </button>
 
       <!-- Center status -->
@@ -222,7 +216,7 @@
           disabled={isDisabledNext}
           on:click={handleNext}
         >
-          Continue
+          {$_("pages.questionnaire.continue")}
           <svg
             width="14"
             height="14"
@@ -240,7 +234,7 @@
           disabled={isDisabledNext}
           on:click={handleSubmit}
         >
-          See Results
+          {$_("pages.questionnaire.seeResults")}
           <svg
             width="14"
             height="14"

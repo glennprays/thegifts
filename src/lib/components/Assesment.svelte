@@ -10,13 +10,13 @@
 
   $: currentLocale = $locale;
 
-  // Likert scale options
-  const options = [
-    { value: 1, label: "Strongly\nDisagree", short: "1" },
-    { value: 2, label: "Disagree", short: "2" },
-    { value: 3, label: "Neutral", short: "3" },
-    { value: 4, label: "Agree", short: "4" },
-    { value: 5, label: "Strongly\nAgree", short: "5" },
+  // Likert scale options with translations
+  $: options = [
+    { value: 1, label: $_("components.likert.stronglyDisagree"), short: "1" },
+    { value: 2, label: $_("components.likert.disagree"), short: "2" },
+    { value: 3, label: $_("components.likert.neutral"), short: "3" },
+    { value: 4, label: $_("components.likert.agree"), short: "4" },
+    { value: 5, label: $_("components.likert.stronglyAgree"), short: "5" },
   ];
 
   function select(questionId: number, value: number) {
@@ -34,7 +34,7 @@
       <div class="answered-check">✓</div>
     {/if}
 
-    <span class="q-num">Question {q.id}</span>
+    <span class="q-num">{$_("components.assesment.questionPrefix", { values: { id: q.id } })}</span>
     <p class="q-text">{currentLocale === "id" ? q.in : q.en}</p>
 
     <div class="likert">
@@ -45,7 +45,7 @@
             class="likert-btn {results[q.id] === opt.value ? 'selected' : ''}"
             on:click={() => select(q.id, opt.value)}
             aria-pressed={results[q.id] === opt.value}
-            aria-label="{opt.label} ({opt.value} of 5)"
+            aria-label={$_("components.assesment.ariaLabel", { values: { label: opt.label, value: opt.value } })}
           >
             <span>{opt.short}</span>
           </button>
