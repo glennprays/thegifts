@@ -44,8 +44,10 @@
     <button
       aria-label="Scroll to Three Pillars Section"
       on:click={() => {
-        const section = document.getElementById("three-pillars");
-        section?.scrollIntoView({ behavior: "smooth" });
+        if (typeof document !== 'undefined') {
+          const section = document.getElementById("three-pillars");
+          section?.scrollIntoView({ behavior: "smooth" });
+        }
       }}
       class="mt-10 mb-12 animate-bounce text-primary"
     >

@@ -3,7 +3,7 @@
   import { goto } from '$app/navigation';
   import { _ } from 'svelte-i18n';
   import type { PageData } from './$types';
-  import { onMount, onDestroy } from 'svelte';
+  import { onMount } from 'svelte';
 
   let { data }: { data: PageData } = $props();
   const lang = $page.params.lang;
@@ -49,10 +49,10 @@
 
   onMount(() => {
     document.addEventListener('keydown', handleEscapeKey);
-  });
 
-  onDestroy(() => {
-    document.removeEventListener('keydown', handleEscapeKey);
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
   });
 </script>
 

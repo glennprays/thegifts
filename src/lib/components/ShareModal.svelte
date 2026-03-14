@@ -1,5 +1,6 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n';
+  import { browser } from '$app/environment';
   import Close from '$lib/icons/Close.svelte';
   import Link from '$lib/icons/Link.svelte';
   import Copy from '$lib/icons/Copy.svelte';
@@ -25,18 +26,21 @@
   let storiesLoading = $state(false);
 
   function copyLink() {
+    if (!browser) return;
     navigator.clipboard.writeText(shareUrl);
     copySuccess = true;
     setTimeout(() => (copySuccess = false), 2000);
   }
 
   function copyTextAndLink() {
+    if (!browser) return;
     navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
     copyTextSuccess = true;
     setTimeout(() => (copyTextSuccess = false), 2000);
   }
 
   function shareToWhatsApp() {
+    if (!browser) return;
     window.open(
       `https://wa.me/?text=${encodeURIComponent(shareText + '\n' + shareUrl)}`,
       '_blank'
@@ -45,6 +49,7 @@
   }
 
   function shareToFacebook() {
+    if (!browser) return;
     window.open(
       `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
       '_blank'
@@ -53,6 +58,7 @@
   }
 
   function shareToTwitter() {
+    if (!browser) return;
     window.open(
       `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`,
       '_blank'
@@ -61,6 +67,7 @@
   }
 
   function shareToTelegram() {
+    if (!browser) return;
     window.open(
       `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`,
       '_blank'
@@ -69,6 +76,7 @@
   }
 
   function shareViaEmail() {
+    if (!browser) return;
     const subject = encodeURIComponent($_('pages.result.emailSubject') || 'Spiritual Gifts Assessment Results');
     const body = encodeURIComponent(shareText + '\n\n' + shareUrl);
     window.location.href = `mailto:?subject=${subject}&body=${body}`;

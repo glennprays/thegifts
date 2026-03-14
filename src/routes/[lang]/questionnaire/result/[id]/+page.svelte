@@ -21,7 +21,7 @@
   let showDownloadToast = $state(false);
 
   // Share URL and text
-  const shareUrl = $derived(`${window.location.origin}/${lang}/questionnaire/result/${data.short_id}`);
+  const shareUrl = $derived(`${$page.url.origin}/${lang}/questionnaire/result/${data.short_id}`);
   const shareText = $derived(`${data.name}'s Spiritual Gifts assessment results — check out their gifts!`);
 
   function openShareModalFn() {

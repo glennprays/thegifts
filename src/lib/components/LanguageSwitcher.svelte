@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
+  import { browser } from '$app/environment';
 
   let open = false;
 
@@ -11,6 +12,8 @@
   $: currentLocale = $page.params.lang || 'en';
 
   function switchLanguage(newLang: 'en' | 'id') {
+    if (!browser) return;  // Guard for SSR
+
     // Compute new URL
     const currentPath = $page.url.pathname;
     const newPath = currentPath.replace(/^\/[a-z]{2}/, `/${newLang}`);
