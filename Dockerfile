@@ -25,6 +25,9 @@ COPY --from=builder /app/build ./build
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/node_modules ./node_modules
 
+# Copy static assets (fonts for image generation)
+COPY --from=builder /app/static ./static
+
 # Copy migration scripts and SQL files
 COPY --from=builder /app/scripts ./scripts
 COPY --from=builder /app/migrations ./migrations
