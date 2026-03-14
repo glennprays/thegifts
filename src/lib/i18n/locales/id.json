@@ -23,8 +23,17 @@
       "step": "Langkah",
       "of": "dari"
     },
+    "likert": {
+      "stronglyDisagree": "Sangat\nTidak Setuju",
+      "disagree": "Tidak Setuju",
+      "neutral": "Netral",
+      "agree": "Setuju",
+      "stronglyAgree": "Sangat\nSetuju"
+    },
     "assesment": {
-      "title": "Pilih seberapa akurat setiap pernyataan mencerminkan diri Anda."
+      "title": "Pilih seberapa akurat setiap pernyataan mencerminkan diri Anda.",
+      "questionPrefix": "Pertanyaan {id}",
+      "ariaLabel": "{label} ({value} dari 5)"
     }
   },
   "pages": {
@@ -72,6 +81,17 @@
       "formTitle": "Siapa nama Anda?",
       "formPlaceholder": "Masukkan nama Anda",
       "formButton": "Lanjutkan"
+    },
+    "questionnaire": {
+      "pageLabel": "Penilaian · Halaman {currentPage}",
+      "personalAssessment": "Penilaian {name}",
+      "answerHint": "Jawab dengan jujur — tidak ada jawaban yang benar atau salah.",
+      "questionsLeft": "{count} pertanyaan tersisa di halaman ini.",
+      "questionsLeft_plural": "{count} pertanyaan tersisa di halaman ini.",
+      "allAnswered": "✓ Semua terjawab — Anda dapat melanjutkan.",
+      "back": "Kembali",
+      "continue": "Lanjutkan",
+      "seeResults": "Lihat Hasil"
     },
     "result": {
       "title": "Hasil Tes Karunia Rohani Anda",

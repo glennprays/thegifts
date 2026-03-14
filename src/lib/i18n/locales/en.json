@@ -23,8 +23,17 @@
       "step": "Step",
       "of": "of"
     },
+    "likert": {
+      "stronglyDisagree": "Strongly\nDisagree",
+      "disagree": "Disagree",
+      "neutral": "Neutral",
+      "agree": "Agree",
+      "stronglyAgree": "Strongly\nAgree"
+    },
     "assesment": {
-      "title": "Choose how accurately each statement reflects you."
+      "title": "Choose how accurately each statement reflects you.",
+      "questionPrefix": "Question {id}",
+      "ariaLabel": "{label} ({value} of 5)"
     }
   },
   "pages": {
@@ -72,6 +81,17 @@
       "formTitle": "What's your name?",
       "formPlaceholder": "Enter your name",
       "formButton": "Continue"
+    },
+    "questionnaire": {
+      "pageLabel": "Assessment · Page {currentPage}",
+      "personalAssessment": "{name}'s Assessment",
+      "answerHint": "Answer honestly — there are no right or wrong answers.",
+      "questionsLeft": "{count} question left on this page.",
+      "questionsLeft_plural": "{count} questions left on this page.",
+      "allAnswered": "✓ All answered — you can continue.",
+      "back": "Back",
+      "continue": "Continue",
+      "seeResults": "See Results"
     },
     "result": {
       "title": "Your Spiritual Gifts Result",

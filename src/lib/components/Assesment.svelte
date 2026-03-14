@@ -1,127 +1,229 @@
 <script lang="ts">
-  import { _ } from "svelte-i18n";
+  // Enhanced Assessment.svelte
+  // Drop-in replacement — same props interface
   export let questions: { id: number; en: string; in: string }[] = [];
-
   export let results: AnswerMap = {};
-  import { locale } from "svelte-i18n";
+
+  import { fly } from "svelte/transition";
+  import { quintOut } from "svelte/easing";
+  import { _, locale } from "svelte-i18n";
+
   $: currentLocale = $locale;
 
-  const options: RatingOption[] = [
-    {
-      text_en: "Strongly Disagree",
-      text_id: "Sangat Tidak Setuju",
-      rating: 1,
-      color: "text-red-400",
-      bg: "bg-red-100",
-      checked: "bg-red-400",
-    },
-    {
-      text_en: "Disagree",
-      text_id: "Tidak Setuju",
-      rating: 2,
-      color: "text-orange-400",
-      bg: "bg-orange-100",
-      checked: "bg-orange-400",
-    },
-    {
-      text_en: "Neutral",
-      text_id: "Netral",
-      rating: 3,
-      color: "text-gray-400",
-      bg: "bg-gray-100",
-      checked: "bg-gray-400",
-    },
-    {
-      text_en: "Agree",
-      text_id: "Setuju",
-      rating: 4,
-      color: "text-green-500",
-      bg: "bg-green-100",
-      checked: "bg-green-500",
-    },
-    {
-      text_en: "Strongly Agree",
-      text_id: "Sangat Setuju",
-      rating: 5,
-      color: "text-teal-500",
-      bg: "bg-teal-100",
-      checked: "bg-teal-500",
-    },
+  // Likert scale options with translations
+  $: options = [
+    { value: 1, label: $_("components.likert.stronglyDisagree"), short: "1" },
+    { value: 2, label: $_("components.likert.disagree"), short: "2" },
+    { value: 3, label: $_("components.likert.neutral"), short: "3" },
+    { value: 4, label: $_("components.likert.agree"), short: "4" },
+    { value: 5, label: $_("components.likert.stronglyAgree"), short: "5" },
   ];
 
-  function selectOption(id: number, rating: number): void {
-    results = { ...results, [id]: rating };
+  function select(questionId: number, value: number) {
+    results = { ...results, [questionId]: value };
   }
 </script>
 
-<div class="p-4 rounded-xl md:shadow-lg max-w-3xl mx-auto space-y-4 mb-8">
-  <div class="p-6 pb-2 rounded-t-xl">
-    <h2
-      class="text-xl md:text-2xl font-semibold text-gray-800 mb-6 text-center"
-    >
-      {$_("components.assesment.title")}
-    </h2>
+{#each questions as q, i (q.id)}
+  {@const answered = !!results[q.id]}
+  <div
+    class="question-card {answered ? 'answered' : ''}"
+    in:fly={{ y: 14, duration: 300, delay: i * 50, easing: quintOut }}
+  >
+    {#if answered}
+      <div class="answered-check">✓</div>
+    {/if}
 
-    <div class="flex justify-between items-baseline text-center px-4">
-      {#each options as option}
-        <div class="flex flex-col items-center w-1/5">
-          <div
-            class="
-            w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-current
-            mb-1 transition-colors duration-200 {option.color} {option.bg}
-          "
+    <span class="q-num">{$_("components.assesment.questionPrefix", { values: { id: q.id } })}</span>
+    <p class="q-text">{currentLocale === "id" ? q.in : q.en}</p>
+
+    <div class="likert">
+      {#each options as opt}
+        <label class="likert-option">
+          <button
+            type="button"
+            class="likert-btn {results[q.id] === opt.value ? 'selected' : ''}"
+            on:click={() => select(q.id, opt.value)}
+            aria-pressed={results[q.id] === opt.value}
+            aria-label={$_("components.assesment.ariaLabel", { values: { label: opt.label, value: opt.value } })}
           >
-            <div class="w-full h-full p-1.5">
-              <div class="w-full h-full rounded-full opacity-80"></div>
-            </div>
-          </div>
-          <span class="text-xs font-medium text-gray-600 mt-1"
-            >{currentLocale === "id" ? option.text_id : option.text_en}</span
-          >
-        </div>
+            <span>{opt.short}</span>
+          </button>
+          <span class="likert-label">{opt.label}</span>
+        </label>
       {/each}
     </div>
   </div>
+{/each}
 
-  <div class="space-y-4">
-    {#each questions as question}
-      <div class="p-5 rounded-lg shadow-md border border-gray-100">
-        <h3 class="font-medium text-gray-700 mb-4">
-          {currentLocale === "id" ? question.in : question.en}
-        </h3>
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap");
 
-        <div class="flex justify-between items-center text-center px-2">
-          {#each options as option}
-            <button
-              class="w-1/5 flex justify-center items-center p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 {option.color} rounded-full"
-              on:click={() => selectOption(question.id, option.rating)}
-              aria-label={`Rate: ${option.text_en}`}
-            >
-              <div
-                class="
-                w-8 h-8 rounded-full border-2 border-gray-300 transition-all duration-150 ease-in-out
-                flex items-center justify-center
-                {results[question.id] === option.rating
-                  ? option.checked + ' border-transparent'
-                  : 'hover:border-gray-500'}
-              "
-              >
-                {#if results[question.id] === option.rating}
-                  <svg
-                    class="w-5 h-5 text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z"
-                    />
-                  </svg>
-                {/if}
-              </div>
-            </button>
-          {/each}
-        </div>
-      </div>
-    {/each}
-  </div>
-</div>
+  .question-card {
+    background: white;
+    border-radius: 22px;
+    border: 1.5px solid #e8f0d8;
+    padding: 28px 26px 24px;
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
+    font-family: "DM Sans", sans-serif;
+  }
+
+  /* Answered state */
+  .question-card.answered {
+    border-color: #c0dba0;
+    box-shadow: 0 4px 20px rgba(74, 101, 24, 0.07);
+  }
+
+  /* Subtle bg tint alternating */
+  .question-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 22px;
+    opacity: 0.25;
+    pointer-events: none;
+  }
+  .question-card:nth-child(odd)::before {
+    background: #f4f9ec;
+  }
+  .question-card:nth-child(even)::before {
+    background: #f0f8e4;
+  }
+
+  /* Question number */
+  .q-num {
+    font-family: "DM Serif Display", serif;
+    font-style: italic;
+    font-size: 12px;
+    color: rgba(107, 143, 39, 0.4);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  /* Question text */
+  .q-text {
+    font-size: 15px;
+    font-weight: 500;
+    color: #1a2e05;
+    line-height: 1.65;
+    margin-bottom: 22px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Likert scale */
+  .likert {
+    display: flex;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .likert-option {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+
+  .likert-btn {
+    width: 100%;
+    aspect-ratio: 1/1;
+    max-width: 52px;
+    border-radius: 12px;
+    border: 1.5px solid #e0ebb8;
+    background: #fafef5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b8f27;
+    font-family: "DM Sans", sans-serif;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .likert-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #3d5a12, #6b8f27);
+    opacity: 0;
+    transition: opacity 0.18s;
+  }
+  .likert-btn span {
+    position: relative;
+    z-index: 1;
+    transition: color 0.18s;
+  }
+
+  .likert-btn:hover {
+    border-color: #8fb840;
+    background: #f0f8e0;
+    transform: translateY(-2px);
+  }
+
+  .likert-btn.selected {
+    border-color: #4a6518;
+    box-shadow: 0 4px 14px rgba(74, 101, 24, 0.22);
+    transform: translateY(-2px);
+  }
+  .likert-btn.selected::before {
+    opacity: 1;
+  }
+  .likert-btn.selected span {
+    color: white;
+  }
+
+  .likert-label {
+    font-size: 10px;
+    font-weight: 500;
+    color: #a0b878;
+    text-align: center;
+    line-height: 1.3;
+    white-space: pre-line;
+  }
+  .likert-option:first-child .likert-label,
+  .likert-option:last-child .likert-label {
+    color: #8aab52;
+    font-weight: 600;
+  }
+
+  /* Check indicator when answered */
+  .answered-check {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4a6518, #6b8f27);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 11px;
+    z-index: 2;
+    animation: checkPop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  @keyframes checkPop {
+    from {
+      transform: scale(0);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+</style>

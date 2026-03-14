@@ -8,127 +8,411 @@
   import Restart from "$lib/icons/Restart.svelte";
   import { RestartTest } from "$lib/utils/utils";
   import LanguageSwitcher from "./LanguageSwitcher.svelte";
+  import { fly, fade } from "svelte/transition";
+  import { quintOut } from "svelte/easing";
 
   let isContinueTestVisible = false;
   let mobileMenuOpen = false;
+  let scrolled = false;
 
-  // Check if current page is homepage (/, /en, /id)
-  $: isHomePage = $page.url.pathname === "/" ||
-                  $page.url.pathname === "/en" ||
-                  $page.url.pathname === "/id";
+  $: isHomePage =
+    $page.url.pathname === "/" ||
+    $page.url.pathname === "/en" ||
+    $page.url.pathname === "/id";
 
   onMount(() => {
     if (typeof window !== "undefined") {
       const savedResults = localStorage.getItem(RESULTS_STORAGE_KEY);
       isContinueTestVisible = savedResults !== null;
+
+      const onScroll = () => {
+        scrolled = window.scrollY > 20;
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      return () => window.removeEventListener("scroll", onScroll);
     }
   });
 
   function toggleMenu() {
     mobileMenuOpen = !mobileMenuOpen;
   }
+  function closeMenu() {
+    mobileMenuOpen = false;
+  }
 </script>
 
-<nav
-  class="w-full bg-white px-4 md:px-5 py-3 flex justify-between items-center z-50 relative"
->
-  <a href="/" rel="external" class="flex items-center gap-2">
-    <img src={logoSrc} alt="TheGifts Logo" class="h-9 w-9 rounded-full" />
-    <span
-      class="text-xl md:text-2xl font-sans font-medium select-none text-gray-800"
-    >
-      TheGifts
-    </span>
-  </a>
-
-  <div class="flex items-center gap-3">
-    <LanguageSwitcher />
-    {#if isHomePage}
-      <div class="hidden md:flex items-center gap-3">
-        {#if isContinueTestVisible}
-          <a
-            href="/questionnaire"
-            class="bg-primary hover:bg-secondary text-white rounded-md text-sm font-semibold px-4 py-2 transition-colors duration-200 shadow-md"
-          >
-            {$_("components.navbar.continueTest")}
-          </a>
-          <a
-            href="/onboarding"
-            class="text-secondary hover:text-white hover:bg-red-400 rounded-md text-sm font-semibold px-4 py-2 transition-colors duration-200 flex items-center gap-1 border border-secondary hover:border-accent"
-            on:click={RestartTest}
-          >
-            {$_("components.navbar.restartTest")}
-            <Restart />
-          </a>
-        {:else}
-          <a
-            href="/onboarding"
-            class="bg-primary hover:bg-secondary text-white rounded-md text-sm font-semibold px-4 py-2 transition-colors duration-200 shadow-md"
-          >
-            {$_("components.navbar.startTest")}
-          </a>
-        {/if}
+<!-- Navbar -->
+<nav class="navbar {scrolled ? 'scrolled' : 'top'}">
+  <div class="navbar-inner">
+    <!-- Brand -->
+    <a href="/" rel="external" class="brand">
+      <div class="brand-logo">
+        <img
+          src={logoSrc}
+          alt="TheGifts Logo"
+          style="width:100%;height:100%;object-fit:cover;"
+        />
       </div>
+      <span class="brand-name">TheGifts</span>
+    </a>
 
-      <div class="md:hidden flex items-center gap-2">
-        {#if isContinueTestVisible}
-          <button
-            on:click={toggleMenu}
-            class="p-2 text-gray-600 hover:text-gray-900 focus:outline-none"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 0 24 24"
-              width="24px"
-              fill="currentColor"
+    <!-- Right side -->
+    <div class="nav-right">
+      <LanguageSwitcher />
+
+      {#if isHomePage}
+        <!-- Desktop actions -->
+        <div class="hidden md:flex items-center gap-2">
+          {#if isContinueTestVisible}
+            <a href="/questionnaire" class="btn-start">
+              {$_("components.navbar.continueTest")}
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg
+              >
+            </a>
+            <a href="/onboarding" class="btn-restart" on:click={RestartTest}>
+              <Restart />
+              {$_("components.navbar.restartTest")}
+            </a>
+          {:else}
+            <a href="/onboarding" class="btn-start">
+              {$_("components.navbar.startTest")}
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg
+              >
+            </a>
+          {/if}
+        </div>
+
+        <!-- Mobile: hamburger (only when continue test visible) or inline start btn -->
+        <div class="md:hidden flex items-center gap-2">
+          {#if isContinueTestVisible}
+            <button
+              class="hamburger"
+              on:click={toggleMenu}
+              aria-label="Toggle menu"
+              aria-expanded={mobileMenuOpen}
             >
-              <!-- Toggle between X and Burger Icon -->
               {#if mobileMenuOpen}
-                <path
-                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-                />
+                <!-- X icon -->
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
               {:else}
-                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                <!-- Burger icon -->
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 12h18M3 6h18M3 18h18" />
+                </svg>
               {/if}
-            </svg>
-          </button>
-        {:else}
-          <a
-            href="/onboarding"
-            class="bg-primary hover:bg-secondary text-white rounded-md text-sm font-semibold px-3 py-1.5 transition-colors duration-200 shadow-sm"
-          >
-            {$_("components.navbar.startTest")}
-          </a>
-        {/if}
-      </div>
-    {/if}
-  </div>
-</nav>
-
-{#if isHomePage && isContinueTestVisible}
-  <div
-    class="md:hidden absolute top-[60px] left-0 w-full bg-white shadow-lg transition-transform duration-300 ease-in-out z-40"
-    class:transform={true}
-    class:translate-y-0={mobileMenuOpen}
-    class:translate-y-[-100%]={!mobileMenuOpen}
-  >
-    <!-- Menu items container -->
-    <div class="flex flex-col p-4 space-y-2">
-      <a
-        href="/questionnaire"
-        on:click={toggleMenu}
-        class="text-base text-gray-700 font-medium p-2 rounded-lg hover:bg-primary/75 bg-primary text-white transition-colors"
-      >
-        {$_("components.navbar.continueTest")}
-      </a>
-      <a
-        href="/onboarding"
-        on:click={RestartTest}
-        class="text-base text-gray-700 font-medium p-2 rounded-lg hover:bg-gray-50 transition-colors"
-      >
-        {$_("components.navbar.restartTest")}
-      </a>
+            </button>
+          {:else}
+            <a href="/onboarding" class="btn-start">
+              {$_("components.navbar.startTest")}
+            </a>
+          {/if}
+        </div>
+      {/if}
     </div>
   </div>
+  <div class="navbar-line"></div>
+</nav>
+
+<!-- Mobile drawer -->
+{#if isHomePage && isContinueTestVisible && mobileMenuOpen}
+  <!-- Backdrop -->
+  <div
+    transition:fade={{ duration: 180 }}
+    class="fixed inset-0 z-40 bg-black/10"
+    role="button"
+    tabindex="-1"
+    aria-label="Close menu"
+    on:click={closeMenu}
+    on:keydown={(e) => e.key === "Escape" && closeMenu()}
+  ></div>
+
+  <!-- Drawer panel -->
+  <div
+    transition:fly={{ y: -12, duration: 260, easing: quintOut }}
+    class="mobile-drawer md:hidden"
+  >
+    <a href="/questionnaire" class="drawer-continue" on:click={closeMenu}>
+      {$_("components.navbar.continueTest")}
+    </a>
+    <a
+      href="/onboarding"
+      class="drawer-restart"
+      on:click={() => {
+        RestartTest();
+        closeMenu();
+      }}
+    >
+      <Restart />
+      {$_("components.navbar.restartTest")}
+    </a>
+  </div>
 {/if}
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap");
+
+  .navbar {
+    font-family: "DM Sans", sans-serif;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+    /* Starts transparent, gains background on scroll via .scrolled class */
+    transition:
+      background 0.3s ease,
+      box-shadow 0.3s ease,
+      backdrop-filter 0.3s ease;
+  }
+
+  /* Transparent on top of hero */
+  .navbar.top {
+    background: rgba(247, 243, 235, 0);
+    box-shadow: none;
+  }
+
+  /* Frosted glass after scrolling */
+  .navbar.scrolled {
+    background: rgba(247, 243, 235, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow:
+      0 1px 0 rgba(107, 143, 39, 0.12),
+      0 4px 20px rgba(0, 0, 0, 0.04);
+  }
+
+  .navbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Brand */
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .brand-logo {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(74, 101, 24, 0.15);
+  }
+  .brand-name {
+    font-family: "DM Serif Display", serif;
+    font-size: 20px;
+    color: #1a2e05;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+  .brand:hover .brand-name {
+    color: #4a6518;
+  }
+
+  /* Nav right area */
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Desktop buttons */
+  .btn-start {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #3d5a12, #6b8f27);
+    color: white;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 8px 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 2px 12px rgba(74, 101, 24, 0.22);
+    position: relative;
+    overflow: hidden;
+    transition:
+      transform 0.15s,
+      box-shadow 0.15s;
+    white-space: nowrap;
+    font-family: "DM Sans", sans-serif;
+  }
+  .btn-start::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 60%;
+    height: 200%;
+    background: radial-gradient(
+      ellipse,
+      rgba(255, 255, 255, 0.12) 0%,
+      transparent 60%
+    );
+    pointer-events: none;
+  }
+  .btn-start:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(74, 101, 24, 0.28);
+  }
+
+  .btn-restart {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #4a6518;
+    font-weight: 500;
+    font-size: 13px;
+    padding: 7px 14px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    background: rgba(107, 143, 39, 0.08);
+    border: 1px solid rgba(107, 143, 39, 0.2);
+    transition:
+      background 0.15s,
+      border-color 0.15s,
+      color 0.15s;
+    white-space: nowrap;
+    font-family: "DM Sans", sans-serif;
+  }
+  .btn-restart:hover {
+    background: rgba(220, 38, 38, 0.07);
+    border-color: rgba(220, 38, 38, 0.25);
+    color: #dc2626;
+  }
+
+  /* Hamburger button */
+  .hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(107, 143, 39, 0.08);
+    border: 1px solid rgba(107, 143, 39, 0.15);
+    cursor: pointer;
+    color: #4a6518;
+    transition: background 0.15s;
+  }
+  .hamburger:hover {
+    background: rgba(107, 143, 39, 0.14);
+  }
+
+  /* Mobile drawer */
+  .mobile-drawer {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: rgba(247, 243, 235, 0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(107, 143, 39, 0.12);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    z-index: 49;
+    padding: 16px 20px 20px;
+  }
+
+  .drawer-continue {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px;
+    border-radius: 12px;
+    text-decoration: none;
+    background: linear-gradient(135deg, #3d5a12, #6b8f27);
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 10px;
+    box-shadow: 0 3px 14px rgba(74, 101, 24, 0.22);
+    font-family: "DM Sans", sans-serif;
+  }
+
+  .drawer-restart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px;
+    border-radius: 12px;
+    text-decoration: none;
+    background: rgba(107, 143, 39, 0.06);
+    border: 1px solid rgba(107, 143, 39, 0.15);
+    color: #4a6518;
+    font-weight: 500;
+    font-size: 14px;
+    font-family: "DM Sans", sans-serif;
+  }
+
+  /* Organic bottom border on navbar when scrolled */
+  .navbar-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(107, 143, 39, 0.15) 30%,
+      rgba(107, 143, 39, 0.15) 70%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .scrolled .navbar-line {
+    opacity: 1;
+  }
+</style>
