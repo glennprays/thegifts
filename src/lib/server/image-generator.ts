@@ -82,71 +82,17 @@ export async function generateStoriesImage(
             boxShadow: '0 20px 40px rgba(124, 154, 47, 0.3)'
           },
           children: [
-            // Header with badge and label
-            {
-              type: 'div',
-              props: {
-                style: {
-                  display: 'flex',
-                  alignItems: 'center',
-                  marginBottom: '20px'
-                },
-                children: [
-                  // Gold badge
-                  {
-                    type: 'div',
-                    props: {
-                      style: {
-                        display: 'flex',
-                        width: '60px',
-                        height: '60px',
-                        borderRadius: '50%',
-                        background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
-                        boxShadow: '0 4px 12px rgba(255, 215, 0, 0.4)',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginRight: '16px'
-                      },
-                      children: [
-                        {
-                          type: 'span',
-                          props: {
-                            style: {
-                              color: '#1B1B1B',
-                              fontWeight: 700,
-                              fontSize: '28px'
-                            },
-                            children: '1'
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    type: 'span',
-                    props: {
-                      style: {
-                        fontSize: '20px',
-                        fontWeight: 600,
-                        color: 'rgba(255, 255, 255, 0.9)'
-                      },
-                      children: yourGiftsText.split(' ')[0] + ' #' + (i + 1)
-                    }
-                  }
-                ]
-              }
-            },
-            // Gift name
+            // Big title with "1 GiftName"
             {
               type: 'h2',
               props: {
                 style: {
-                  fontSize: '40px',
+                  fontSize: '48px',
                   fontWeight: 700,
                   color: 'white',
-                  marginBottom: '16px'
+                  marginBottom: '20px'
                 },
-                children: gift.name
+                children: `#1 ${gift.name}`
               }
             },
             // Description (if available)
@@ -155,9 +101,9 @@ export async function generateStoriesImage(
                 type: 'p',
                 props: {
                   style: {
-                    fontSize: '20px',
-                    lineHeight: 1.6,
-                    color: 'rgba(255, 255, 255, 0.9)',
+                    fontSize: '26px',
+                    lineHeight: 1.5,
+                    color: 'rgba(255, 255, 255, 0.95)',
                     marginBottom: '20px'
                   },
                   children: gift.description
@@ -208,7 +154,7 @@ export async function generateStoriesImage(
                         fontWeight: 700,
                         color: 'white'
                       },
-                      children: `${gift.score}/25`
+                      children: `${gift.score} / 25`
                     }
                   }
                 ]
@@ -225,10 +171,10 @@ export async function generateStoriesImage(
           style: {
             display: 'flex',
             alignItems: 'center',
-            marginBottom: '16px',
-            padding: '16px 20px',
+            marginBottom: '20px',
+            padding: '24px 28px',
             backgroundColor: 'white',
-            borderRadius: '16px',
+            borderRadius: '20px',
             border: '2px solid #e5e7eb',
             boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)'
           },
@@ -238,14 +184,14 @@ export async function generateStoriesImage(
               type: 'div',
               props: {
                 style: {
-                  width: '40px',
-                  height: '40px',
+                  width: '50px',
+                  height: '50px',
                   borderRadius: '50%',
                   background: `linear-gradient(135deg, ${getBarColor(i)}, ${getBarColor(i)})`,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginRight: '16px',
+                  marginRight: '20px',
                   flexShrink: 0
                 },
                 children: [
@@ -255,7 +201,7 @@ export async function generateStoriesImage(
                       style: {
                         color: 'white',
                         fontWeight: 700,
-                        fontSize: '20px'
+                        fontSize: '24px'
                       },
                       children: String(i + 1)
                     }
@@ -280,14 +226,14 @@ export async function generateStoriesImage(
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                        marginBottom: '8px'
+                        marginBottom: '10px'
                       },
                       children: [
                         {
                           type: 'span',
                           props: {
                             style: {
-                              fontSize: '22px',
+                              fontSize: '26px',
                               fontWeight: 600,
                               color: '#1B1B1B'
                             },
@@ -298,11 +244,11 @@ export async function generateStoriesImage(
                           type: 'span',
                           props: {
                             style: {
-                              fontSize: '18px',
+                              fontSize: '22px',
                               fontWeight: 700,
                               color: '#1B1B1B'
                             },
-                            children: `${gift.score}/25`
+                            children: `${gift.score} / 25`
                           }
                         }
                       ]
@@ -315,7 +261,7 @@ export async function generateStoriesImage(
                       style: {
                         display: 'flex',
                         width: '100%',
-                        height: '8px',
+                        height: '10px',
                         backgroundColor: '#e5e7eb',
                         borderRadius: '9999px',
                         overflow: 'hidden'
@@ -351,11 +297,11 @@ export async function generateStoriesImage(
       style: {
         display: 'flex',
         alignItems: 'center',
-        marginBottom: '16px',
-        padding: '16px',
+        marginBottom: '20px',
+        padding: '20px 24px',
         backgroundColor: '#f0fdf4',
-        borderRadius: '12px',
-        borderLeft: '4px solid #7c9a2f'
+        borderRadius: '16px',
+        borderLeft: '5px solid #7c9a2f'
       },
       children: [
         {
@@ -363,13 +309,13 @@ export async function generateStoriesImage(
           props: {
             style: {
               display: 'flex',
-              width: '32px',
-              height: '32px',
+              width: '40px',
+              height: '40px',
               borderRadius: '50%',
               backgroundColor: '#7c9a2f',
               alignItems: 'center',
               justifyContent: 'center',
-              marginRight: '16px',
+              marginRight: '20px',
               flexShrink: 0
             },
             children: [
@@ -379,7 +325,7 @@ export async function generateStoriesImage(
                   style: {
                     color: 'white',
                     fontWeight: 700,
-                    fontSize: '16px'
+                    fontSize: '20px'
                   },
                   children: String(i + 1)
                 }
@@ -391,7 +337,7 @@ export async function generateStoriesImage(
           type: 'span',
           props: {
             style: {
-              fontSize: '20px',
+              fontSize: '24px',
               fontWeight: 500,
               color: '#1B1B1B',
               lineHeight: 1.4
@@ -425,23 +371,32 @@ export async function generateStoriesImage(
               display: 'flex',
               flexDirection: 'column',
               textAlign: 'center',
-              marginBottom: '30px',
-              padding: '20px',
-              background: 'linear-gradient(135deg, rgba(124, 154, 47, 0.1) 0%, rgba(124, 154, 47, 0.05) 100%)',
-              borderRadius: '16px',
-              border: '2px solid rgba(124, 154, 47, 0.2)'
+              marginBottom: '30px'
             },
             children: [
               {
                 type: 'span',
                 props: {
                   style: {
-                    fontSize: '36px',
+                    fontSize: '48px',
                     fontWeight: 700,
                     color: '#7c9a2f',
-                    letterSpacing: '3px'
+                    letterSpacing: '2px'
                   },
-                  children: 'thegifts.site'
+                  children: 'TheGifts'
+                }
+              },
+              {
+                type: 'span',
+                props: {
+                  style: {
+                    fontSize: '20px',
+                    fontWeight: 500,
+                    color: '#6b7280',
+                    marginTop: '8px',
+                    fontStyle: 'italic'
+                  },
+                  children: 'Understand the Purpose God Planted in You.'
                 }
               }
             ]
@@ -501,57 +456,57 @@ export async function generateStoriesImage(
         // Practical applications section
         ...(topGiftPracticals.length > 0
           ? [
-              {
-                type: 'div',
-                props: {
-                  style: {
-                    display: 'flex',
-                    flexDirection: 'column',
-                    marginTop: '10px',
-                    flex: 1
-                  },
-                  children: [
-                    {
-                      type: 'div',
-                      props: {
-                        style: {
-                          display: 'flex',
-                          alignItems: 'center',
-                          marginBottom: '20px'
-                        },
-                        children: [
-                          {
-                            type: 'div',
-                            props: {
-                              style: {
-                                width: '6px',
-                                height: '32px',
-                                backgroundColor: '#7c9a2f',
-                                borderRadius: '3px',
-                                marginRight: '12px'
-                              }
-                            }
-                          },
-                          {
-                            type: 'h2',
-                            props: {
-                              style: {
-                                display: 'block',
-                                fontSize: '28px',
-                                fontWeight: 700,
-                                color: '#1B1B1B'
-                              },
-                              children: practicalText
+            {
+              type: 'div',
+              props: {
+                style: {
+                  display: 'flex',
+                  flexDirection: 'column',
+                  marginTop: '10px',
+                  flex: 1
+                },
+                children: [
+                  {
+                    type: 'div',
+                    props: {
+                      style: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        marginBottom: '20px'
+                      },
+                      children: [
+                        {
+                          type: 'div',
+                          props: {
+                            style: {
+                              width: '6px',
+                              height: '32px',
+                              backgroundColor: '#7c9a2f',
+                              borderRadius: '3px',
+                              marginRight: '12px'
                             }
                           }
-                        ]
-                      }
-                    },
-                    ...practicalItems
-                  ]
-                }
+                        },
+                        {
+                          type: 'h2',
+                          props: {
+                            style: {
+                              display: 'block',
+                              fontSize: '28px',
+                              fontWeight: 700,
+                              color: '#1B1B1B'
+                            },
+                            children: practicalText
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  ...practicalItems
+                ]
               }
-            ]
+            }
+          ]
           : []),
         // QR code section at bottom
         {
