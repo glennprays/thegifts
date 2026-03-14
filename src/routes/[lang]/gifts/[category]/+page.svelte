@@ -3,6 +3,7 @@
   import { goto } from '$app/navigation';
   import { _ } from 'svelte-i18n';
   import type { PageData } from './$types';
+  import { onMount, onDestroy } from 'svelte';
 
   let { data }: { data: PageData } = $props();
   const lang = $page.params.lang;
@@ -11,6 +12,10 @@
   // Check if we came from result page
   const fromResult = $page.url.searchParams.get('from') === 'result';
   const resultId = $page.url.searchParams.get('id');
+
+  // Modal state
+  let showModal = $state(false);
+  let selectedReference = $state<{ verse: string; text: string } | null>(null);
 
   function goBack() {
     if (fromResult && resultId) {
@@ -25,6 +30,30 @@
   function viewAllGifts() {
     goto(`/${lang}/gifts`);
   }
+
+  function openModal(reference: { verse: string; text: string }) {
+    selectedReference = reference;
+    showModal = true;
+  }
+
+  function closeModal() {
+    showModal = false;
+    selectedReference = null;
+  }
+
+  function handleEscapeKey(event: KeyboardEvent) {
+    if (event.key === 'Escape' && showModal) {
+      closeModal();
+    }
+  }
+
+  onMount(() => {
+    document.addEventListener('keydown', handleEscapeKey);
+  });
+
+  onDestroy(() => {
+    document.removeEventListener('keydown', handleEscapeKey);
+  });
 </script>
 
 <svelte:head>
@@ -38,7 +67,7 @@
     <div class="flex items-center gap-3 mb-8">
       <!-- Back Button (conditional text) -->
       <button
-        on:click={goBack}
+        onclick={goBack}
         class="flex items-center text-gray-600 hover:text-primary transition"
       >
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -51,7 +80,7 @@
       {#if fromResult}
         <span class="text-gray-300">|</span>
         <button
-          on:click={viewAllGifts}
+          onclick={viewAllGifts}
           class="text-primary hover:text-primary-dark font-medium transition"
         >
           {$_('pages.gifts.viewAllGifts')}
@@ -99,12 +128,16 @@
         <h2 class="text-2xl font-semibold text-gray-900 mb-4">
           {$_('pages.gifts.sections.biblical_references')}
         </h2>
-        <div class="space-y-4">
+        <div class="space-y-3">
           {#each category.biblical_references as reference}
-            <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-primary">
-              <p class="font-semibold text-primary mb-2">{reference.verse}</p>
-              <p class="text-gray-700 italic">{reference.text}</p>
-            </div>
+            <button
+              type="button"
+              onclick={() => openModal(reference)}
+              class="w-full text-left bg-gray-50 rounded-lg p-6 border-l-4 border-primary hover:bg-gray-100 transition cursor-pointer"
+            >
+              <p class="font-semibold text-primary mb-1">{reference.verse}</p>
+              <p class="text-gray-500 text-sm">{$_('pages.gifts.clickToRead')}</p>
+            </button>
           {/each}
         </div>
       </section>
@@ -127,3 +160,57 @@
     {/if}
   </div>
 </div>
+
+<!-- Modal Overlay -->
+{#if showModal && selectedReference}
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <div
+    class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+    onclick={closeModal}
+    onkeydown={(e) => e.key === 'Escape' && closeModal()}
+    role="button"
+    tabindex="-1"
+    aria-label="Close modal"
+  >
+    <!-- Modal Content -->
+    <div
+      class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] overflow-hidden"
+      onclick={(e) => e.stopPropagation()}
+    >
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between p-6 border-b">
+        <h3 class="text-xl font-semibold text-primary">
+          {selectedReference.verse}
+        </h3>
+        <button
+          type="button"
+          onclick={closeModal}
+          class="text-gray-400 hover:text-gray-600 transition p-1"
+          aria-label="Close modal"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 overflow-y-auto max-h-[60vh]">
+        <p class="text-gray-700 italic leading-relaxed text-lg">
+          {selectedReference.text}
+        </p>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-6 border-t bg-gray-50">
+        <button
+          type="button"
+          onclick={closeModal}
+          class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition"
+        >
+          {$_('common.close')}
+        </button>
+      </div>
+    </div>
+  </div>
+{/if}

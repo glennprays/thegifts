@@ -1,9 +1,19 @@
 /**
- * Biblical reference with verse citation and text
+ * Biblical reference with bilingual support
  */
 export interface BiblicalReference {
-  verse: string; // e.g., "Romans 12:6-8"
-  text: string; // e.g., "Having gifts that differ..."
+  verse_en: string; // e.g., "1 Corinthians 12:28"
+  verse_id: string; // e.g., "1 Korintus 12:28"
+  text_en: string; // e.g., "And God has appointed these in the church..."
+  text_id: string; // e.g., "Dan Allah mengangkat orang-orang tertentu..."
+}
+
+/**
+ * Localized biblical reference for display
+ */
+export interface LocalizedBiblicalReference {
+  verse: string; // Localized verse reference
+  text: string; // Localized verse text
 }
 
 /**

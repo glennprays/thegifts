@@ -3,558 +3,974 @@
     "key": "administration",
     "name_en": "Administration",
     "name_id": "Administrasi",
-    "description_en": "[TODO: Add description]",
-    "description_id": "[TODO: Add description]",
+    "description_en": "Special ability to clearly understand the short-term and long-term goals of a ministry unit. Includes the skill to design and implement effective plans to ensure those goals are achieved in an organized and efficient manner.",
+    "description_id": "Kemampuan istimewa untuk memahami dengan jelas tujuan jangka pendek dan jangka panjang suatu unit pelayanan. Meliputi keahlian untuk merancang dan melaksanakan rencana efektif guna memastikan tujuan-tujuan tersebut tercapai secara terorganisir dan efisien.",
     "characteristics_en": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Clear understanding of organizational goals",
+      "Ability to design effective plans",
+      "Skill in implementing plans efficiently",
+      "Organizational and coordination abilities"
     ],
     "characteristics_id": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Memahami tujuan jangka pendek dan panjang",
+      "Merancang rencana efektif",
+      "Melaksanakan rencana dengan terorganisir",
+      "Koordinasi yang efisien"
     ],
     "biblical_references": [
       {
-        "verse": "1 Corinthians 12:28",
-        "text": "[TODO: Add biblical text]"
+        "verse_en": "1 Corinthians 12:28",
+        "verse_id": "1 Korintus 12:28",
+        "text_en": "And God has appointed these in the church: first apostles, second prophets, third teachers, after that miracles, then gifts of healings, helps, administrations, varieties of tongues.",
+        "text_id": "Dan Allah mengangkat orang-orang tertentu dalam jemaat: pertama sebagai rasul, kedua sebagai nabi, ketiga sebagai pengajar, selanjutnya mereka yang mengadakan mujizat-mujizat, lalu mereka yang mempunyai karunia untuk menyembuhkan, untuk menolong, untuk memimpin, dan untuk mengatakan bahasa-bahasa roh."
+      },
+      {
+        "verse_en": "Acts 6:1-7",
+        "verse_id": "Kisah Para Rasul 6:1-7",
+        "text_en": "Now in those days, when the number of the disciples was multiplying, there arose a complaint against the Hebrews by the Hellenists, because their widows were neglected in the daily distribution. Then the twelve summoned the multitude of the disciples and said, 'It is not desirable that we should leave the word of God and serve tables. Therefore, brethren, seek out from among you seven men of good reputation, full of the Holy Spirit and wisdom, whom we may appoint over this business; but we will give ourselves continually to prayer and to the ministry of the word.' And the saying pleased the whole multitude. And they chose Stephen, a man full of faith and the Holy Spirit, and Philip, Prochorus, Nicanor, Timon, Parmenas, and Nicolas, a proselyte from Antioch, whom they set before the apostles; and when they had prayed, they laid hands on them. Then the word of God spread, and the number of the disciples multiplied greatly in Jerusalem, and a great many of the priests were obedient to the faith.",
+        "text_id": "Pada waktu itu jumlah murid-murid terus bertambah dan timbullah keberatan di kalangan orang-orang Yahudi berbahasa Yunani terhadap orang-orang Yahudi berbahasa Ibrani, karena janda-janda mereka tidak diurus baik dalam pembagian jatah sehari-hari. Kedua belas rasul itu memanggil semua murid dan berkata: 'Tidak patut kalau kami melalaikan pelayanan firman Allah hanya untuk melayani meja. Saudara-saudara, carilah tujuh orang di antara kamu yang dapat dipercaya dan yang penuh Roh dan hikmat, supaya kami angkat mereka mengurus pekerjaan itu; tetapi kami akan mendedikasikan diri sepenuhnya untuk doa dan pelayanan firman.' Usul itu disetujui oleh seluruh jemaat. Mereka memilih Stefanus, seorang yang penuh iman dan Roh Kudus, dan juga Filipus, Prokhorus, Nikanor, Timon, Parmenas dan Nikolaus, seorang masuk Yahudi dari Antiokhia. Mereka membawa orang-orang itu kepada rasul-rasul, lalu para rasul itu berdoa dan meletakkan tangan mereka di atas orang-orang itu. Demikianlah firman Allah tersebar dan jumlah murid-murid di Yerusalem bertambah dengan sangat besar; juga banyak imam yang taat kepada iman."
+      },
+      {
+        "verse_en": "Acts 27:11",
+        "verse_id": "Kisah Para Rasul 27:11",
+        "text_en": "Nevertheless the centurion was more persuaded by the helmsman and the owner of the ship than by the things spoken by Paul.",
+        "text_id": "Namun orang ratusan itu lebih percaya kepada jurumudi dan pemilik kapal dari pada kepada apa yang dikatakan oleh Paulus."
       }
     ],
     "practical_applications_en": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Elder",
+      "Nominating Committee",
+      "Sabbath School Leader",
+      "Church Secretary",
+      "Church Treasurer"
     ],
     "practical_applications_id": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Penatua",
+      "Komite Nominasi",
+      "Pemimpin Sekolah Sabat",
+      "Sekretaris Jemaat",
+      "Bendahara"
     ]
   },
   {
     "key": "discernment",
     "name_en": "Discernment",
-    "name_id": "Penghakiman",
-    "description_en": "[TODO: Add description]",
-    "description_id": "[TODO: Add description]",
+    "name_id": "Pembedaan Roh",
+    "description_en": "Special ability that God gives to know with certainty whether a certain behavior, message, or influence claimed to come from God actually originates from the divine (God), human (flesh/self), or satanic (devil). This is the 'inner eye' to discern spiritual truth.",
+    "description_id": "Kemampuan istimewa yang Allah berikan untuk mengetahui dengan keyakinan apakah suatu perilaku, pesan, atau pengaruh yang diklaim berasal dari Allah sesungguhnya bersumber dari ilahi (Tuhan), manusiawi (daging/diri sendiri), atau setan (iblis). Ini adalah 'mata batin' untuk memilah kebenaran spiritual.",
     "characteristics_en": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Ability to discern spiritual origins",
+      "Distinguishing between divine, human, and demonic influences",
+      "Spiritual perception and insight",
+      "Testing spirits and messages"
     ],
     "characteristics_id": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Mengetahui asal-usul spiritual",
+      "Membedakan pengaruh ilahi, manusiawi, dan setan",
+      "Persepsi spiritual dan wawasan",
+      "Menguji roh dan pesan"
     ],
     "biblical_references": [
       {
-        "verse": "1 Corinthians 12:10",
-        "text": "[TODO: Add biblical text]"
+        "verse_en": "1 Corinthians 12:10",
+        "verse_id": "1 Korintus 12:10",
+        "text_en": "To another the working of miracles, to another prophecy, to another discerning of spirits, to another different kinds of tongues, to another the interpretation of tongues.",
+        "text_id": "Kepada yang seorang karunia untuk mengadakan mujizat, kepada yang lain karunia untuk bernubuat, kepada yang lain karunia untuk membedakan roh, kepada yang seorang karunia untuk berkata-kata dalam bahasa roh, dan kepada yang lain karunia untuk menafsirkan bahasa roh itu."
+      },
+      {
+        "verse_en": "Acts 5:1-11",
+        "verse_id": "Kisah Para Rasul 5:1-11",
+        "text_en": "But a certain man named Ananias, with Sapphira his wife, sold a possession. And he kept back part of the proceeds, his wife also being aware of it, and brought a certain part and laid it at the apostles' feet. But Peter said, 'Ananias, why has Satan filled your heart to lie to the Holy Spirit and keep back part of the price of the land for yourself? While it remained, was it not your own? And after it was sold, was it not in your own control? Why have you conceived this thing in your heart? You have not lied to men but to God.' Then Ananias, hearing these words, fell down and breathed his last. So great fear came upon all those who heard these things. And the young men arose and wrapped him up, carried him out, and buried him. Now it was about three hours later when his wife came in, not knowing what had happened. And Peter answered her, 'Tell me whether you sold the land for so much?' She said, 'Yes, for so much.' Then Peter said to her, 'How is it that you have agreed together to test the Spirit of the Lord? Look, the feet of those who have buried your husband are at the door, and they will carry you out.' Then immediately she fell down at his feet and breathed her last. And the young men came in and found her dead, and carrying her out, buried her by her husband. So great fear came upon all the church and upon all who heard these things.",
+        "text_id": "Tetapi seorang yang bernama Ananias, beserta isterinya Safira, menjual sebuah ladang. Ia menahan sebagian dari hasil penjualan itu, dan isterinya juga mengetahuinya, lalu ia membawa sebagian dari harga penjualan itu dan meletakkannya di kaki rasul-rasul itu. Tetapi Petrus berkata: 'Ananias, mengapa hatimu dikuasai Iblis, sehingga engkau mendustai Roh Kudus dan menahan sebagian dari harga tanah itu? Selama tanah itu belum terjual, bukankah itu milikmu? Dan setelah dijual, bukankah hasilnya di bawah kekuasaanmu? Mengapa engkau merencanakan hal itu dalam hatimu? Engkau bukan mendustai manusia, melainkan Allah.' Ketika Ananias mendengar perkataan itu, ia jatuh tewas. Maka takut yang besar menimpa semua yang mendengarnya. Maka orang-orang muda itu bangun, mengkafani dia, membawa dia keluar dan menguburkannya. Kira-kira tiga jam kemudian, isterinya masuk, tidak tahu apa yang telah terjadi. Lalu Petrus menjawab dia: 'Katakanlah kepadaku, apakah kamu menjual ladang itu sekian harga?' Jawab perempuan itu: 'Ya, sekian itu.' Lalu kata Petrus kepadanya: 'Mengapa kamu sepakat untuk mencobai Roh Tuhan? Lihatlah, kaki orang-orang yang telah menguburkan suamimu ada di depan pintu, dan mereka akan membawa kamu juga keluar.' Segera jatuhlah dia di kaki Petrus dan meninggal. Lalu orang-orang muda itu masuk dan menemukan dia sudah mati, lalu mereka membawa dia keluar dan menguburkannya di sebelah suaminya. Maka takut yang besar menimpa seluruh jemaat dan semua yang mendengar hal itu."
+      },
+      {
+        "verse_en": "Acts 16:16-18",
+        "verse_id": "Kisah Para Rasul 16:16-18",
+        "text_en": "Now it happened, as we went to prayer, that a certain slave girl possessed with a spirit of divination met us, who brought her masters much profit by fortune-telling. This girl followed Paul and us, and cried out, saying, 'These men are the servants of the Most High God, who proclaim to us the way of salvation.' And this she did for many days. But Paul, greatly annoyed, turned and said to the spirit, 'I command you in the name of Jesus Christ to come out of her.' And he came out that very hour.",
+        "text_id": "Pada suatu hari, ketika kami pergi ke tempat doa, kami berjumpa dengan seorang hamba perempuan yang mempunyai roh penerawangan. Dengan peramalannya ia menghasilkan banyak uang bagi tuannya. Perempuan itu mengikuti Paulus dan kami, sambil berteriak: 'Orang-orang ini adalah hamba-hamba Allah Yang Mahatinggi, yang memberitakan kepada kamu jalan keselamatan.' Hal itu dilakukannya beberapa hari lamanya. Tetapi Paulus sangat tidak senang, lalu berpaling dan berkata kepada roh itu: 'Aku menyuruh engkau demi nama Yesus Kristus keluar dari perempuan itu.' Pada saat itu juga roh itu keluar dari perempuan itu."
       }
     ],
     "practical_applications_en": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Church Board Chairperson",
+      "Nominating Committee",
+      "Lay Pastor Advisory Committee",
+      "School Committee",
+      "Membership Committee"
     ],
     "practical_applications_id": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Ketua Jemaat",
+      "Komite Nominasi",
+      "Komite penasihat pendeta awam",
+      "Komite sekolah",
+      "Komite keanggotaan"
     ]
   },
   {
     "key": "evangelist",
-    "name_en": "Evangelism",
-    "name_id": "Penginjilan",
-    "description_en": "[TODO: Add description]",
-    "description_id": "[TODO: Add description]",
+    "name_en": "Evangelist",
+    "name_id": "Penginjil",
+    "description_en": "Special ability that God gives to members of the Body of Christ to share the Gospel with unbelievers in such a way that they become disciples of Jesus and responsible members of the Body of Christ.",
+    "description_id": "Kemampuan istimewa yang Allah berikan kepada anggota Tubuh Kristus untuk menyampaikan Injil kepada orang-orang yang belum percaya sedemikian rupa, sehingga mereka menjadi murid Yesus dan anggota yang bertanggung jawab dari Tubuh Kristus.",
     "characteristics_en": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Passion for sharing the Gospel",
+      "Ability to reach unbelievers effectively",
+      "Commitment to making disciples",
+      "Cross-cultural evangelism skills"
     ],
     "characteristics_id": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Semangat untuk menyampaikan Injil",
+      "Kemampuan menjangkau orang yang belum percaya",
+      "Komitmen untuk membuat murid",
+      "Keterampilan penginjilan lintas budaya"
     ],
     "biblical_references": [
       {
-        "verse": "Ephesians 4:11",
-        "text": "[TODO: Add biblical text]"
+        "verse_en": "Ephesians 4:11-14",
+        "verse_id": "Efesus 4:11-14",
+        "text_en": "And He Himself gave some to be apostles, some prophets, some evangelists, and some pastors and teachers, for the equipping of the saints for the work of ministry, for the edifying of the body of Christ, till we all come to the unity of the faith and of the knowledge of the Son of God, to a perfect man, to the measure of the stature of the fullness of Christ; that we should no longer be children, tossed to and fro and carried about with every wind of doctrine, by the trickery of men, in the cunning craftiness of deceitful plotting.",
+        "text_id": "Dan Ialah yang memberikan karunia-karunia: ada yang dijadikan rasul, ada yang dijadikan nabi, ada yang dijadikan penginjil, ada yang dijadikan gembala dan pengajar. Semua itu diberikan-Nya untuk memperlengkapi orang-orang kudus bagi pekerjaan pelayanan, bagi pembangunan tubuh Kristus. Sampai kita semua telah mencapai kesatuan iman dan pengetahuan yang benar tentang Anak Allah, kedewasaan penuh, dan tingkat pertumbuhan yang sesuai dengan kepenuhan Kristus, sehingga kita bukan lagi anak-anak, yang diombang-ambingkan dan diombang-ambingkan oleh rupa-rupa angin pengajaran, oleh permainan manusia yang licik dalam mengajak orang sesat."
+      },
+      {
+        "verse_en": "2 Timothy 4:5",
+        "verse_id": "2 Timotius 4:5",
+        "text_en": "But you be watchful in all things, endure afflictions, do the work of an evangelist, fulfill your ministry.",
+        "text_id": "Tetapi engkau harus menguasai diri dalam segala hal, jangan menyerah dalam penderitaan, lakukanlah pekerjaan penginjil dan tunaikanlah tugas pelayananmu!"
+      },
+      {
+        "verse_en": "Acts 8:5,6",
+        "verse_id": "Kisah Para Rasul 8:5,6",
+        "text_en": "Then Philip went down to the city of Samaria and preached Christ to them. And the multitudes with one accord heeded the things spoken by Philip, hearing and seeing the miracles which he did.",
+        "text_id": "Lalu Filipus pergi ke kota Samaria dan memberitakan Kristus di sana. Orang-orang banyak itu mengikuti dengan satu hati perkataan yang dikatakan oleh Filipus, ketika mereka mendengar dan melihat tanda-tanda yang dibuat-Nya."
       }
     ],
     "practical_applications_en": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Personal Ministry Leader",
+      "Bible Study Instructor",
+      "Bible-oriented Seminar Leader",
+      "Church Planting in New Areas",
+      "Prison Ministry",
+      "Branch Sabbath School (Adult)",
+      "Guest Visitation",
+      "Media Interest Follow-up"
     ],
     "practical_applications_id": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Pemimpin pelayanan perorangan",
+      "Memberikan pelajaran Alkitab",
+      "Pimpin seminar berorientasi Alkitab",
+      "Penanaman gereja di daerah baru",
+      "Pelayanan penjara",
+      "Sekolah Sabat Cabang (dewasa)",
+      "Melawat tamu",
+      "Tindaklanjuti minat media"
     ]
   },
   {
     "key": "exhortation",
     "name_en": "Exhortation",
-    "name_id": "Penguatan",
-    "description_en": "[TODO: Add description]",
-    "description_id": "[TODO: Add description]",
+    "name_id": "Penasehat",
+    "description_en": "Special ability that God gives to members of the Body of Christ to provide words of comfort, encouragement, and advice to other members in such a way that they feel helped and restored. This is the ability to be a 'spiritual cheerleader.'",
+    "description_id": "Kemampuan istimewa yang Allah berikan kepada anggota Tubuh Kristus untuk memberikan kata-kata penghiburan, dorongan, dan nasihat kepada anggota lainnya sedemikian rupa sehingga mereka merasa terbantu dan dipulihkan. Ini adalah kemampuan menjadi 'penyemangat spiritual.'",
     "characteristics_en": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Providing comfort and encouragement",
+      "Giving wise counsel and advice",
+      "Helping others feel restored",
+      "Motivating and inspiring spiritual growth"
     ],
     "characteristics_id": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Memberikan penghiburan dan dorongan",
+      "Memberikan nasihat yang bijak",
+      "Membantu orang lain merasa dipulihkan",
+      "Memotivasi dan menginspirasi pertumbuhan spiritual"
     ],
     "biblical_references": [
       {
-        "verse": "Romans 12:8",
-        "text": "[TODO: Add biblical text]"
+        "verse_en": "Romans 12:8",
+        "verse_id": "Roma 12:8",
+        "text_en": "He who exhorts, in exhortation; he who gives, with liberality; he who leads, with diligence; he who shows mercy, with cheerfulness.",
+        "text_id": "Siapa yang menghibur, hendaklah ia menghibur; siapa yang memberi, hendaklah ia memberi dengan tulus hati; siapa yang memimpin, hendaklah ia memimpin dengan rajin; siapa yang menunjukkan kemurahan, hendaklah ia melakukannya dengan sukacita."
+      },
+      {
+        "verse_en": "1 Timothy 4:13",
+        "verse_id": "1 Timotius 4:13",
+        "text_en": "Till I come, give attention to reading, to exhortation, to doctrine.",
+        "text_id": "Selagi aku datang, berkonsentrasilah pada pembacaan Alkitab, nasihat dan pengajaran."
+      },
+      {
+        "verse_en": "Hebrews 10:25",
+        "verse_id": "Ibrani 10:25",
+        "text_en": "Not forsaking the assembling of ourselves together, as is the manner of some, but exhorting one another, and so much the more as you see the Day approaching.",
+        "text_id": "Janganlah kita menjauhkan diri dari pertemuan-pertemuan ibadah kita, seperti dibiasakan oleh beberapa orang, tetapi marilah kita saling menasihati, dan semakin giat melakukannya mengingat bahwa hari itu sudah dekat."
       }
     ],
     "practical_applications_en": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Hospital Visitation",
+      "Church Member Shepherding Visits",
+      "Prison Ministry",
+      "Phone Counseling",
+      "Outreach Leader",
+      "Specific Area Counseling (marriage, youth, etc.)",
+      "Small Group Leader",
+      "Youth Ministry"
     ],
     "practical_applications_id": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Kunjungan rumah sakit",
+      "Kunjungan pemeliharaan jemaat",
+      "Pelayanan penjara",
+      "Konseling telepon",
+      "Pemimpin penanaman",
+      "Konseling area spesifik (pernikahan, remaja, dll.)",
+      "Pemimpin perkumpulan",
+      "Pelayanan kaum muda"
     ]
   },
   {
     "key": "faith",
     "name_en": "Faith",
     "name_id": "Iman",
-    "description_en": "[TODO: Add description]",
-    "description_id": "[TODO: Add description]",
+    "description_en": "Special ability that God gives to members of the Body of Christ to understand with extraordinary confidence God's will and purpose for His work. This gift enables a person to see the unseen and act without doubt, often in impossible situations.",
+    "description_id": "Kemampuan istimewa yang Allah berikan kepada anggota Tubuh Kristus untuk memahami dengan keyakinan yang luar biasa kehendak dan tujuan Allah bagi pekerjaan-Nya. Karunia ini memungkinkan seseorang untuk melihat yang tidak terlihat dan bertindak tanpa keraguan, sering kali dalam situasi mustahil.",
     "characteristics_en": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Extraordinary confidence in God's will",
+      "Seeing the unseen",
+      "Acting without doubt",
+      "Trusting God in impossible situations"
     ],
     "characteristics_id": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Keyakinan luar biasa pada kehendak Allah",
+      "Melihat yang tidak terlihat",
+      "Bertindak tanpa keraguan",
+      "Percaya pada Allah dalam situasi mustahil"
     ],
     "biblical_references": [
       {
-        "verse": "1 Corinthians 12:9",
-        "text": "[TODO: Add biblical text]"
+        "verse_en": "1 Corinthians 12:9",
+        "verse_id": "1 Korintus 12:9",
+        "text_en": "To another faith by the same Spirit, to another gifts of healings by the same Spirit.",
+        "text_id": "Kepada yang seorang diberikan iman oleh Roh yang sama, kepada yang lain karunia untuk menyembuhkan oleh Roh yang sama."
+      },
+      {
+        "verse_en": "Acts 11:22-24",
+        "verse_id": "Kisah Para Rasul 11:22-24",
+        "text_en": "Then news of these things came to the ears of the church in Jerusalem, and they sent out Barnabas to go as far as Antioch. When he came and had seen the grace of God, he was glad, and encouraged them all that with purpose of heart they should continue with the Lord. For he was a good man, full of the Holy Spirit and of faith. And a great many people were added to the Lord.",
+        "text_id": "Berita tentang hal itu sampai kepada jemaat di Yerusalem dan mereka mengutus Barnabas ke Antiokhia. Setelah tiba di sana dan melihat kasih karunia Allah, ia bersukacita dan ia menasihati mereka semua supaya dengan segenap hati bertekun dalam Tuhan. Karena ia adalah orang yang baik, penuh Roh Kudus dan iman. Banyak orang pun ditambahkan kepada Tuhan."
       }
     ],
     "practical_applications_en": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Building Committee",
+      "Project Development",
+      "Nominating Committee",
+      "School Committee",
+      "Evangelism Committee"
     ],
     "practical_applications_id": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Komite pembangunan",
+      "Pengembangan proyek",
+      "Komite pencalonan",
+      "Komite Sekolah",
+      "Komite penginjilan"
     ]
   },
   {
     "key": "giving",
     "name_en": "Giving",
     "name_id": "Memberi",
-    "description_en": "[TODO: Add description]",
-    "description_id": "[TODO: Add description]",
+    "description_en": "Special ability that God gives to members of the Body of Christ to contribute their material resources to God's work with generosity (liberality) and joy. They see needs as opportunities for heavenly investment.",
+    "description_id": "Kemampuan istimewa yang Allah berikan kepada anggota Tubuh Kristus untuk menyumbangkan sumber daya materi mereka bagi pekerjaan Tuhan dengan kemurahan hati (liberalitas) dan sukacita. Mereka melihat kebutuhan sebagai peluang untuk investasi sorgawi.",
     "characteristics_en": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Generous material contributions",
+      "Joyful giving attitude",
+      "Seeing needs as investment opportunities",
+      "Resource provision for God's work"
     ],
     "characteristics_id": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Kontribusi materi yang murah hati",
+      "Sikap memberi dengan sukacita",
+      "Melihat kebutuhan sebagai peluang investasi",
+      "Penyediaan sumber daya untuk pekerjaan Tuhan"
     ],
     "biblical_references": [
       {
-        "verse": "Romans 12:8",
-        "text": "[TODO: Add biblical text]"
+        "verse_en": "Romans 12:8",
+        "verse_id": "Roma 12:8",
+        "text_en": "He who exhorts, in exhortation; he who gives, with liberality; he who leads, with diligence; he who shows mercy, with cheerfulness.",
+        "text_id": "Siapa yang menghibur, hendaklah ia menghibur; siapa yang memberi, hendaklah ia memberi dengan tulus hati; siapa yang memimpin, hendaklah ia memimpin dengan rajin; siapa yang menunjukkan kemurahan, hendaklah ia melakukannya dengan sukacita."
+      },
+      {
+        "verse_en": "2 Corinthians 8:1-7",
+        "verse_id": "2 Korintus 8:1-7",
+        "text_en": "Moreover, brethren, we make known to you the grace of God bestowed on the churches of Macedonia: that in a great trial of affliction the abundance of their joy and their deep poverty abounded in the riches of their liberality. For I bear witness that according to their ability, yes, and beyond their ability, they were freely willing, imploring us with much urgency that we would receive the gift and the fellowship of the ministering to the saints. And not only as we had hoped, but they first gave themselves to the Lord, and then to us by the will of God. So we urged Titus, that as he had begun, so he would also complete in you this grace of giving. But as you abound in everything—in faith, in speech, in knowledge, in all diligence, and in your love for us—see that you abound in this grace also.",
+        "text_id": "Saudara-saudara, kami hendak memberitahukan kepada kamu, kasih karunia Allah, yang dianugerahkan kepada jemaat-jemaat di Makedonia. Yaitu bahwa dalam segala pencobaan yang mereka alami, sukacita mereka berlimpah-limpah dan kemiskin mereka yang mendalam telah melimpahkan kekayaan kemurahan hati mereka. Sebab aku dapat bersaksi bahwa menurut kemampuan mereka, bahkan melampaui kemampuan mereka, mereka memberikan diri dengan rela, minta dengan sangat agar kami menerima karunia itu dan memperanugerahkan pelayanan kepada orang-orang kudus. Dan bukan seperti yang kami harapkan, melainkan mereka menyerahkan diri mereka sendiri kepada Tuhan, kemudian kepada kami oleh kehendak Allah. Sebab itu kami mendesak Titus, supaya, seperti ia telah memulai, ia juga melengkapkan karunia memberi itu di antara kamu. Tetapi sebagaimana kamu berlimpah dalam segala hal—dalam iman, dalam firman, dalam pengetahuan, dalam segala kesungguhan, dan dalam kasihmu kepada kami—haraplah kamu juga berlimpah dalam karunia ini."
+      },
+      {
+        "verse_en": "2 Corinthians 9:2-8",
+        "verse_id": "2 Korintus 9:2-8",
+        "text_en": "For I know your willingness, about which I boast of you to the Macedonians, that Achaia was ready a year ago; and your zeal has stirred up the majority. Yet I have sent the brethren, lest our boasting of you should be in vain in this respect, that, as I said, you may be ready; lest if some Macedonians come with me and find you unprepared, we (not to mention you!) should be ashamed—this confident boasting. Therefore I thought it necessary to exhort the brethren to go to you ahead of time, and prepare your generous gift beforehand, which there had been promised, that it might be ready as a matter of generosity and not as of covetousness. But this I say: He who sows sparingly will also reap sparingly, and he who sows bountifully will also reap bountifully. So let each one give as he purposes in his heart, not grudgingly or of necessity; for God loves a cheerful giver. And God is able to make all grace abound toward you, that you, always having all sufficiency in all things, may have an abundance for every good work.",
+        "text_id": "Sebab aku tahu kerelaanmu, yang tentang itu aku memuji engkau kepada orang-orang Makedonia, yaitu bahwa Akhaya sudah bersedia sejak setahun yang lalu, dan semangatmu telah membangkitkan kebanyakan dari mereka. Namun aku telah mengutus saudara-saudara itu, supaya pujian kami terhadap engkau dalam hal ini jangan ternyata sia-sia, supaya, seperti aku telah berkata, kamu benar-benar bersedia; supaya jangan kalau di antara mereka ada orang-orang Makedonia yang datang bersama-sama dengan aku dan mendapati kamu tidak bersedia, kami (untuk tidak mengatakan engkau) menjadi malu karena kepercayaan kami ini. Sebab itu aku menganggap perlu untuk mengajak saudara-saudara itu datang terlebih dahulu kepadamu dan menyiapkan karunia kemurahan hatimu itu terlebih dahulu, yang sudah dijanjikan, supaya hal itu disiapkan sebagai kemurahan hati dan bukan sebagai pemaksaan. Tetapi ini kukatakan: Barangsiapa menabur sedikit, ia akan menuai sedikit juga, dan barangsiapa menabur banyak, ia akan menuai banyak juga. Hendaklah masing-masing memberi menurut kerelaan hatinya, jangan dengan sedih hati atau karena paksaan, sebab Allah mengasihi orang yang memberi dengan sukacita. Dan Allah sanggup melimpahkan segala kasih karunia-Nya kepada kamu, supaya kamu senantiasa memiliki cukup segala sesuatu dan bahkan berkelebihan dalam segala kebaikan."
       }
     ],
     "practical_applications_en": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Finance Committee",
+      "Student Aid Committee",
+      "Investment Leader",
+      "Community Service Committee",
+      "Fundraising Committee",
+      "Poor Fund Committee",
+      "Missionary Student Committee"
     ],
     "practical_applications_id": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Komite keuangan",
+      "Komite bantuan siswa",
+      "Pemimpin investasi",
+      "Komite Pelayanan masyarakat",
+      "Komite pengumpulan dana",
+      "Komite dana miskin",
+      "Komite mahasiswa missionaris"
     ]
   },
   {
     "key": "healing",
     "name_en": "Healing",
     "name_id": "Kesembuhan",
-    "description_en": "[TODO: Add description]",
-    "description_id": "[TODO: Add description]",
+    "description_en": "Special ability that God gives to members of the Body of Christ to serve as human intermediaries used by God to heal diseases and restore health without relying on natural means or methods.",
+    "description_id": "Kemampuan istimewa yang Allah berikan kepada anggota Tubuh Kristus untuk berfungsi sebagai perantara manusia yang dipakai Allah untuk menyembuhkan penyakit dan memulihkan kesehatan tanpa mengandalkan sarana atau metode alami.",
     "characteristics_en": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Divine healing ability",
+      "Intermediary for supernatural healing",
+      "Restoring health through God's power",
+      "Operating beyond natural means"
     ],
     "characteristics_id": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Kemampuan penyembuhan ilahi",
+      "Perantara untuk kesembuhan supranatural",
+      "Memulihkan kesehatan melalui kuasa Allah",
+      "Beroperasi di luar sarana alami"
     ],
     "biblical_references": [
       {
-        "verse": "1 Corinthians 12:9",
-        "text": "[TODO: Add biblical text]"
+        "verse_en": "1 Corinthians 12:9, 28",
+        "verse_id": "1 Korintus 12:9, 28",
+        "text_en": "To another faith by the same Spirit, to another gifts of healings by the same Spirit... And God has appointed these in the church: first apostles, second prophets, third teachers, after that miracles, then gifts of healings, helps, administrations, varieties of tongues.",
+        "text_id": "Kepada yang seorang diberikan iman oleh Roh yang sama, kepada yang lain karunia untuk menyembuhkan oleh Roh yang sama... Dan Allah mengangkat orang-orang tertentu dalam jemaat: pertama sebagai rasul, kedua sebagai nabi, ketiga sebagai pengajar, selanjutnya mereka yang mengadakan mujizat-mujizat, lalu mereka yang mempunyai karunia untuk menyembuhkan, untuk menolong, untuk memimpin, dan untuk mengatakan bahasa-bahasa roh."
+      },
+      {
+        "verse_en": "Acts 3:1-10",
+        "verse_id": "Kisah Para Rasul 3:1-10",
+        "text_en": "Now Peter and John went up together to the temple at the hour of prayer, the ninth hour. And a certain man lame from his mother's womb was carried, whom they laid daily at the gate of the temple which is called Beautiful, to ask alms from those who entered the temple; who, seeing Peter and John about to go into the temple, asked for alms. And Peter, along with John, fixed his eyes on him, and said, 'Look at us.' So he gave them his attention, expecting to receive something from them. Then Peter said, 'Silver and gold I do not have, but what I do have I give you: In the name of Jesus Christ of Nazareth, rise up and walk!' And he took him by the right hand and lifted him up, and immediately his feet and ankle bones received strength. So he, leaping up, stood and walked and entered the temple with them—walking, leaping, and praising God. And all the people saw him walking and praising God. Then they knew that it was he who sat begging alms at the Beautiful Gate of the temple; and they were filled with wonder and amazement at what had happened to him.",
+        "text_id": "Pada suatu hari Petrus dan Yohanes pergi ke Bait Allah pada waktu sembahyang, kira-kira jam sembilan. Di situ ada seorang laki-laki yang lumpuh sejak lahirnya, orang yang setiap hari dibawa dan diletakkan di depan pintu gerbang Bait Allah yang disebut Gerbang Indah untuk meminta sedekah kepada orang-orang yang masuk ke Bait Allah. Ketika ia melihat Petrus dan Yohanes hendak masuk ke Bait Allah, ia meminta sedekah. Maka Petrus memandang dia, bersama-sama dengan Yohanes, lalu berkata: 'Lihatlah kami!' Orang itu menatap mereka dengan harap akan menerima sesuatu dari mereka. Tetapi Petrus berkata: 'Emas dan perak tidak aku punya, tetapi apa yang kupunya, itulah kuberikan kepadamu: Demi nama Yesus Kristus dari Nazaret, berdirilah dan berjalanlah!' Lalu ia memegang tangan kanan orang itu dan membantu dia berdiri, dan seketika itu juga kaki dan mata kakinya menjadi kuat. Seketika orang itu melompat berdiri dan berjalan serta masuk ke Bait Allah bersama-sama dengan mereka, berjalan dan melompat sambil memuji Allah. Seluruh rakyat melihat dia berjalan dan memuji Allah. Maka mereka tahu bahwa dialah orang yang sejak dahulu duduk meminta sedekah di Gerbang Indah Bait Allah itu, dan mereka penuh takjub dan heran tentang apa yang telah terjadi kepadanya."
+      },
+      {
+        "verse_en": "Acts 5:12-16",
+        "verse_id": "Kisah Para Rasul 5:12-16",
+        "text_en": "And through the hands of the apostles many signs and wonders were done among the people. And they were all with one accord in Solomon's Porch. Yet none of the rest dared join them, but the people esteemed them highly. And believers were increasingly added to the Lord, multitudes of both men and women, so that they brought the sick out into the streets and laid them on beds and couches, that at least the shadow of Peter passing by might fall on some of them. Also a multitude gathered from the surrounding cities to Jerusalem, bringing sick people and those who were tormented by unclean spirits, and they were all healed.",
+        "text_id": "Dan oleh tangan rasul-rasul banyak tanda dan mujizat terjadi di antara orang banyak. Dan mereka semua bertekun dengan satu hati di Serambi Salomo. Namun seorangpun dari orang lain tidak berani menggabungkan diri dengan mereka, tetapi orang banyak memuliakan mereka. Dan orang-orang yang percaya semakin bertambah banyak kepada Tuhan, baik laki-laki maupun perempuan, sehingga mereka mengangkut orang-orang sakit ke jalan-jalan dan meletakkannya di ranjang dan tilam, supaya kalau bayang-bayang Petrus saja jatuh menimpa salah seorang dari mereka, ia akan sembuh. Datang juga dari kota-kota di sekeliling Yerusalem orang banyak yang membawa orang-orang sakit dan orang-orang yang diganggu oleh roh-roh najis, dan mereka semua disembuhkan."
       }
     ],
     "practical_applications_en": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Specific prayer for the sick",
+      "Healing ministry in hospitals or care facilities",
+      "Evil spirit expulsion ministry (exorcism)",
+      "Healing and restoration ministry in small groups",
+      "Ministry to those emotionally sick or traumatized"
     ],
     "practical_applications_id": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Doa khusus bagi orang sakit",
+      "Pelayanan kesembuhan di rumah sakit atau tempat perawatan",
+      "Pelayanan pengusiran roh jahat (eksorcism)",
+      "Pelayanan healing dan pemulihan dalam kelompok kecil",
+      "Pelayanan bagi mereka yang sakit secara emosional atau trauma"
     ]
   },
   {
     "key": "helps",
     "name_en": "Helps",
-    "name_id": "Pertolongan",
-    "description_en": "[TODO: Add description]",
-    "description_id": "[TODO: Add description]",
+    "name_id": "Menolong",
+    "description_en": "Special ability that God gives to members of the Body of Christ to invest the talents they possess for the church body, thereby increasing the effectiveness of the spiritual gifts possessed by others. They are 'supporters' who make stars shine.",
+    "description_id": "Kemampuan istimewa yang Allah berikan kepada anggota Tubuh Kristus untuk menginvestasikan talenta yang mereka miliki demi tubuh gereja, sehingga meningkatkan efektivitas karunia rohani yang dimiliki oleh orang lain. Mereka adalah 'pendukung' yang membuat bintang bersinar.",
     "characteristics_en": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Supporting others' gifts",
+      "Investing talents for the church",
+      "Increasing effectiveness of others",
+      "Practical service and assistance"
     ],
     "characteristics_id": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Mendukung karunia orang lain",
+      "Menginvestasikan talenta untuk gereja",
+      "Meningkatkan efektivitas orang lain",
+      "Pelayanan dan bantuan praktis"
     ],
     "biblical_references": [
       {
-        "verse": "1 Corinthians 12:28",
-        "text": "[TODO: Add biblical text]"
+        "verse_en": "1 Corinthians 12:28",
+        "verse_id": "1 Korintus 12:28",
+        "text_en": "And God has appointed these in the church: first apostles, second prophets, third teachers, after that miracles, then gifts of healings, helps, administrations, varieties of tongues.",
+        "text_id": "Dan Allah mengangkat orang-orang tertentu dalam jemaat: pertama sebagai rasul, kedua sebagai nabi, ketiga sebagai pengajar, selanjutnya mereka yang mengadakan mujizat-mujizat, lalu mereka yang mempunyai karunia untuk menyembuhkan, untuk menolong, untuk memimpin, dan untuk mengatakan bahasa-bahasa roh."
+      },
+      {
+        "verse_en": "Romans 16:1,2",
+        "verse_id": "Roma 16:1,2",
+        "text_en": "I commend to you Phoebe our sister, who is a servant of the church in Cenchrea, that you may receive her in the Lord in a manner worthy of the saints, and assist her in whatever business she has need of you; for she has been a helper of many and of myself also.",
+        "text_id": "Aku memperkenalkan kepadaku Febe, saudara kita, yang adalah pelayan jemaat di Kenkrea. Terimalah dia dalam Tuhan dengan layaknya orang-orang kudus, dan bantulah dia dalam segala keperluannya, sebab dia telah membantu banyak orang, termasuk aku juga."
+      },
+      {
+        "verse_en": "Acts 9:36",
+        "verse_id": "Kisah Para Rasul 9:36",
+        "text_en": "At Joppa there was a certain disciple named Tabitha, which is translated Dorcas. This woman was full of good works and charitable deeds which she did.",
+        "text_id": "Di Yope ada seorang murid perempuan bernama Tabita, yang berarti 'Rusa'. Wanita itu penuh dengan segala macam perbuatan baik dan sedekah yang dilakukannya."
       }
     ],
     "practical_applications_en": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Ministry Committee Leader",
+      "Dorcas Fellowship",
+      "Adventist Men / Adventist Women's Ministry",
+      "Deacon",
+      "Deaconess"
     ],
     "practical_applications_id": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Pemimpin komite pelayanan",
+      "Perkumpulan Dorkas",
+      "Pria Advent/Bakti Wanita Advent",
+      "Diaken",
+      "Diakenes"
     ]
   },
   {
     "key": "hospitality",
     "name_en": "Hospitality",
     "name_id": "Keramahan",
-    "description_en": "[TODO: Add description]",
-    "description_id": "[TODO: Add description]",
+    "description_en": "Special ability that God gives to members of the Body of Christ to provide an open home (welcome) and warm reception to those in need of food and lodging. They are the welcoming heart of the church community.",
+    "description_id": "Kemampuan istimewa yang Allah berikan kepada anggota Tubuh Kristus untuk menyediakan rumah terbuka (penerimaan) dan sambutan yang hangat kepada mereka yang membutuhkan makanan dan penginapan. Mereka adalah jantung yang menyambut dalam komunitas gereja.",
     "characteristics_en": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Open and welcoming home",
+      "Providing food and lodging",
+      "Warm reception to guests",
+      "Creating a welcoming church community"
     ],
     "characteristics_id": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Rumah terbuka dan menyambut",
+      "Menyediakan makanan dan penginapan",
+      "Sambutan hangat kepada tamu",
+      "Menciptakan komunitas gereja yang ramah"
     ],
     "biblical_references": [
       {
-        "verse": "1 Peter 4:9",
-        "text": "[TODO: Add biblical text]"
+        "verse_en": "1 Peter 4:9",
+        "verse_id": "1 Petrus 4:9",
+        "text_en": "Be hospitable to one another without grumbling.",
+        "text_id": "Berilah tumpangan seorang kepada yang lain dengan sukacita dan jangan mengeluh."
+      },
+      {
+        "verse_en": "Romans 12:9-13",
+        "verse_id": "Roma 12:9-13",
+        "text_en": "Let love be without hypocrisy. Abhor what is evil. Cling to what is good. Be kindly affectionate to one another with brotherly love, in honor giving preference to one another; not lagging in diligence, fervent in spirit, serving the Lord; rejoicing in hope, patient in tribulation, continuing steadfastly in prayer; distributing to the needs of the saints, given to hospitality.",
+        "text_id": "Hendaklah kasihmu tulus jujur. Bencilah kejahatan dan taatilah kebaikan. Hendaklah kamu saling mengasihi sebagai saudara dengan penuh kasih sayang dan saling menghormati. Janganlah kamu malas, tetapi rajinlah kamu dalam semangat dan tetap melayani Tuhan. Bersukacitalah dalam pengharapan, sabarlah dalam kesesakan, dan bertekunlah dalam doa. Bantulah orang-orang kudus dalam segala keperluan mereka, dan berusahalah untuk memberi tumpangan."
+      },
+      {
+        "verse_en": "Romans 16:23",
+        "verse_id": "Roma 16:23",
+        "text_en": "Gaius, my host and the host of the whole church, greets you. Erastus, the treasurer of the city, greets you, and Quartus, a brother.",
+        "text_id": "Gaius yang menjamu aku dan juga seluruh jemaat mengucapkan salam kepadamu. Erastus, bendahara kota, mengucapkan salam kepadamu, dan Kuartus, saudara kita."
       }
     ],
     "practical_applications_en": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Hospitality Coordinator / Potluck / Team Leader",
+      "Social Committee",
+      "Greeter/Usher",
+      "Deacon / Deaconess",
+      "Ministry to Singles"
     ],
     "practical_applications_id": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Koordinator ramah tamah / potluck / pemimpin tim",
+      "Komite sosial",
+      "Penyambut tamu",
+      "Diakon / diakenes",
+      "Pelayanan kepada single (orang lajang)"
     ]
   },
   {
     "key": "intercession",
     "name_en": "Intercession",
-    "name_id": "Doa Syafaat",
-    "description_en": "[TODO: Add description]",
-    "description_id": "[TODO: Add description]",
+    "name_id": "Perantaraan",
+    "description_en": "Special ability that God gives to members of the Body of Christ to pray for long periods of time regularly and see frequent and specific answers to their prayers, at a level far beyond what the average Christian expects. They are 'heavenly spokespeople.'",
+    "description_id": "Kemampuan istimewa yang Allah berikan kepada anggota Tubuh Kristus untuk berdoa dalam jangka waktu yang panjang secara rutin dan melihat jawaban yang sering dan spesifik atas doa mereka, pada tingkat yang jauh lebih besar dari yang diharapkan oleh rata-rata orang Kristen. Mereka adalah 'juru bicara surgawi.'",
     "characteristics_en": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Regular extended prayer",
+      "Frequent and specific prayer answers",
+      "Spiritual intercession beyond average",
+      "Heavenly spokesperson"
     ],
     "characteristics_id": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Doa rutin jangka panjang",
+      "Jawaban doa yang sering dan spesifik",
+      "Perantaraan spiritual di atas rata-rata",
+      "Juru bicara surgawi"
     ],
     "biblical_references": [
       {
-        "verse": "Romans 8:26-27",
-        "text": "[TODO: Add biblical text]"
+        "verse_en": "James 5:14-16",
+        "verse_id": "Yakobus 5:14-16",
+        "text_en": "Is anyone among you sick? Let him call for the elders of the church, and let them pray over him, anointing him with oil in the name of the Lord. And the prayer of faith will save the sick, and the Lord will raise him up. And if he has committed sins, he will be forgiven. Confess your trespasses to one another, and pray for one another, that you may be healed. The effective, fervent prayer of a righteous man avails much.",
+        "text_id": "Adakah di antara kamu yang sakit? Baiklah ia memanggil penatua-penatua jemaat, supaya mereka mendoakan dia serta mengolesinya dengan minyak dalam nama Tuhan. Dan doa yang lahir dari iman akan menyelamatkan orang sakit itu dan Tuhan akan membangkitkan dia; dan jika ia telah berbuat dosa, dosanya itu akan diampuni. Karena itu hendaklah kamu mengaku dosa kamu seorang kepada yang lain dan berdoa seorang untuk yang lain, supaya kamu sembuh. Doa orang yang benar, bila dengan yakin diajukan, sangat besar kuasanya."
+      },
+      {
+        "verse_en": "1 Timothy 2:1,2",
+        "verse_id": "1 Timotius 2:1,2",
+        "text_en": "Therefore I exhort first of all that supplications, prayers, intercessions, and giving of thanks be made for all men, for kings and all who are in authority, that we may lead a quiet and peaceable life in all godliness and reverence.",
+        "text_id": "Pertama-tama aku menasihati, supaya permohonan, doa syafaat dan ucapan syukur dibuat untuk semua orang, untuk raja-raja dan untuk semua pemimpin, supaya kita dapat hidup tenang dan tenteram dalam segala kesalehan dan kehormatan."
+      },
+      {
+        "verse_en": "Colossians 1:9-12",
+        "verse_id": "Kolose 1:9-12",
+        "text_en": "For this reason we also, since the day we heard it, do not cease to pray for you, and to ask that you may be filled with the knowledge of His will in all wisdom and spiritual understanding; that you may walk worthy of the Lord, fully pleasing Him, being fruitful in every good work and increasing in the knowledge of God; strengthened with all might, according to His glorious power, for all patience and longsuffering with joy; giving thanks to the Father who has qualified us to be partakers of the inheritance of the saints in the light.",
+        "text_id": "Sebab itu sejak hari kami mendengarnya, kami tidak henti-hentinya berdoa untuk kamu dan meminta, supaya kamu dipenuhi dengan pengetahuan kehendak-Nya dalam segala hikmat dan pengertian rohani, supaya kamu hidup sebagaimana seharusnya menurut Tuhan dan berkenan kepada-Nya dalam segala hal, sehingga kamu menghasilkan buah dalam segala pekerjaan baik dan bertumbuh dalam pengetahuan Allah, dan dikuatkan dengan segala kekuatan menurut kemuliaan-Nya yang kuat, sehingga kamu bertekun dan sabar dengan penuh sukacita, sambil mengucap syukur kepada Bapa, yang telah mengangkat kamu untuk mendapat bagian di dalam warisan orang-orang kudus di dalam terang."
       }
     ],
     "practical_applications_en": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Hospital Visitation (focused on healing prayer)",
+      "Church Member Shepherding Visits (focused on intercessory prayer)",
+      "New Project Development (focused on prayer for God's plan to be realized)",
+      "Chairperson (focused on prayer for leadership)",
+      "Prayer Leader"
     ],
     "practical_applications_id": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Kunjungan rumah sakit (berfokus pada doa penyembuhan)",
+      "Kunjungan pemeliharaan Jemaat (berfokus pada doa syafaat)",
+      "Pengembangan proyek baru (berfokus pada doa agar rencana Tuhan terwujud)",
+      "Ketua (berfokus pada doa bagi kepemimpinan)",
+      "Pemimpin doa"
     ]
   },
   {
     "key": "knowledge",
     "name_en": "Knowledge",
     "name_id": "Pengetahuan",
-    "description_en": "[TODO: Add description]",
-    "description_id": "[TODO: Add description]",
+    "description_en": "Special ability that God gives to members of the Body of Christ to discover, collect, analyze, and clarify information and ideas relevant to the growth and welfare of the church. They are librarians and analysts of the Holy Spirit.",
+    "description_id": "Kemampuan istimewa yang Allah berikan kepada anggota Tubuh Kristus untuk menemukan, mengumpulkan, menganalisis, dan memperjelas informasi serta ide-ide yang relevan dengan pertumbuhan dan kesejahteraan gereja. Mereka adalah pustakawan dan analis dari Roh Kudus.",
     "characteristics_en": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Discovering and collecting information",
+      "Analyzing and clarifying ideas",
+      "Researching church-relevant topics",
+      "Organizing knowledge for church growth"
     ],
     "characteristics_id": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Menemukan dan mengumpulkan informasi",
+      "Menganalisis dan memperjelas ide",
+      "Meneliti topik-topik yang relevan dengan gereja",
+      "Mengorganisasi pengetahuan untuk pertumbuhan gereja"
     ],
     "biblical_references": [
       {
-        "verse": "1 Corinthians 12:8",
-        "text": "[TODO: Add biblical text]"
+        "verse_en": "1 Corinthians 2:14",
+        "verse_id": "1 Korintus 2:14",
+        "text_en": "But the natural man does not receive the things of the Spirit of God, for they are foolishness to him; nor can he know them, because they are spiritually discerned.",
+        "text_id": "Tetapi manusia duniawi tidak menerima apa yang berasal dari Roh Allah, sebab baginya hal itu adalah kebodohan. Dan ia tidak dapat memahaminya, sebab hal itu harus dinilai secara rohani."
+      },
+      {
+        "verse_en": "1 Corinthians 12:8",
+        "verse_id": "1 Korintus 12:8",
+        "text_en": "For to one is given the word of wisdom through the Spirit, to another the word of knowledge through the same Spirit.",
+        "text_id": "Kepada yang seorang Roh itu memberikan karunia untuk mengatakan firman hikmat, dan kepada yang lain Roh yang sama memberikan karunia untuk mengatakan firman pengetahuan."
+      },
+      {
+        "verse_en": "Acts 5:1-11",
+        "verse_id": "Kisah Para Rasul 5:1-11",
+        "text_en": "But a certain man named Ananias, with Sapphira his wife, sold a possession. And he kept back part of the proceeds, his wife also being aware of it, and brought a certain part and laid it at the apostles' feet. But Peter said, 'Ananias, why has Satan filled your heart to lie to the Holy Spirit and keep back part of the price of the land for yourself? While it remained, was it not your own? And after it was sold, was it not in your own control? Why have you conceived this thing in your heart? You have not lied to men but to God.' Then Ananias, hearing these words, fell down and breathed his last. So great fear came upon all those who heard these things. And the young men arose and wrapped him up, carried him out, and buried him. Now it was about three hours later when his wife came in, not knowing what had happened. And Peter answered her, 'Tell me whether you sold the land for so much?' She said, 'Yes, for so much.' Then Peter said to her, 'How is it that you have agreed together to test the Spirit of the Lord? Look, the feet of those who have buried your husband are at the door, and they will carry you out.' Then immediately she fell down at his feet and breathed her last. And the young men came in and found her dead, and carrying her out, buried her by her husband. So great fear came upon all the church and upon all who heard these things.",
+        "text_id": "Tetapi seorang yang bernama Ananias, beserta isterinya Safira, menjual sebuah ladang. Ia menahan sebagian dari hasil penjualan itu, dan isterinya juga mengetahuinya, lalu ia membawa sebagian dari harga penjualan itu dan meletakkannya di kaki rasul-rasul itu. Tetapi Petrus berkata: 'Ananias, mengapa hatimu dikuasai Iblis, sehingga engkau mendustai Roh Kudus dan menahan sebagian dari harga tanah itu? Selama tanah itu belum terjual, bukankah itu milikmu? Dan setelah dijual, bukankah hasilnya di bawah kekuasaanmu? Mengapa engkau merencanakan hal itu dalam hatimu? Engkau bukan mendustai manusia, melainkan Allah.' Ketika Ananias mendengar perkataan itu, ia jatuh tewas. Maka takut yang besar menimpa semua yang mendengarnya. Maka orang-orang muda itu bangun, mengkafani dia, membawa dia keluar dan menguburkannya. Kira-kira tiga jam kemudian, isterinya masuk, tidak tahu apa yang telah terjadi. Lalu Petrus menjawab dia: 'Katakanlah kepadaku, apakah kamu menjual ladang itu sekian harga?' Jawab perempuan itu: 'Ya, sekian itu.' Lalu kata Petrus kepadanya: 'Mengapa kamu sepakat untuk mencobai Roh Tuhan? Lihatlah, kaki orang-orang yang telah menguburkan suamimu ada di depan pintu, dan mereka akan membawa kamu juga keluar.' Segera jatuhlah dia di kaki Petrus dan meninggal. Lalu orang-orang muda itu masuk dan menemukan dia sudah mati, lalu mereka membawa dia keluar dan menguburkannya di sebelah suaminya. Maka takut yang besar menimpa seluruh jemaat dan semua yang mendengar hal itu."
       }
     ],
     "practical_applications_en": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Teaching Bible Studies",
+      "Assisting with Seminars",
+      "Writing on Bible Topics",
+      "Lay Pastor",
+      "Chairperson"
     ],
     "practical_applications_id": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Memberikan pelajaran Alkitab",
+      "Menolong dengan seminar",
+      "Menulis tentang topik-topik Alkitab",
+      "Pendeta awam",
+      "Ketua"
     ]
   },
   {
     "key": "leadership",
     "name_en": "Leadership",
     "name_id": "Kepemimpinan",
-    "description_en": "[TODO: Add description]",
-    "description_id": "[TODO: Add description]",
+    "description_en": "Special ability that God gives to set goals according to God's purpose and communicate them in such a way that others voluntarily and harmoniously work together to achieve those goals for God's glory. They are the church's compass and guide.",
+    "description_id": "Kemampuan istimewa yang Allah berikan untuk menetapkan tujuan sesuai dengan maksud Allah dan mengomunikasikannya sedemikian rupa sehingga orang lain secara sukarela dan harmonis bekerja sama untuk mencapai tujuan tersebut demi kemuliaan Allah. Mereka adalah kompas dan pemandu gereja.",
     "characteristics_en": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Setting goals according to God's purpose",
+      "Communicating vision effectively",
+      "Motivating others to work together",
+      "Guiding the church toward God's glory"
     ],
     "characteristics_id": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Menetapkan tujuan sesuai maksud Allah",
+      "Mengomunikasikan visi secara efektif",
+      "Memotivasi orang lain untuk bekerja bersama",
+      "Membimbing gereja menuju kemuliaan Allah"
     ],
     "biblical_references": [
       {
-        "verse": "Romans 12:8",
-        "text": "[TODO: Add biblical text]"
+        "verse_en": "1 Timothy 5:17",
+        "verse_id": "1 Timotius 5:17",
+        "text_en": "Let the elders who rule well be counted worthy of double honor, especially those who labor in the word and doctrine.",
+        "text_id": "Hormatilah para penatua yang memimpin dengan baik, terutama mereka yang bekerja keras dalam berkata-kata dan mengajar."
+      },
+      {
+        "verse_en": "Acts 7:10",
+        "verse_id": "Kisah Para Rasul 7:10",
+        "text_en": "And delivered him out of all his troubles, and gave him favor and wisdom in the presence of Pharaoh, king of Egypt; and he made him governor over Egypt and all his house.",
+        "text_id": "Dan Ia menyelamatkan dia dari segala kesukarannya, dan mengaruniakan kepadanya hikmat dan kasih karunia di hadapan Firaun, raja Mesir, dan Ia mengangkat dia menjadi gubernur atas Mesir dan atas seisi rumahnya."
+      },
+      {
+        "verse_en": "Acts 15:7-11",
+        "verse_id": "Kisah Para Rasul 15:7-11",
+        "text_en": "And when there had been much dispute, Peter rose up and said to them: 'Men and brethren, you know that a good while ago God chose among us, that by my mouth the Gentiles should hear the word of the gospel and believe. So God, who knows the heart, acknowledged them by giving them the Holy Spirit, just as He did to us, and made no distinction between us and them, purifying their hearts by faith. Now therefore, why do you test God by putting a yoke on the neck of the disciples which neither our fathers nor we were able to bear? But we believe that through the grace of the Lord Jesus Christ we shall be saved in the same manner as they.'",
+        "text_id": "Setelah terjadi perdebatan yang panjang, Petrus bangun dan berkata kepada mereka: 'Saudara-saudara, kamu tahu bahwa sejak lama Allah memilih dari antara kita, supaya dengan mulutku bangsa-bangsa lain mendengar firman Injil dan menjadi percaya. Dan Allah yang mengenal hati manusia mengakui mereka, karena Ia memberikan Roh Kudus kepada mereka, sama seperti kepada kami, dan Ia tidak membuat perbedaan antara kami dengan mereka, sesudah Ia menyucikan hati mereka oleh iman. Jadi mengapa kamu sekarang mencobai Allah dengan meletakkan beban di atas bahu murid-murid yang tidak pernah dapat dipikul oleh nenek moyang kita maupun oleh kita sendiri? Tetapi kami percaya, bahwa oleh kasih karunia Tuhan Yesus Kristus kita akan diselamatkan, sebagaimana mereka juga.'"
       }
     ],
     "practical_applications_en": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "General Sabbath School Leader",
+      "Chairperson of Various Councils and Committees",
+      "Lay Pastor",
+      "Chairperson",
+      "Head Deacon / Deaconess",
+      "Treasurer",
+      "Youth Ministry Leader"
     ],
     "practical_applications_id": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Pemimpin umum Sekolah Sabat",
+      "Ketua berbagai dewan dan komite",
+      "Pendeta awam",
+      "Ketua",
+      "Kepala diaken / diakenes",
+      "Bendahara",
+      "Pemimpin pelayanan pemuda"
     ]
   },
   {
     "key": "mercy",
     "name_en": "Mercy",
-    "name_id": "Belas Kasihan",
-    "description_en": "[TODO: Add description]",
-    "description_id": "[TODO: Add description]",
+    "name_id": "Kemurahan",
+    "description_en": "Special ability that God gives to feel genuine empathy and compassion for individuals suffering from physical, mental, or emotional problems. This gift translates into actions done with joy to reflect Christ's love and alleviate suffering.",
+    "description_id": "Kemampuan istimewa yang Allah berikan untuk merasakan empati dan kasih sayang yang tulus kepada individu yang menderita masalah fisik, mental, atau emosional. Karunia ini diterjemahkan menjadi perbuatan yang dilakukan dengan riang untuk mencerminkan kasih Kristus dan meringankan penderitaan.",
     "characteristics_en": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Genuine empathy and compassion",
+      "Sensitivity to suffering",
+      "Joyful service to help others",
+      "Reflecting Christ's love through action"
     ],
     "characteristics_id": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Empati dan kasih sayang yang tulus",
+      "Sensitivitas terhadap penderitaan",
+      "Pelayanan dengan sukacita untuk membantu orang lain",
+      "Mencerminkan kasih Kristus melalui tindakan"
     ],
     "biblical_references": [
       {
-        "verse": "Romans 12:8",
-        "text": "[TODO: Add biblical text]"
+        "verse_en": "Romans 12:8",
+        "verse_id": "Roma 12:8",
+        "text_en": "He who exhorts, in exhortation; he who gives, with liberality; he who leads, with diligence; he who shows mercy, with cheerfulness.",
+        "text_id": "Siapa yang menghibur, hendaklah ia menghibur; siapa yang memberi, hendaklah ia memberi dengan tulus hati; siapa yang memimpin, hendaklah ia memimpin dengan rajin; siapa yang menunjukkan kemurahan, hendaklah ia melakukannya dengan sukacita."
+      },
+      {
+        "verse_en": "Mark 9:41",
+        "verse_id": "Markus 9:41",
+        "text_en": "For whoever gives you a cup of water to drink in My name, because you belong to Christ, assuredly, I say to you, he will by no means lose his reward.",
+        "text_id": "Sebab barangsiapa memberi kamu secawan air minum karena kamu adalah milik Kristus, Aku berkata kepadamu: Sesungguhnya ia tidak akan kehilangan upahnya."
+      },
+      {
+        "verse_en": "Acts 16:33,34",
+        "verse_id": "Kisah Para Rasul 16:33,34",
+        "text_en": "And he took them the same hour of the night and washed their stripes. And immediately he and all his family were baptized. Now when he had brought them into his house, he set food before them; and he rejoiced, having believed in God with all his household.",
+        "text_id": "Pada jam itu juga ia membawa mereka dan membasuh luka-luka mereka. Segera ia dan semua keluarganya dibaptis. Lalu ia membawa mereka ke dalam rumahnya, dan menghidangkan makanan di hadapan mereka; ia bersukacita bersama dengan seluruh keluarganya karena ia telah percaya kepada Allah."
       }
     ],
     "practical_applications_en": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Emergency Preparedness Committee",
+      "Community Service (Dorcas)",
+      "Poor Fund Committee",
+      "Student Aid Committee",
+      "Counseling"
     ],
     "practical_applications_id": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Komite kesiapsiagaan darurat",
+      "Layanan masyarakat (Dorkas)",
+      "Komite dana orang miskin",
+      "Komite bantuan siswa",
+      "Konseling"
     ]
   },
   {
     "key": "missionary",
     "name_en": "Missionary",
     "name_id": "Misionaris",
-    "description_en": "[TODO: Add description]",
-    "description_id": "[TODO: Add description]",
+    "description_en": "Special ability that God gives to members of the Body of Christ to serve any other spiritual gift they possess in a second culture (cross-cultural). They have special adaptation and passion to take the Gospel beyond known boundaries.",
+    "description_id": "Kemampuan istimewa yang Allah berikan kepada anggota Tubuh Kristus untuk melayani karunia rohani lain apa pun yang mereka miliki di budaya kedua (lintas budaya). Mereka memiliki adaptasi dan gairah khusus untuk membawa Injil melampaui batas yang sudah dikenal.",
     "characteristics_en": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Cross-cultural adaptability",
+      "Passion for taking the Gospel beyond boundaries",
+      "Serving spiritual gifts in different cultures",
+      "Missionary calling and commitment"
     ],
     "characteristics_id": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Adaptabilitas lintas budaya",
+      "Gairah untuk membawa Injil melampaui batas",
+      "Melayani karunia rohani dalam budaya yang berbeda",
+      "Panggilan dan komitmen misionaris"
     ],
     "biblical_references": [
       {
-        "verse": "1 Corinthians 9:19-23",
-        "text": "[TODO: Add biblical text]"
+        "verse_en": "1 Corinthians 9:19-23",
+        "verse_id": "1 Korintus 9:19-23",
+        "text_en": "For though I am free from all men, I have made myself a servant to all, that I might win the more; and to the Jews I became as a Jew, that I might win Jews; to those who are under the law, as under the law, that I might win those who are under the law; to those who are without law, as without law (not being without law toward God, but under law toward Christ), that I might win those who are without law; to the weak I became as weak, that I might win the weak. I have become all things to all men, that I might by all means save some. Now this I do for the gospel's sake, that I may be partaker of it with you.",
+        "text_id": "Sekalipun aku bebas terhadap semua orang, aku menjadikan diriku hamba semua orang, supaya aku boleh memenangkan sebanyak mungkin orang. Bagi orang-orang Yahudi aku menjadi seorang Yahudi, supaya aku boleh memenangkan orang-orang Yahudi. Bagi mereka yang hidup di bawah hukum Taurat aku menjadi seorang yang hidup di bawah hukum Taurat, sekalipun aku sendiri tidak hidup di bawah hukum Taurat, supaya aku boleh memenangkan mereka yang hidup di bawah hukum Taurat. Bagi mereka yang tanpa hukum Taurat aku menjadi sebagai orang tanpa hukum Taurat—sekalipun aku tidak tanpa hukum Allah di hadapan Kristus—supaya aku boleh memenangkan mereka yang tanpa hukum Taurat. Bagi orang-orang yang lemah aku menjadi sebagai orang yang lemah, supaya aku boleh memenangkan orang-orang yang lemah. Segala sesuatu telah aku lakukan bagi kamu karena Injil, supaya aku boleh turut mendapat bagian di dalamnya."
+      },
+      {
+        "verse_en": "Acts 8:4",
+        "verse_id": "Kisah Para Rasul 8:4",
+        "text_en": "Therefore those who were scattered went everywhere preaching the word.",
+        "text_id": "Sebab itu orang-orang yang tersebar pergi memberitakan firman ke mana-mana."
+      },
+      {
+        "verse_en": "Acts 13:2,3",
+        "verse_id": "Kisah Para Rasul 13:2,3",
+        "text_en": "As they ministered to the Lord and fasted, the Holy Spirit said, 'Now separate to Me Barnabas and Saul for the work to which I have called them.' Then, having fasted and prayed, and laid hands on them, they sent them away.",
+        "text_id": "Sedang mereka beribadah kepada Tuhan dan berpuasa, berkatalah Roh Kudus: 'Kuduskanlah bagi-Ku Barnabas dan Saulus untuk pekerjaan yang telah Kutentukan bagi mereka.' Maka setelah berpuasa dan berdoa, mereka meletakkan tangan di atas kedua orang itu dan melepaskan mereka."
       }
     ],
     "practical_applications_en": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Student Missionary Committee",
+      "Visitation Committee",
+      "Refugee Assistance",
+      "Work in the City",
+      "Cross-cultural Evangelism"
     ],
     "practical_applications_id": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Komite misionaris mahasiswa",
+      "Komite perlawatan",
+      "Bantuan pengungsi",
+      "Pekerjaan dalam kota",
+      "Penginjilan lintas budaya"
     ]
   },
   {
     "key": "pastor",
-    "name_en": "Pastor/Shepherd",
+    "name_en": "Pastor",
     "name_id": "Gembala",
-    "description_en": "[TODO: Add description]",
-    "description_id": "[TODO: Add description]",
+    "description_en": "Special ability that God gives to members of the Body of Christ to bear personal long-term responsibility for the spiritual welfare of a group of believers. They are soul caretakers who provide guidance and spiritual protection.",
+    "description_id": "Kemampuan istimewa yang Allah berikan kepada anggota Tubuh Kristus untuk memikul tanggung jawab pribadi jangka panjang atas kesejahteraan spiritual sekelompok orang percaya. Mereka adalah pemelihara jiwa yang menyediakan tuntunan dan perlindungan rohani.",
     "characteristics_en": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Long-term personal responsibility",
+      "Spiritual care and guidance",
+      "Protecting the spiritual welfare",
+      "Shepherding a group of believers"
     ],
     "characteristics_id": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Tanggung jawab pribadi jangka panjang",
+      "Pemeliharaan dan bimbingan spiritual",
+      "Melindungi kesejahteraan spiritual",
+      "Menggembalakan kelompok orang percaya"
     ],
     "biblical_references": [
       {
-        "verse": "Ephesians 4:11",
-        "text": "[TODO: Add biblical text]"
+        "verse_en": "Ephesians 4:11-14",
+        "verse_id": "Efesus 4:11-14",
+        "text_en": "And He Himself gave some to be apostles, some prophets, some evangelists, and some pastors and teachers, for the equipping of the saints for the work of ministry, for the edifying of the body of Christ, till we all come to the unity of the faith and of the knowledge of the Son of God, to a perfect man, to the measure of the stature of the fullness of Christ; that we should no longer be children, tossed to and fro and carried about with every wind of doctrine, by the trickery of men, in the cunning craftiness of deceitful plotting.",
+        "text_id": "Dan Ialah yang memberikan karunia-karunia: ada yang dijadikan rasul, ada yang dijadikan nabi, ada yang dijadikan penginjil, ada yang dijadikan gembala dan pengajar. Semua itu diberikan-Nya untuk memperlengkapi orang-orang kudus bagi pekerjaan pelayanan, bagi pembangunan tubuh Kristus. Sampai kita semua telah mencapai kesatuan iman dan pengetahuan yang benar tentang Anak Allah, kedewasaan penuh, dan tingkat pertumbuhan yang sesuai dengan kepenuhan Kristus, sehingga kita bukan lagi anak-anak, yang diombang-ambingkan dan diombang-ambingkan oleh rupa-rupa angin pengajaran, oleh permainan manusia yang licik dalam mengajak orang sesat."
+      },
+      {
+        "verse_en": "1 Timothy 3:1-7",
+        "verse_id": "1 Timotius 3:1-7",
+        "text_en": "This is a faithful saying: If a man desires the position of a bishop, he desires a good work. A bishop then must be blameless, the husband of one wife, temperate, sober-minded, of good behavior, hospitable, able to teach; not given to wine, not violent, not greedy for money, but gentle, not quarrelsome, not covetous; one who rules his own house well, having his children in submission with all reverence (for if a man does not know how to rule his own house, how will he take care of the church of God?); not a novice, lest being puffed up with pride he fall into the same condemnation as the devil. Moreover he must have a good testimony among those who are outside, lest he fall into reproach and the snare of the devil.",
+        "text_id": "Ini adalah benar: kalau seseorang mendambakan jabatan penilik, ia menginginkan pekerjaan yang baik. Penilik itu harus dapat dipercaya, suami dari satu isteri, sederhana, dapat menguasai diri, berkelakuan baik, suka memberi tumpangan, cakap mengajar; bukan peminum keras, bukan pemarah, sebaliknya ia harus lemah lembut dan bukan orang yang suka bertengkar; bukan orang yang tamak; seorang yang mengatur keluarganya sendiri dengan baik dan yang menaati segala perintah dengan penuh hormat. Sebab jika seseorang tidak tahu mengatur keluarganya sendiri, bagaimanakah ia akan menjaga jemaat Allah? Ia juga bukan orang yang baru percaya, supaya ia tidak menjadi sombong dan jatuh ke dalam hukuman yang sama dengan Iblis. Ia juga harus mempunyai nama baik di luar jemaat, supaya jangan ia mendapat cemoohan dan jerat Iblis."
+      },
+      {
+        "verse_en": "John 10:1-18",
+        "verse_id": "Yohanes 10:1-18",
+        "text_en": "'Most assuredly, I say to you, he who does not enter the sheepfold by the door, but climbs up some other way, the same is a thief and a robber. But he who enters by the door is the shepherd of the sheep. To him the doorkeeper opens, and the sheep hear his voice; and he calls his own sheep by name and leads them out. And when he brings out his own sheep, he goes before them; and the sheep follow him, for they know his voice. Yet they will by no means follow a stranger, but will flee from him, for they do not know the voice of strangers.' Jesus used this illustration, but they did not understand the things which He spoke to them. Then Jesus said to them again, 'Most assuredly, I say to you, I am the door of the sheep. All who ever came before Me are thieves and robbers, but the sheep did not hear them. I am the door. If anyone enters by Me, he will be saved, and will go in and out and find pasture. The thief does not come except to steal, and to kill, and to destroy. I have come that they may have life, and that they may have it more abundantly. I am the good shepherd. The good shepherd gives His life for the sheep. But a hireling, he who is not the shepherd, one who does not own the sheep, sees the wolf coming and leaves the sheep and flees; and the wolf catches the sheep and scatters them. The hireling flees because he is a hireling and does not care about the sheep. I am the good shepherd; and I know My sheep, and am known by My own. As the Father knows Me, even so I know the Father; and I lay down My life for the sheep. And other sheep I have which are not of this fold; them also I must bring, and they will hear My voice; and there will be one flock and one shepherd.'",
+        "text_id": "'Aku berkata kepadamu dengan sungguh-sungguh: Siapa yang tidak masuk ke kandang domba melalui pintu, tetapi memanjat masuk ke tempat lain, ia adalah pencuri dan perampok. Tetapi siapa yang masuk melalui pintu, ia adalah gembala domba. Baginya penjaga membukakan pintu dan domba-domba itu mendengar suaranya dan ia memanggil domba-dombanya masing-masing menurut namanya dan membawa mereka keluar. Dan apabila ia telah mengeluarkan semua dombanya, ia berjalan di depan mereka dan domba-domba itu mengikutinya, karena mereka mengenal suaranya. Tetapi seorang asing tidak akan mereka ikuti, malah mereka akan lari daripadanya, karena mereka tidak mengenal suara orang asing.' Yesus memakai perumpamaan ini untuk berbicara kepada mereka, tetapi mereka tidak mengerti apa yang Ia katakan kepada mereka. Maka Yesus berkata pula: 'Aku berkata kepadamu dengan sungguh-sungguh: Akulah pintu domba. Semua orang yang datang sebelum Aku, adalah pencuri dan perampok, dan domba-domba itu tidak mendengarkan mereka. Akulah pintu; jika seorang masuk melalui Aku, ia akan selamat dan ia akan masuk dan keluar dan menemukan padang rumput. Pencuri datang hanya untuk mencuri, membunuh dan membinasakan, tetapi Aku datang supaya mereka mempunyai hidup, dan mempunyainya dalam segala kelimpahan. Akulah gembala yang baik. Gembala yang baik memberikan nyawanya bagi domba-dombanya, sedangkan seorang upahan yang bukan gembala dan yang bukan pemilik domba-domba itu, kalau ia melihat serigala datang, ia meninggalkan domba-domba itu dan lari, lalu serigala itu menerkam dan menyeret-nyeret domba-domba itu. Upahan itu lari karena ia adalah seorang upahan dan ia tidak peduli kepada domba-domba itu. Akulah gembala yang baik dan Aku mengenal domba-domba-Ku dan domba-domba-Ku mengenal Aku, sama seperti Bapa mengenal Aku dan Aku mengenal Bapa, dan Aku memberikan nyawa-Ku bagi domba-domba itu. Dan Aku mempunyai domba lain yang bukan dari kandang ini; domba-domba itu juga harus Kubawa, dan mereka akan mendengarkan suara-Ku dan mereka akan menjadi satu kawanan, dengan satu gembala.'"
       }
     ],
     "practical_applications_en": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Church Member Shepherding Visits",
+      "Ministry for People Living Alone",
+      "Small Group Leader",
+      "Hospital Visitation",
+      "Counseling",
+      "Social Committee"
     ],
     "practical_applications_id": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Kunjungan pemeliharaan jemaat",
+      "Pelayanan untuk orang yang hidup sendiri",
+      "Pemimpin kelompok belajar",
+      "Kunjungan rumah sakit",
+      "Konseling",
+      "Komite sosial"
     ]
   },
   {
     "key": "service",
     "name_en": "Service",
     "name_id": "Pelayanan",
-    "description_en": "[TODO: Add description]",
-    "description_id": "[TODO: Add description]",
+    "description_en": "Special ability that God gives to identify unmet needs in tasks related to God's work, and use available resources to meet those needs and help achieve desired results. They are practical problem solvers.",
+    "description_id": "Kemampuan istimewa yang Allah berikan untuk mengidentifikasi kebutuhan yang belum terpenuhi dalam suatu tugas yang berkaitan dengan pekerjaan Tuhan, dan menggunakan sumber daya yang tersedia untuk memenuhi kebutuhan tersebut serta membantu mencapai hasil yang diinginkan. Mereka adalah pemecah masalah praktis.",
     "characteristics_en": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Identifying unmet needs",
+      "Using available resources effectively",
+      "Solving practical problems",
+      "Supporting God's work through service"
     ],
     "characteristics_id": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Mengidentifikasi kebutuhan yang belum terpenuhi",
+      "Menggunakan sumber daya yang tersedia secara efektif",
+      "Memecahkan masalah praktis",
+      "Mendukung pekerjaan Tuhan melalui pelayanan"
     ],
     "biblical_references": [
       {
-        "verse": "Romans 12:7",
-        "text": "[TODO: Add biblical text]"
+        "verse_en": "2 Timothy 1:16-18",
+        "verse_id": "2 Timotius 1:16-18",
+        "text_en": "The Lord grant mercy to the household of Onesiphorus, for he often refreshed me, and was not ashamed of my chain; but when he arrived in Rome, he sought me out very zealously and found me. The Lord grant to him that he may find mercy from the Lord in that Day—and you know very well how many ways he ministered to me at Ephesus.",
+        "text_id": "Tuhan mengaruniakan rahmat kepada keluarga Onesiforus, sebab ia sering menyegarkan aku dan ia tidak malu karena aku dijebloskan ke penjara; sebaliknya, ketika ia tiba di Roma, ia dengan sungguh-sungguh mencari aku dan ia menemukan aku. Semoga Tuhan mengaruniakan kepadanya rahmat di hadapan Tuhan pada hari itu. Dan engkau sendiri tahu lebih baik daripada siapapun juga, bagaimana ia melayani aku di Efesus."
+      },
+      {
+        "verse_en": "Romans 12:7",
+        "verse_id": "Roma 12:7",
+        "text_en": "Or ministry, let us use it in our ministering; he who teaches, in teaching;",
+        "text_id": "atau dalam pelayanan, hendaklah kita melayani; atau dalam mengajar, hendaklah kita mengajar;"
+      },
+      {
+        "verse_en": "Acts 6:1-7",
+        "verse_id": "Kisah Para Rasul 6:1-7",
+        "text_en": "Now in those days, when the number of the disciples was multiplying, there arose a complaint against the Hebrews by the Hellenists, because their widows were neglected in the daily distribution. Then the twelve summoned the multitude of the disciples and said, 'It is not desirable that we should leave the word of God and serve tables. Therefore, brethren, seek out from among you seven men of good reputation, full of the Holy Spirit and wisdom, whom we may appoint over this business; but we will give ourselves continually to prayer and to the ministry of the word.' And the saying pleased the whole multitude. And they chose Stephen, a man full of faith and the Holy Spirit, and Philip, Prochorus, Nicanor, Timon, Parmenas, and Nicolas, a proselyte from Antioch, whom they set before the apostles; and when they had prayed, they laid hands on them. Then the word of God spread, and the number of the disciples multiplied greatly in Jerusalem, and a great many of the priests were obedient to the faith.",
+        "text_id": "Pada waktu itu jumlah murid-murid terus bertambah dan timbullah keberatan di kalangan orang-orang Yahudi berbahasa Yunani terhadap orang-orang Yahudi berbahasa Ibrani, karena janda-janda mereka tidak diurus baik dalam pembagian jatah sehari-hari. Kedua belas rasul itu memanggil semua murid dan berkata: 'Tidak patut kalau kami melalaikan pelayanan firman Allah hanya untuk melayani meja. Saudara-saudara, carilah tujuh orang di antara kamu yang dapat dipercaya dan yang penuh Roh dan hikmat, supaya kami angkat mereka mengurus pekerjaan itu; tetapi kami akan mendedikasikan diri sepenuhnya untuk doa dan pelayanan firman.' Usul itu disetujui oleh seluruh jemaat. Mereka memilih Stefanus, seorang yang penuh iman dan Roh Kudus, dan juga Filipus, Prokhorus, Nikanor, Timon, Parmenas dan Nikolaus, seorang masuk Yahudi dari Antiokhia. Mereka membawa orang-orang itu kepada rasul-rasul, lalu para rasul itu berdoa dan meletakkan tangan mereka di atas orang-orang itu. Demikianlah firman Allah tersebar dan jumlah murid-murid di Yerusalem bertambah dengan sangat besar; juga banyak imam yang taat kepada iman."
       }
     ],
     "practical_applications_en": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Deacon / Deaconess",
+      "Music Committee or Music Participant",
+      "Phone Committee",
+      "Flower Committee",
+      "Audio Visual Committee",
+      "Public Relations"
     ],
     "practical_applications_id": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Diakon / diakenes",
+      "Komite musik atau partisipan musik",
+      "Komite telepon",
+      "Komite bunga",
+      "Komite audio visual",
+      "Humas"
     ]
   },
   {
-    "key": "teacher",
+    "key": "teaching",
     "name_en": "Teaching",
-    "name_id": "Pengajaran",
-    "description_en": "[TODO: Add description]",
-    "description_id": "[TODO: Add description]",
+    "name_id": "Pengajar",
+    "description_en": "Special ability that God gives to members of the Body of Christ to communicate information relevant to the health and ministry of the church in such a way that others truly understand and learn. They are translators of divine truth.",
+    "description_id": "Kemampuan istimewa yang Allah berikan kepada anggota Tubuh Kristus untuk mengomunikasikan informasi yang relevan dengan kesehatan dan pelayanan gereja sedemikian rupa sehingga orang lain benar-benar mengerti dan belajar. Mereka adalah penerjemah kebenaran ilahi.",
     "characteristics_en": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Communicating information effectively",
+      "Making divine truth understandable",
+      "Teaching for learning and growth",
+      "Translating spiritual concepts"
     ],
     "characteristics_id": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Mengkomunikasikan informasi secara efektif",
+      "Membuat kebenaran ilahi dapat dimengerti",
+      "Mengajar untuk pembelajaran dan pertumbuhan",
+      "Menerjemahkan konsep spiritual"
     ],
     "biblical_references": [
       {
-        "verse": "Romans 12:7",
-        "text": "[TODO: Add biblical text]"
+        "verse_en": "1 Corinthians 12:28",
+        "verse_id": "1 Korintus 12:28",
+        "text_en": "And God has appointed these in the church: first apostles, second prophets, third teachers, after that miracles, then gifts of healings, helps, administrations, varieties of tongues.",
+        "text_id": "Dan Allah mengangkat orang-orang tertentu dalam jemaat: pertama sebagai rasul, kedua sebagai nabi, ketiga sebagai pengajar, selanjutnya mereka yang mengadakan mujizat-mujizat, lalu mereka yang mempunyai karunia untuk menyembuhkan, untuk menolong, untuk memimpin, dan untuk mengatakan bahasa-bahasa roh."
+      },
+      {
+        "verse_en": "Ephesians 4:11-14",
+        "verse_id": "Efesus 4:11-14",
+        "text_en": "And He Himself gave some to be apostles, some prophets, some evangelists, and some pastors and teachers, for the equipping of the saints for the work of ministry, for the edifying of the body of Christ, till we all come to the unity of the faith and of the knowledge of the Son of God, to a perfect man, to the measure of the stature of the fullness of Christ; that we should no longer be children, tossed to and fro and carried about with every wind of doctrine, by the trickery of men, in the cunning craftiness of deceitful plotting.",
+        "text_id": "Dan Ialah yang memberikan karunia-karunia: ada yang dijadikan rasul, ada yang dijadikan nabi, ada yang dijadikan penginjil, ada yang dijadikan gembala dan pengajar. Semua itu diberikan-Nya untuk memperlengkapi orang-orang kudus bagi pekerjaan pelayanan, bagi pembangunan tubuh Kristus. Sampai kita semua telah mencapai kesatuan iman dan pengetahuan yang benar tentang Anak Allah, kedewasaan penuh, dan tingkat pertumbuhan yang sesuai dengan kepenuhan Kristus, sehingga kita bukan lagi anak-anak, yang diombang-ambingkan dan diombang-ambingkan oleh rupa-rupa angin pengajaran, oleh permainan manusia yang licik dalam mengajak orang sesat."
+      },
+      {
+        "verse_en": "Romans 12:7",
+        "verse_id": "Roma 12:7",
+        "text_en": "Or ministry, let us use it in our ministering; he who teaches, in teaching;",
+        "text_id": "atau dalam pelayanan, hendaklah kita melayani; atau dalam mengajar, hendaklah kita mengajar;"
       }
     ],
     "practical_applications_en": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Sabbath School Leader / Teacher (at every division/level)",
+      "Pathfinder Leader",
+      "Youth Activities Leader",
+      "Vacation Bible School Leader / Teacher",
+      "Branch Sabbath School Leader / Teacher",
+      "Bible Study Leader"
     ],
     "practical_applications_id": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Pemimpin / guru Sekolah Sabat (di setiap divisi / tingkat)",
+      "Pathfinder",
+      "Pemimpin kegiatan pemuda",
+      "Pemimpin / guru Sekolah Alkitab Liburan",
+      "Pemimpin / guru Sekolah Sabat Cabang",
+      "Pemimpin studi Alkitab"
     ]
   },
   {
     "key": "wisdom",
     "name_en": "Wisdom",
-    "name_id": "Hikmat",
-    "description_en": "[TODO: Add description]",
-    "description_id": "[TODO: Add description]",
+    "name_id": "Kebijaksanaan",
+    "description_en": "Special ability that God gives to know the mind of the Holy Spirit in such a way as to receive insight into how existing knowledge can be best applied to specific needs that arise in the church. They are practical divine decision makers.",
+    "description_id": "Kemampuan istimewa yang Allah berikan untuk mengetahui pikiran Roh Kudus sedemikian rupa sehingga menerima wawasan tentang bagaimana pengetahuan yang ada dapat diterapkan secara terbaik pada kebutuhan spesifik yang muncul dalam gereja. Mereka adalah pembuat keputusan ilahi yang praktis.",
     "characteristics_en": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Knowing the mind of the Holy Spirit",
+      "Applying knowledge to specific needs",
+      "Practical divine decision making",
+      "Spiritual insight for church needs"
     ],
     "characteristics_id": [
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]",
-      "[TODO: Add characteristic]"
+      "Mengetahui pikiran Roh Kudus",
+      "Menerapkan pengetahuan pada kebutuhan spesifik",
+      "Pengambilan keputusan ilahi yang praktis",
+      "Wawasan spiritual untuk kebutuhan gereja"
     ],
     "biblical_references": [
       {
-        "verse": "1 Corinthians 12:8",
-        "text": "[TODO: Add biblical text]"
+        "verse_en": "1 Corinthians 2:1-13",
+        "verse_id": "1 Korintus 2:1-13",
+        "text_en": "And I, brethren, when I came to you, did not come with excellence of speech or of wisdom declaring to you the testimony of God. For I determined not to know anything among you except Jesus Christ and Him crucified. I was with you in weakness, in fear, and in much trembling. And my speech and my preaching were not with persuasive words of human wisdom, but in demonstration of the Spirit and of power, that your faith should not be in the wisdom of men but in the power of God. However, we speak wisdom among those who are mature, yet not the wisdom of this age, nor of the rulers of this age, who are coming to nothing. But we speak the wisdom of God in a mystery, the hidden wisdom which God ordained before the ages for our glory, which none of the rulers of this age knew; for had they known, they would not have crucified the Lord of glory. But as it is written: 'Eye has not seen, nor ear heard, Nor have entered into the heart of man The things which God has prepared for those who love Him.' But God has revealed them to us through His Spirit. For the Spirit searches all things, yes, the deep things of God. For what man knows the things of a man except the spirit of the man which is in him? Even so no one knows the things of God except the Spirit of God. Now we have received, not the spirit of the world, but the Spirit who is from God, that we might know the things that have been freely given to us by God. These things we also speak, not in words which man's wisdom teaches but which the Holy Spirit teaches, comparing spiritual things with spiritual. But the natural man does not receive the things of the Spirit of God, for they are foolishness to him; nor can he know them, because they are spiritually discerned. But he who is spiritual judges all things, yet he himself is rightly judged by no one. For 'who has known the mind of the LORD that he may instruct Him?' But we have the mind of Christ.",
+        "text_id": "Dan ketika aku datang kepadamu, saudara-saudara, aku tidak datang dengan kefasihan bicara atau hikmat, ketika aku memberitakan kesaksian Allah kepada kamu. Sebab aku tidak memutuskan untuk mengetahui sesuatu di antara kamu, selain dari Yesus Kristus, yaitu Kristus yang disalibkan. Aku berada di antara kamu dalam kelemahan dan dalam ketakutan dan sangat gemetar. Dan perkataanku dan pemberitaanku tidak didukung oleh kata-kata hikmat yang meyakinkan, tetapi oleh kekuatan Roh dan kekuatan, supaya iman kamu tidak bertumpu pada hikmat manusia, tetapi pada kekuatan Allah. Namun kami berbicara tentang hikmat di antara mereka yang sudah dewasa, yakni suatu hikmat yang bukan dari dunia ini dan bukan dari penguasa-penguasa dunia ini, yang akan lenyap. Tetapi kami berbicara tentang hikmat Allah dalam suatu rahasia, yaitu hikmat yang tersembunyi, yang sebelumnya telah disediakan Allah bagi kemuliaan kita, dan yang tidak diketahui oleh seorangpun dari penguasa dunia ini. Sebab kalau sekiranya mereka mengetahuinya, mereka tidak menyalibkan Tuhan kemuliaan itu. Tetapi seperti ada tertulis: 'Apa yang tidak pernah dilihat mata, dan tidak pernah didengar telinga, dan yang tidak pernah timbul di dalam hati manusia: semua yang disediakan Allah bagi mereka yang mengasihi Dia.' Kepada kita Allah telah menyatakannya itu melalui Roh-Nya. Sebab Roh menyelidiki segala sesuatu, bahkan hal-hal yang tersembunyi di dalam Allah. Siapa yang tahu apa yang ada pada diri seorang manusia, selain roh manusia yang ada di dalam diri orang itu? Demikian juga tidak ada yang tahu apa yang ada pada Allah, selain Roh Allah. Kita tidak menerima roh dunia, melainkan roh yang berasal dari Allah, supaya kita tahu apa yang dikaruniakan Allah kepada kita. Hal-hal ini juga kami beritakan, bukan dengan kata-kata yang diajarkan oleh hikmat manusia, tetapi dengan kata-kata yang diajarkan oleh Roh, dengan menjelaskan hal-hal rohani kepada mereka yang rohani. Tetapi manusia duniawi tidak menerima apa yang berasal dari Roh Allah, sebab baginya hal itu adalah kebodohan. Dan ia tidak dapat memahaminya, sebab hal itu harus dinilai secara rohani. Tetapi orang yang rohani menilai segala sesuatu, dan ia sendiri tidak dinilai oleh siapapun juga. Sebab 'siapa yang mengerti pikiran Tuhan, sehingga ia dapat menasihati Dia?' Tetapi kami memiliki pikiran Kristus."
+      },
+      {
+        "verse_en": "1 Corinthians 12:8",
+        "verse_id": "1 Korintus 12:8",
+        "text_en": "For to one is given the word of wisdom through the Spirit, to another the word of knowledge through the same Spirit.",
+        "text_id": "Kepada yang seorang Roh itu memberikan karunia untuk mengatakan firman hikmat, dan kepada yang lain Roh yang sama memberikan karunia untuk mengatakan firman pengetahuan."
+      },
+      {
+        "verse_en": "Acts 6:3,10",
+        "verse_id": "Kisah Para Rasul 6:3,10",
+        "text_en": "Therefore, brethren, seek out from among you seven men of good reputation, full of the Holy Spirit and wisdom, whom we may appoint over this business; but we will give ourselves continually to prayer and to the ministry of the word... And they were not able to resist the wisdom and the Spirit by which he spoke.",
+        "text_id": "Saudara-saudara, carilah tujuh orang di antara kamu yang dapat dipercaya dan yang penuh Roh dan hikmat, supaya kami angkat mereka mengurus pekerjaan itu; tetapi kami akan mendedikasikan diri sepenuhnya untuk doa dan pelayanan firman... Namun mereka tidak sanggup menghadapi hikmat dan Roh yang digunakannya ketika ia berbicara."
       }
     ],
     "practical_applications_en": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Church Committee Chairperson",
+      "Committee Member",
+      "Chairperson",
+      "Counseling",
+      "School Board Member"
     ],
     "practical_applications_id": [
-      "[TODO: Add application]",
-      "[TODO: Add application]"
+      "Ketua komite gereja",
+      "Anggota komite",
+      "Ketua",
+      "Konseling",
+      "Anggota dewan sekolah"
     ]
   }
 ]

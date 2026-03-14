@@ -1,226 +1,193 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { page } from "$app/stores";
+  import { fly } from "svelte/transition";
+  import { quintOut } from "svelte/easing";
+  import { onMount } from "svelte";
   import Arrow from "$lib/icons/Arrow.svelte";
   import Share from "$lib/icons/Share.svelte";
   import { _ } from "svelte-i18n";
+  import ShareModal from "$lib/components/ShareModal.svelte";
   import type { PageData } from "./$types";
+  import { getCategoryExplanation } from "$lib/utils/category-explanation";
 
   let { data }: { data: PageData } = $props();
 
-  const lang = $page.params.lang;
+  const lang = $page.params.lang as "en" | "id";
   const maxScore = 25;
 
-  let showAll = $state(false);
-  let copySuccess = $state(false);
+  let showShareModal = $state(false);
+  let animated = $state(false);
+  let showDownloadToast = $state(false);
 
-  // Show top 5 by default, or all if showAll is true
-  const topGifts = $derived(data.result.slice(0, 5));
-  const otherGifts = $derived(data.result.slice(5));
-  const displayedGifts = $derived(showAll ? data.result : topGifts);
+  // Share URL and text
+  const shareUrl = $derived(`${window.location.origin}/${lang}/questionnaire/result/${data.short_id}`);
+  const shareText = $derived(`${data.name}'s Spiritual Gifts assessment results — check out their gifts!`);
 
-  function shareResults() {
-    // Use short_id for cleaner shareable URL
-    const url = `${window.location.origin}/${lang}/questionnaire/result/${data.short_id}`;
-    const text = `${data.name}'s Spiritual Gifts assessment results — check out their gifts!`;
-    const title = "Spiritual Gifts Assessment Results";
-
-    if (navigator.share) {
-      navigator
-        .share({
-          title,
-          text,
-          url,
-        })
-        .catch((err) => console.error("Share failed:", err));
-    } else {
-      navigator.clipboard.writeText(url);
-      copySuccess = true;
-      setTimeout(() => {
-        copySuccess = false;
-      }, 2000);
-    }
+  function openShareModalFn() {
+    showShareModal = true;
   }
-
+  function closeShareModal() {
+    showShareModal = false;
+  }
   function viewGift(category: string) {
     const resultId = data.short_id;
     goto(`/${lang}/gifts/${category.toLowerCase()}?from=result&id=${resultId}`);
   }
+  function handleGiftKeydown(e: KeyboardEvent, category: string) {
+    if (e.key === 'Enter') {
+      viewGift(category);
+    }
+  }
+  // Share to Instagram Stories - Download only
+  async function shareToStories() {
+    try {
+      const response = await fetch(`/api/og-image/${data.short_id}`);
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${data.short_id}.png`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showDownloadToast = true;
+      setTimeout(() => (showDownloadToast = false), 3000);
+    } catch (err) {
+      console.error("Download failed:", err);
+      alert("Failed to download image. Please try again.");
+    }
+  }
+  // Animate on mount
+  onMount(() => {
+    setTimeout(() => {
+      animated = true;
+    }, 100);
+  });
 </script>
 
-<div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-3xl mx-auto">
-    <!-- Header Card -->
-    <div class="bg-white shadow-lg rounded-2xl p-6 sm:p-8 mb-8 relative">
-      <!-- Share Button with Feedback -->
-      <div class="absolute top-4 right-4">
-        <button
-          on:click={shareResults}
-          class="bg-white hover:bg-gray-50 text-gray-700 p-2.5 rounded-full shadow-md transition-all duration-200 hover:shadow-lg hover:scale-105"
-          aria-label={$_("pages.result.shareTitle")}
-        >
-          <Share />
-        </button>
-        {#if copySuccess}
-          <div class="absolute top-full right-0 mt-2 bg-green-600 text-white text-xs px-3 py-1 rounded-md shadow-lg whitespace-nowrap animate-fade-in">
-            {$_("pages.result.shareCopied")}
+<div class="min-h-screen bg-gray-50 py-4 px-4">
+  <div class="max-w-2xl mx-auto space-y-4">
+    <!-- Compact Header Card -->
+    {#if animated}
+      <div
+        in:fly={{ y: -20, duration: 600, easing: quintOut }}
+        class="bg-white rounded-xl shadow p-4"
+      >
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-xl font-bold text-gray-900">
+              {$_("pages.result.title")}
+            </h1>
+            <p class="text-sm text-gray-600">
+              {data.name}
+            </p>
           </div>
-        {/if}
-      </div>
-
-      <!-- Title Section -->
-      <div class="pr-12">
-        <h1 class="text-2xl sm:text-3xl font-semibold font-graphik text-gray-900 mb-2">
-          {$_("pages.result.title")}
-        </h1>
-        <p class="text-gray-600 text-sm sm:text-base mb-4">
-          {$_("pages.result.name")}: <span class="font-semibold text-gray-900">{data.name}</span>
-        </p>
-        <p class="text-gray-700">{$_("pages.result.intro")}</p>
-      </div>
-    </div>
-
-    <!-- Top Gifts Section -->
-    {#if topGifts.length > 0}
-      <div class="mb-6">
-        <h2 class="text-lg font-semibold text-gray-900 mb-3 px-1">
-          {$_("pages.result.topGifts")}
-        </h2>
-        <div class="space-y-3">
-          {#each topGifts as item, i}
-            <button
-              on:click={() => viewGift(item.category)}
-              class="w-full group"
-              aria-label={$_("pages.result.clickToLearnMore")}
-            >
-              <div class="bg-white p-4 sm:p-5 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                <div class="flex justify-between items-center mb-2">
-                  <div class="flex items-center gap-3">
-                    {#if i < 3}
-                      <span class="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 text-white text-sm font-bold">
-                        {i + 1}
-                      </span>
-                    {/if}
-                    <span class="font-semibold text-gray-900 text-base sm:text-lg">
-                      {$_(`categories.${item.category}`)}
-                    </span>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <span class="text-gray-900 font-bold text-lg">
-                      {item.score}
-                      <span class="text-gray-500 font-normal text-sm">/25</span>
-                    </span>
-                    <Arrow />
-                  </div>
-                </div>
-                <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-                  <div
-                    class="h-3 rounded-full transition-all duration-500 relative"
-                    style="
-                      width: {(item.score / maxScore) * 100}%;
-                      background: linear-gradient(90deg,
-                        hsl({220 - i * 10}, 70%, 55%),
-                        hsl({220 - i * 10}, 70%, 45%)
-                      );
-                    "
-                  >
-                    <div
-                      class="absolute inset-0 rounded-full"
-                      style="
-                        background: linear-gradient(180deg,
-                          rgba(255, 255, 255, 0.3) 0%,
-                          rgba(255, 255, 255, 0) 50%,
-                          rgba(0, 0, 0, 0.1) 100%
-                        );
-                      "
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </button>
-          {/each}
+          <button
+            onclick={openShareModalFn}
+            class="flex items-center gap-2 px-3 py-2 bg-secondary text-white rounded-lg hover:opacity-90 transition-colors"
+            aria-label="Share results"
+          >
+            <Share class="w-5 h-5" />
+            <span class="hidden sm:inline text-sm">{$_("pages.result.shareTitle")}</span>
+          </button>
         </div>
       </div>
     {/if}
 
-    <!-- Other Gifts Section (Collapsible) -->
-    {#if otherGifts.length > 0}
-      <div class="mb-6">
-        <div class="flex items-center justify-between mb-3 px-1">
-          <h2 class="text-lg font-semibold text-gray-900">
-            {$_("pages.result.otherGifts")}
-          </h2>
-          <button
-            on:click={() => showAll = !showAll}
-            class="text-primary hover:text-primary-dark font-medium text-sm flex items-center gap-1 transition"
-          >
-            {showAll ? $_("pages.result.showLess") : $_("pages.result.showAll")}
-            <svg
-              class="w-4 h-4 transition-transform duration-200"
-              class:rotate-180={showAll}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </button>
+    <!-- #1 Gift Hero Card (Compact) -->
+    {#if animated && data.result[0]}
+      <div
+        in:fly={{ y: 20, duration: 600, delay: 50, easing: quintOut }}
+        class="bg-secondary rounded-xl shadow-lg p-5 text-white"
+      >
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-sm font-medium opacity-90">#1 {$_("pages.result.topGift")}</span>
+        </div>
+        <h2 class="text-xl font-bold mb-2">
+          {getCategoryExplanation(data.result[0].category.toLowerCase(), lang)?.name}
+        </h2>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="flex-1 h-2 bg-white/20 rounded-full overflow-hidden">
+            <div
+              class="h-full bg-white rounded-full transition-all duration-1000"
+              style="width: {(data.result[0].score / maxScore) * 100}%"
+            ></div>
+          </div>
+          <span class="text-sm font-bold">{data.result[0].score}/{maxScore}</span>
+        </div>
+        <p class="text-white/90 text-sm leading-relaxed line-clamp-2">
+          {getCategoryExplanation(data.result[0].category.toLowerCase(), lang)?.description}
+        </p>
+        <button
+          onclick={() => viewGift(data.result[0].category)}
+          class="mt-3 text-sm text-white/90 hover:text-white transition-colors"
+        >
+          {$_("pages.gifts.learnMore")} →
+        </button>
+      </div>
+    {/if}
+
+    <!-- All Gifts List -->
+    {#if animated}
+      <div
+        in:fly={{ y: 20, duration: 600, delay: 100, easing: quintOut }}
+        class="bg-white rounded-xl shadow overflow-hidden"
+      >
+        <!-- Header -->
+        <div class="px-4 py-3 border-b bg-gray-50">
+          <h3 class="font-semibold text-gray-700">{$_("pages.result.yourGifts")}</h3>
         </div>
 
-        {#if showAll}
-          <div class="space-y-2">
-            {#each otherGifts as item, i}
-              <button
-                on:click={() => viewGift(item.category)}
-                class="w-full group"
-              >
-                <div class="bg-white p-3 sm:p-4 rounded-lg hover:shadow-md transition-all duration-200 hover:bg-gray-50">
-                  <div class="flex justify-between items-center text-sm mb-1.5">
-                    <span class="font-medium text-gray-700">
-                      {$_(`categories.${item.category}`)}
-                    </span>
-                    <div class="flex items-center gap-2">
-                      <span class="text-gray-600 font-semibold">
-                        {item.score}<span class="font-light text-xs">/25</span>
-                      </span>
-                      <Arrow />
-                    </div>
-                  </div>
-                  <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-                    <div
-                      class="h-2 rounded-full transition-all duration-300"
-                      style="
-                        width: {(item.score / maxScore) * 100}%;
-                        background: linear-gradient(90deg,
-                          hsl({170 - i * 8}, 60%, 50%),
-                          hsl({170 - i * 8}, 60%, 40%)
-                        );
-                      "
-                    ></div>
-                  </div>
-                </div>
-              </button>
-            {/each}
+        <!-- Gift Items -->
+        {#each data.result as gift, i (gift.category)}
+          <div
+            in:fly={{ x: 20, duration: 400, delay: 200 + i * 50, easing: quintOut }}
+            class="flex items-center gap-3 px-4 py-3 border-b last:border-b-0 hover:bg-gray-50 transition-colors cursor-pointer
+              {i < 3 ? 'bg-secondary/5' : ''}"
+            onclick={() => viewGift(gift.category)}
+            role="button"
+            tabindex="0"
+            onkeydown={(e) => handleGiftKeydown(e, gift.category)}
+          >
+            <span class="w-8 text-lg font-bold {i < 3 ? 'text-secondary' : 'text-gray-400'}">
+              #{i + 1}
+            </span>
+            <span class="flex-1 font-medium {i < 3 ? 'text-secondary' : 'text-gray-700'}">
+              {getCategoryExplanation(gift.category.toLowerCase(), lang)?.name || gift.category}
+            </span>
+            <div class="w-24 h-2 bg-gray-100 rounded-full overflow-hidden">
+              <div
+                class="h-full {i < 3 ? 'bg-secondary' : 'bg-gray-400'} rounded-full transition-all duration-1000"
+                style="width: {(gift.score / maxScore) * 100}%"
+              ></div>
+            </div>
+            <span class="w-12 text-right text-sm font-medium text-gray-600">
+              {gift.score}/{maxScore}
+            </span>
+            <Arrow class="w-4 h-4 text-gray-400" />
           </div>
-        {/if}
+        {/each}
+      </div>
+    {/if}
+
+    <!-- Download Toast -->
+    {#if showDownloadToast}
+      <div
+        in:fly={{ y: 20, duration: 300 }}
+        out:fly={{ y: 20, duration: 300 }}
+        class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white px-6 py-3 rounded-lg shadow-lg"
+      >
+        {$_("pages.result.imageDownloaded")}
       </div>
     {/if}
   </div>
 </div>
 
-<style>
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(-0.5rem);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-fade-in {
-    animation: fade-in 0.2s ease-out;
-  }
-</style>
+<!-- Share Modal -->
+<ShareModal
+  show={showShareModal}
+  {shareUrl}
+  {shareText}
+  onClose={closeShareModal}
+  onShareToStories={shareToStories}
+/>

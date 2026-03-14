@@ -32,7 +32,10 @@ export function getCategoryExplanation(
     name: locale === 'en' ? category.name_en : category.name_id,
     description: locale === 'en' ? category.description_en : category.description_id,
     characteristics: locale === 'en' ? category.characteristics_en : category.characteristics_id,
-    biblical_references: category.biblical_references,
+    biblical_references: category.biblical_references.map(ref => ({
+      verse: locale === 'en' ? ref.verse_en : ref.verse_id,
+      text: locale === 'en' ? ref.text_en : ref.text_id
+    })),
     practical_applications:
       locale === 'en' ? category.practical_applications_en : category.practical_applications_id
   };
@@ -49,7 +52,10 @@ export function getAllCategoryExplanations(locale: 'en' | 'id') {
     name: locale === 'en' ? category.name_en : category.name_id,
     description: locale === 'en' ? category.description_en : category.description_id,
     characteristics: locale === 'en' ? category.characteristics_en : category.characteristics_id,
-    biblical_references: category.biblical_references,
+    biblical_references: category.biblical_references.map(ref => ({
+      verse: locale === 'en' ? ref.verse_en : ref.verse_id,
+      text: locale === 'en' ? ref.text_en : ref.text_id
+    })),
     practical_applications:
       locale === 'en' ? category.practical_applications_en : category.practical_applications_id
   }));

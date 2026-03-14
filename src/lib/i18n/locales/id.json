@@ -77,13 +77,25 @@
       "title": "Hasil Tes Karunia Rohani Anda",
       "intro": "Berdasarkan jawaban Anda, berikut adalah karunia rohani teratas Anda:",
       "name": "Nama",
+      "yourGifts": "Karunia Anda",
       "topGifts": "Karunia Teratas Anda",
       "otherGifts": "Karunia Lainnya",
       "showAll": "Tampilkan Semua Karunia",
       "showLess": "Tampilkan Lebih Sedikit",
       "shareCopied": "Tautan berhasil disalin!",
       "shareTitle": "Bagikan Hasil",
-      "clickToLearnMore": "Klik untuk mempelajari lebih lanjut tentang karunia ini"
+      "clickToLearnMore": "Klik untuk mempelajari lebih lanjut tentang karunia ini",
+      "copyLink": "Salin Tautan",
+      "copyTextAndLink": "Salin Teks & Tautan",
+      "copied": "Tersalin!",
+      "shareVia": "Bagikan via",
+      "shareViaEmail": "Bagikan via Email",
+      "downloadResult": "Unduh Hasil",
+      "storiesDownloadHint": "Gambar akan diunduh untuk Anda bagikan",
+      "generating": "Menghasilkan...",
+      "topGift": "Karunia Teratas Anda",
+      "imageDownloaded": "Gambar berhasil diunduh! Periksa folder unduhan Anda.",
+      "emailSubject": "Hasil Tes Karunia Rohani"
     },
     "gifts": {
       "title": "Karunia Rohani",
@@ -97,8 +109,12 @@
         "characteristics": "Karakteristik Utama",
         "biblical_references": "Referensi Alkitab",
         "practical_applications": "Penerapan Praktis"
-      }
+      },
+      "clickToRead": "Klik untuk membaca ayat lengkap"
     }
+  },
+  "common": {
+    "close": "Tutup"
   },
   "categories": {
     "administration": "Administrasi",
