@@ -256,7 +256,7 @@
         class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 text-sm font-medium"
         style="background:rgba(143,184,64,0.15);color:rgba(143,184,64,0.9);border:1px solid rgba(143,184,64,0.2);"
       >
-        👋 Welcome back, {savedName}
+        Welcome back, {savedName}
       </div>
     {:else}
       <div class="section-eyebrow" style="color:rgba(143,184,64,0.7);">

@@ -1,30 +1,27 @@
 <script lang="ts">
-  import { page } from '$app/stores';
-  import { goto } from '$app/navigation';
-  import { _ } from 'svelte-i18n';
-  import type { PageData } from './$types';
-  import { onMount } from 'svelte';
+  import { page } from "$app/stores";
+  import { goto } from "$app/navigation";
+  import { _ } from "svelte-i18n";
+  import type { PageData } from "./$types";
+  import { onMount } from "svelte";
+  import { fly, fade, scale } from "svelte/transition";
+  import { quintOut, cubicOut } from "svelte/easing";
 
   let { data }: { data: PageData } = $props();
   const lang = $page.params.lang;
   const { category } = data;
 
-  // Check if we came from result page
-  const fromResult = $page.url.searchParams.get('from') === 'result';
-  const resultId = $page.url.searchParams.get('id');
+  const fromResult = $page.url.searchParams.get("from") === "result";
+  const resultId = $page.url.searchParams.get("id");
 
-  // Modal state
   let showModal = $state(false);
   let selectedReference = $state<{ verse: string; text: string } | null>(null);
+  let visible = $state(false);
 
   function goBack() {
-    if (fromResult && resultId) {
-      // Return to result page
+    if (fromResult && resultId)
       goto(`/${lang}/questionnaire/result/${resultId}`);
-    } else {
-      // Default: go to all gifts page
-      goto(`/${lang}/gifts`);
-    }
+    else goto(`/${lang}/gifts`);
   }
 
   function viewAllGifts() {
@@ -41,176 +38,640 @@
     selectedReference = null;
   }
 
-  function handleEscapeKey(event: KeyboardEvent) {
-    if (event.key === 'Escape' && showModal) {
-      closeModal();
-    }
-  }
-
   onMount(() => {
-    document.addEventListener('keydown', handleEscapeKey);
-
-    return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
+    requestAnimationFrame(() => {
+      visible = true;
+    });
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && showModal) closeModal();
     };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
   });
 </script>
 
 <svelte:head>
-  <title>{category.name} - {$_('pages.gifts.title')} - TheGifts</title>
+  <title>{category.name} - {$_("pages.gifts.title")} - TheGifts</title>
   <meta name="description" content={category.description} />
 </svelte:head>
 
-<div class="min-h-screen bg-white py-16 px-6">
-  <div class="max-w-4xl mx-auto">
-    <!-- Navigation Buttons: Back + View All Gifts (side by side) -->
-    <div class="flex items-center gap-3 mb-8">
-      <!-- Back Button (conditional text) -->
-      <button
-        onclick={goBack}
-        class="flex items-center text-gray-600 hover:text-primary transition"
-      >
-        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-        </svg>
-        {fromResult ? $_('pages.gifts.backToResults') : $_('pages.gifts.back')}
-      </button>
-
-      <!-- View All Gifts Button (shown when from result page, next to back button) -->
-      {#if fromResult}
-        <span class="text-gray-300">|</span>
-        <button
-          onclick={viewAllGifts}
-          class="text-primary hover:text-primary-dark font-medium transition"
+<div class="page">
+  <div class="relative z-10 max-w-3xl mx-auto px-5 py-14 pb-24">
+    <!-- Nav row -->
+    <div class="flex items-center gap-3 mb-10 reveal {visible ? 'in' : ''}">
+      <button class="back-btn" onclick={goBack}>
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7" /></svg
         >
-          {$_('pages.gifts.viewAllGifts')}
+        {fromResult ? $_("pages.gifts.backToResults") : $_("pages.gifts.back")}
+      </button>
+      {#if fromResult}
+        <span style="color:#d8ebb0;">·</span>
+        <button class="all-gifts-btn" onclick={viewAllGifts}>
+          {$_("pages.gifts.viewAllGifts")}
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg
+          >
         </button>
       {/if}
     </div>
 
-    <!-- Title -->
-    <h1 class="text-4xl md:text-5xl font-semibold font-graphik text-gray-900 mb-8">
-      {category.name}
-    </h1>
+    <!-- Hero block -->
+    <div class="hero-block mb-8 reveal d1 {visible ? 'in' : ''}">
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-5 text-xs font-semibold tracking-widest"
+        style="background:rgba(255,255,255,0.16);color:rgba(255,255,255,0.88);"
+      >
+        ✦ {$_("pages.gifts.title")}
+      </div>
+      <h1
+        class="serif text-5xl md:text-6xl text-white leading-tight mb-0"
+        style="position:relative;z-index:1;"
+      >
+        {category.name}
+      </h1>
+    </div>
 
-    <!-- Description Section -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-semibold text-gray-900 mb-4">
-        {$_('pages.gifts.sections.description')}
-      </h2>
-      <p class="text-lg text-gray-700 leading-relaxed">
+    <!-- Description -->
+    <div class="section-card mb-6 reveal d2 {visible ? 'in' : ''}">
+      <div class="section-eyebrow">
+        {$_("pages.gifts.sections.description")}
+      </div>
+      <p class="text-base text-[#2a4010]/80 leading-relaxed">
         {category.description}
       </p>
-    </section>
+    </div>
 
-    <!-- Characteristics Section -->
+    <!-- Characteristics -->
     {#if category.characteristics.length > 0}
-      <section class="mb-12">
-        <h2 class="text-2xl font-semibold text-gray-900 mb-4">
-          {$_('pages.gifts.sections.characteristics')}
-        </h2>
-        <ul class="space-y-3">
-          {#each category.characteristics as characteristic}
-            <li class="flex items-start">
-              <svg class="w-6 h-6 text-primary mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-              </svg>
-              <span class="text-gray-700">{characteristic}</span>
-            </li>
-          {/each}
-        </ul>
-      </section>
-    {/if}
-
-    <!-- Biblical References Section -->
-    {#if category.biblical_references.length > 0}
-      <section class="mb-12">
-        <h2 class="text-2xl font-semibold text-gray-900 mb-4">
-          {$_('pages.gifts.sections.biblical_references')}
-        </h2>
-        <div class="space-y-3">
-          {#each category.biblical_references as reference}
-            <button
-              type="button"
-              onclick={() => openModal(reference)}
-              class="w-full text-left bg-gray-50 rounded-lg p-6 border-l-4 border-primary hover:bg-gray-100 transition cursor-pointer"
-            >
-              <p class="font-semibold text-primary mb-1">{reference.verse}</p>
-              <p class="text-gray-500 text-sm">{$_('pages.gifts.clickToRead')}</p>
-            </button>
-          {/each}
+      <div class="section-card mb-6 reveal d3 {visible ? 'in' : ''}">
+        <div class="section-eyebrow">
+          {$_("pages.gifts.sections.characteristics")}
         </div>
-      </section>
-    {/if}
-
-    <!-- Practical Applications Section -->
-    {#if category.practical_applications.length > 0}
-      <section class="mb-12">
-        <h2 class="text-2xl font-semibold text-gray-900 mb-4">
-          {$_('pages.gifts.sections.practical_applications')}
+        <h2 class="section-title">
+          {$_("pages.gifts.sections.characteristics")}
         </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {#each category.practical_applications as application}
-            <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-lg p-5">
-              <p class="text-gray-800">{application}</p>
+        <div>
+          {#each category.characteristics as char}
+            <div class="char-item">
+              <div class="char-dot"></div>
+              <span class="text-sm text-[#2a4010]/75 leading-relaxed"
+                >{char}</span
+              >
             </div>
           {/each}
         </div>
-      </section>
+      </div>
+    {/if}
+
+    <!-- Biblical references -->
+    {#if category.biblical_references.length > 0}
+      <div class="section-card mb-6 reveal d3 {visible ? 'in' : ''}">
+        <div class="section-eyebrow">
+          {$_("pages.gifts.sections.biblical_references")}
+        </div>
+        <h2 class="section-title">
+          {$_("pages.gifts.sections.biblical_references")}
+        </h2>
+        <div class="flex flex-col gap-3">
+          {#each category.biblical_references as reference}
+            <button
+              type="button"
+              class="scripture-btn"
+              onclick={() => openModal(reference)}
+            >
+              <div class="scripture-icon">📖</div>
+              <div>
+                <div class="text-sm font-semibold text-[#4a6518] mb-1">
+                  {reference.verse}
+                </div>
+                <div class="text-xs text-[#8aab52]">
+                  {$_("pages.gifts.clickToRead")}
+                </div>
+              </div>
+              <svg
+                class="ml-auto flex-shrink-0 mt-1"
+                style="color:#c8daa8;"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"><path d="M9 18l6-6-6-6" /></svg
+              >
+            </button>
+          {/each}
+        </div>
+      </div>
+    {/if}
+
+    <!-- Practical applications -->
+    {#if category.practical_applications.length > 0}
+      <div class="section-card reveal d4 {visible ? 'in' : ''}">
+        <div class="section-eyebrow">
+          {$_("pages.gifts.sections.practical_applications")}
+        </div>
+        <h2 class="section-title">
+          {$_("pages.gifts.sections.practical_applications")}
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {#each category.practical_applications as app, i}
+            <div class="app-card">
+              <div class="app-num">{i + 1}</div>
+              <p class="app-text">{app}</p>
+            </div>
+          {/each}
+        </div>
+      </div>
     {/if}
   </div>
 </div>
 
-<!-- Modal Overlay -->
+<!-- Scripture modal -->
 {#if showModal && selectedReference}
-  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div
-    class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
-    onclick={closeModal}
-    onkeydown={(e) => e.key === 'Escape' && closeModal()}
+    class="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-5"
+    style="background:rgba(15,25,5,0.55);backdrop-filter:blur(4px);"
     role="button"
     tabindex="-1"
     aria-label="Close modal"
+    onclick={closeModal}
+    onkeydown={(e) => e.key === "Escape" && closeModal()}
+    transition:fade={{ duration: 180 }}
   >
-    <!-- Modal Content -->
+    <!-- svelte-ignore a11y_no_static_element_interactions a11y_click_events_have_key_events -->
     <div
-      class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] overflow-hidden"
+      class="modal-sheet"
       onclick={(e) => e.stopPropagation()}
+      onkeydown={(e) => e.stopPropagation()}
+      role="dialog"
+      aria-modal="true"
+      tabindex="-1"
+      in:fly={{ y: 24, duration: 320, easing: quintOut }}
+      out:fly={{ y: 20, duration: 200, easing: cubicOut }}
     >
-      <!-- Modal Header -->
-      <div class="flex items-center justify-between p-6 border-b">
-        <h3 class="text-xl font-semibold text-primary">
-          {selectedReference.verse}
-        </h3>
-        <button
-          type="button"
-          onclick={closeModal}
-          class="text-gray-400 hover:text-gray-600 transition p-1"
-          aria-label="Close modal"
-        >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
+      <!-- Header -->
+      <div class="modal-header">
+        <div>
+          <div
+            class="text-xs font-semibold tracking-widest uppercase text-[#8aab52] mb-2"
+          >
+            Scripture
+          </div>
+          <h3 class="modal-verse">{selectedReference.verse}</h3>
+        </div>
+        <button class="modal-close" onclick={closeModal} aria-label="Close">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12" /></svg
+          >
         </button>
       </div>
 
-      <!-- Modal Body -->
-      <div class="p-6 overflow-y-auto max-h-[60vh]">
-        <p class="text-gray-700 italic leading-relaxed text-lg">
-          {selectedReference.text}
-        </p>
+      <!-- Body -->
+      <div class="modal-body">
+        <p class="modal-text">{selectedReference.text}</p>
       </div>
 
-      <!-- Modal Footer -->
-      <div class="p-6 border-t bg-gray-50">
-        <button
-          type="button"
-          onclick={closeModal}
-          class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition"
-        >
-          {$_('common.close')}
+      <!-- Footer -->
+      <div class="modal-footer">
+        <button type="button" class="modal-close-btn" onclick={closeModal}>
+          {$_("common.close")}
         </button>
       </div>
     </div>
   </div>
 {/if}
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap");
+
+  .page {
+    font-family: "DM Sans", sans-serif;
+    background: linear-gradient(160deg, #f7f3eb 0%, #eef5e4 55%, #f2efe6 100%);
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+  .page::before {
+    content: "";
+    position: fixed;
+    top: -100px;
+    right: -100px;
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(107, 143, 39, 0.09) 0%,
+      transparent 65%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+  .page::after {
+    content: "";
+    position: fixed;
+    bottom: -60px;
+    left: -80px;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(143, 184, 64, 0.07) 0%,
+      transparent 65%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .serif {
+    font-family: "DM Serif Display", serif;
+  }
+
+  /* Reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .d1 {
+    transition-delay: 0.06s;
+  }
+  .d2 {
+    transition-delay: 0.14s;
+  }
+  .d3 {
+    transition-delay: 0.22s;
+  }
+  .d4 {
+    transition-delay: 0.3s;
+  }
+
+  /* Back nav */
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #4a6518;
+    background: rgba(107, 143, 39, 0.08);
+    border: 1px solid rgba(107, 143, 39, 0.18);
+    border-radius: 10px;
+    padding: 7px 14px;
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+      background 0.15s,
+      transform 0.15s;
+    font-family: "DM Sans", sans-serif;
+  }
+  .back-btn:hover {
+    background: rgba(107, 143, 39, 0.14);
+    transform: translateX(-2px);
+  }
+
+  .all-gifts-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #8aab52;
+    text-decoration: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: color 0.15s;
+    font-family: "DM Sans", sans-serif;
+  }
+  .all-gifts-btn:hover {
+    color: #4a6518;
+  }
+
+  /* Hero block */
+  .hero-block {
+    background: linear-gradient(
+      145deg,
+      #3d5a12 0%,
+      #5a7c1a 40%,
+      #6b8f27 75%,
+      #7ea832 100%
+    );
+    border-radius: 28px;
+    padding: 48px 44px 40px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(61, 90, 18, 0.2);
+  }
+  .hero-block::before {
+    content: "";
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.07);
+    pointer-events: none;
+  }
+  .hero-block::after {
+    content: "";
+    position: absolute;
+    bottom: -50px;
+    left: -30px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.04);
+    pointer-events: none;
+  }
+
+  /* Section */
+  .section-card {
+    background: white;
+    border-radius: 24px;
+    padding: 36px 32px;
+    border: 1.5px solid #e8f0d8;
+  }
+
+  .section-eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #8aab52;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-eyebrow::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: rgba(138, 171, 82, 0.4);
+  }
+
+  .section-title {
+    font-family: "DM Serif Display", serif;
+    font-size: 26px;
+    color: #1a2e05;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  /* Characteristics */
+  .char-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid #f0f5e8;
+  }
+  .char-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .char-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4a6518, #8fb840);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  /* Scripture cards */
+  .scripture-btn {
+    width: 100%;
+    text-align: left;
+    background: white;
+    border-radius: 18px;
+    padding: 22px 24px;
+    border: 1.5px solid #e8f0d8;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s,
+      border-color 0.2s;
+    font-family: "DM Sans", sans-serif;
+  }
+  .scripture-btn::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #4a6518, #8fb840);
+    border-radius: 4px 0 0 4px;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.25s ease;
+  }
+  .scripture-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(74, 101, 24, 0.1);
+    border-color: #c8e0a0;
+  }
+  .scripture-btn:hover::after {
+    transform: scaleY(1);
+  }
+
+  .scripture-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #f0f8e0, #e0f0c0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  /* Application cards */
+  .app-card {
+    background: white;
+    border-radius: 18px;
+    padding: 20px 22px;
+    border: 1.5px solid #e8f0d8;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .app-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #f4f9ec, #eef5e4);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .app-num {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #4a6518, #6b8f27);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    position: relative;
+    z-index: 1;
+  }
+  .app-text {
+    font-size: 14px;
+    color: #1a2e05;
+    line-height: 1.6;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Organic divider */
+  .divider {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(107, 143, 39, 0.15) 30%,
+      rgba(107, 143, 39, 0.15) 70%,
+      transparent
+    );
+  }
+
+  /* Scripture modal */
+  .modal-overlay {
+    font-family: "DM Sans", sans-serif;
+  }
+  .modal-sheet {
+    background: linear-gradient(170deg, #f9f6ef, #f4f9ec);
+    border-radius: 28px;
+    max-width: 540px;
+    width: 100%;
+    max-height: 80vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+  }
+  .modal-header {
+    padding: 28px 28px 20px;
+    border-bottom: 1px solid rgba(107, 143, 39, 0.12);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .modal-verse {
+    font-family: "DM Serif Display", serif;
+    font-size: 22px;
+    color: #1a2e05;
+    line-height: 1.25;
+  }
+  .modal-close {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(107, 143, 39, 0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4a6518;
+    flex-shrink: 0;
+    transition:
+      background 0.15s,
+      transform 0.2s;
+    font-family: "DM Sans", sans-serif;
+  }
+  .modal-close:hover {
+    background: rgba(107, 143, 39, 0.18);
+    transform: rotate(90deg);
+  }
+  .modal-body {
+    padding: 24px 28px;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .modal-text {
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.8;
+    color: #2a4010;
+    padding: 20px 24px;
+    border-radius: 16px;
+    background: rgba(107, 143, 39, 0.06);
+    border-left: 3px solid rgba(107, 143, 39, 0.3);
+  }
+  .modal-footer {
+    padding: 16px 28px;
+    border-top: 1px solid rgba(107, 143, 39, 0.1);
+  }
+  .modal-close-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 22px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #3d5a12, #6b8f27);
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition:
+      transform 0.15s,
+      box-shadow 0.15s;
+    font-family: "DM Sans", sans-serif;
+    box-shadow: 0 2px 12px rgba(74, 101, 24, 0.22);
+  }
+  .modal-close-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(74, 101, 24, 0.28);
+  }
+</style>
