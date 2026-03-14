@@ -154,7 +154,21 @@
               class="scripture-btn"
               onclick={() => openModal(reference)}
             >
-              <div class="scripture-icon">📖</div>
+              <div class="scripture-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#4a6518"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                </svg>
+              </div>
               <div>
                 <div class="text-sm font-semibold text-[#4a6518] mb-1">
                   {reference.verse}
@@ -524,7 +538,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
   }
 
   /* Application cards */
