@@ -1,5 +1,7 @@
+import { BASE_URL } from '$lib/constants/constants';
+
 export async function GET() {
-	const baseUrl = 'https://thegifts.site';
+	const baseUrl = BASE_URL;
 	const lastmod = new Date().toISOString().split('T')[0];
 
 	const urls = [

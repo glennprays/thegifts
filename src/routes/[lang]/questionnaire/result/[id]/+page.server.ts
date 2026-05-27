@@ -1,6 +1,7 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import db from '$lib/server/db';
+import type { CategoryScore } from '$lib/schemas/assesment';
 
 /**
  * Detect if the ID is a UUID or a short_id
@@ -14,8 +15,8 @@ export const load: PageServerLoad = async ({ params }) => {
 
   // Determine which column to query based on ID format
   const query = isUUID(id)
-    ? 'SELECT name, result, short_id FROM assessment_result WHERE id = $1'
-    : 'SELECT name, result, short_id FROM assessment_result WHERE short_id = $1';
+    ? 'SELECT name, result, short_id FROM assessment_result WHERE id = $1 LIMIT 1'
+    : 'SELECT name, result, short_id FROM assessment_result WHERE short_id = $1 LIMIT 1';
 
   const { rows } = await db.query(query, [id]);
 

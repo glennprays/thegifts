@@ -70,13 +70,6 @@
         {$_("pages.onboarding.title")}
       </h1>
 
-      <p
-        class="text-sm text-[#4a5e2a]/65 leading-relaxed mb-8"
-        style="position:relative;z-index:1;"
-      >
-        {$_("pages.onboarding.formTitle")}
-      </p>
-
       <!-- Form -->
       <form
         on:submit|preventDefault={handleSubmit}

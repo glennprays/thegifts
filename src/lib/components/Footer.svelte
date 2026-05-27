@@ -11,7 +11,7 @@
     <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-6">
       <!-- Brand block -->
       <div class="max-w-xs">
-        <div class="tag-pill">✦ Spiritual Gifts</div>
+        <div class="tag-pill">Spiritual Gifts</div>
         <h3 class="serif text-3xl text-white mb-3 leading-tight">TheGifts</h3>
         <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.5);">
           {$_("components.footer.about")}

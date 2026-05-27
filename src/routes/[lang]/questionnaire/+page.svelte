@@ -14,6 +14,7 @@
   import { fly, fade } from "svelte/transition";
   import { quintOut } from "svelte/easing";
   import { _ } from "svelte-i18n";
+  import type { AnswerMap } from "$lib/schemas/assesment";
 
   let isLoading = false;
   const QUESTIONS_PER_PAGE = 5;

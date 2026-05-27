@@ -1,7 +1,7 @@
-interface AnswerMap {
+export interface AnswerMap {
   [id: number]: number;
 }
-interface RatingOption {
+export interface RatingOption {
   text_en: string;
   text_id: string;
   rating: number;
@@ -10,9 +10,9 @@ interface RatingOption {
   checked: string;
 }
 
-type AssesmentResult = { category: string; score: number }[];
+export type AssesmentResult = { category: string; score: number }[];
 
-interface CategoryScore {
+export interface CategoryScore {
   category: string;
   score: number;
 }
