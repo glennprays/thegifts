@@ -165,7 +165,7 @@
             class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-widest"
             style="background: rgba(255,255,255,0.18); color: rgba(255,255,255,0.9);"
           >
-            ✦ TOP GIFT
+            TOP GIFT
           </span>
         </div>
 

@@ -3,26 +3,32 @@ import type { RequestHandler } from './$types';
 import db from '$lib/server/db';
 import { generateStoriesImage } from '$lib/server/image-generator';
 import { getCategoryExplanation } from '$lib/utils/category-explanation';
+import type { CategoryScore } from '$lib/schemas/assesment';
 
-/**
- * Detect if the ID is a UUID or a short_id
- */
 function isUUID(id: string): boolean {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
 }
 
-interface CategoryScore {
-  category: string;
-  score: number;
-}
+const imageCache = new Map<string, Buffer>();
+const MAX_CACHE_SIZE = 50;
 
 export const GET: RequestHandler = async ({ params }) => {
   const { id } = params;
 
-  // Determine which column to query based on ID format
+  const cacheKey = id;
+  const cached = imageCache.get(cacheKey);
+  if (cached) {
+    return new Response(new Uint8Array(cached), {
+      headers: {
+        'Content-Type': 'image/png',
+        'Cache-Control': 'public, max-age=86400'
+      }
+    });
+  }
+
   const query = isUUID(id)
-    ? 'SELECT name, result, short_id FROM assessment_result WHERE id = $1'
-    : 'SELECT name, result, short_id FROM assessment_result WHERE short_id = $1';
+    ? 'SELECT name, result, short_id FROM assessment_result WHERE id = $1 LIMIT 1'
+    : 'SELECT name, result, short_id FROM assessment_result WHERE short_id = $1 LIMIT 1';
 
   const { rows } = await db.query(query, [id]);
 
@@ -33,19 +39,17 @@ export const GET: RequestHandler = async ({ params }) => {
   const row = rows[0];
   const result: CategoryScore[] = row.result;
 
-  // Always use English for image generation
   const topGifts = result.slice(0, 3).map((item, index) => {
     const explanation = getCategoryExplanation(item.category, 'en');
     return {
       name: explanation?.name || item.category,
       score: item.score,
-      description: index === 0 // Only for top gift
+      description: index === 0
         ? explanation?.description
         : undefined
     };
   });
 
-  // Get 4 practical applications for the top gift
   const topGiftExplanation = getCategoryExplanation(result[0]?.category, 'en');
   const topGiftPracticals = (topGiftExplanation?.practical_applications || []).slice(0, 4);
 
@@ -56,10 +60,16 @@ export const GET: RequestHandler = async ({ params }) => {
       topGiftPracticals
     });
 
+    if (imageCache.size >= MAX_CACHE_SIZE) {
+      const firstKey = imageCache.keys().next().value;
+      if (firstKey) imageCache.delete(firstKey);
+    }
+    imageCache.set(cacheKey, imageBuffer);
+
     return new Response(new Uint8Array(imageBuffer), {
       headers: {
         'Content-Type': 'image/png',
-        'Cache-Control': 'public, max-age=86400' // Cache for 24 hours
+        'Cache-Control': 'public, max-age=86400'
       }
     });
   } catch (err) {

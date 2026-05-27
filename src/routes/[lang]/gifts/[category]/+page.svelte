@@ -96,7 +96,7 @@
         class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-5 text-xs font-semibold tracking-widest"
         style="background:rgba(255,255,255,0.16);color:rgba(255,255,255,0.88);"
       >
-        ✦ {$_("pages.gifts.title")}
+        {$_("pages.gifts.title")}
       </div>
       <h1
         class="serif text-5xl md:text-6xl text-white leading-tight mb-0"

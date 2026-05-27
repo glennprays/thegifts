@@ -1,10 +1,6 @@
 import questionMap from '$lib/data/category-question.json';
+import type { AnswerMap, AssesmentResult } from '$lib/schemas/assesment';
 
-/**
- * Calculate total scores for each category
- * @param answers - key-value object of questionId: value
- * @returns Sorted array of categories by descending score
- */
 export function CalculateCategoryScores(answers: AnswerMap): AssesmentResult {
   const results: { [key: string]: number } = {};
 

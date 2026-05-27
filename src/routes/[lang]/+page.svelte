@@ -53,7 +53,7 @@
   >
     <div class="reveal {visible ? 'in' : ''}">
       <div class="tag-pill mb-6">
-        <span>✦</span> Spiritual Gifts Assessment
+        Spiritual Gifts Assessment
       </div>
     </div>
 
@@ -217,7 +217,6 @@
     <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-12">
       {#each featuredCategories as category}
         <a href="/{lang}/gifts/{category.key}" class="gift-card">
-          <span class="text-2xl mb-2">✦</span>
           <h3
             class="font-semibold text-[#1a2e05] text-sm md:text-base leading-snug"
           >

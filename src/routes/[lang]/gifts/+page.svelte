@@ -171,7 +171,11 @@
       </div>
     {:else}
       <div class="empty" in:fade={{ duration: 200 }}>
-        <div class="empty-icon">✦</div>
+        <div class="empty-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+        </div>
         <p class="empty-text">
           {lang === "id"
             ? `Tidak ada karunia yang cocok dengan "${searchQuery}"`

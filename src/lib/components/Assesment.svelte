@@ -1,6 +1,6 @@
 <script lang="ts">
-  // Enhanced Assessment.svelte
-  // Drop-in replacement — same props interface
+  import type { AnswerMap } from "$lib/schemas/assesment";
+
   export let questions: { id: number; en: string; in: string }[] = [];
   export let results: AnswerMap = {};
 

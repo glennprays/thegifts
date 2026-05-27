@@ -3,8 +3,21 @@ import sharp from 'sharp';
 import QRCode from 'qrcode';
 import fs from 'fs';
 import path from 'path';
+import { BASE_URL } from '$lib/constants/constants';
 
 let cachedFonts: Record<string, Buffer> | null = null;
+let cachedQrBase64: string | null = null;
+
+async function getQrBase64(): Promise<string> {
+  if (cachedQrBase64) return cachedQrBase64;
+  const qrDataUrl = await QRCode.toDataURL(BASE_URL, {
+    width: 140,
+    margin: 1,
+    color: { dark: '#1a2e05', light: '#FFFFFF' }
+  });
+  cachedQrBase64 = qrDataUrl.split(',')[1];
+  return cachedQrBase64;
+}
 
 async function loadFonts(): Promise<Record<string, Buffer>> {
   if (cachedFonts) return cachedFonts;
@@ -88,12 +101,7 @@ export async function generateStoriesImage(
   const fonts = await loadFonts();
   const { name, topGifts, topGiftPracticals } = options;
 
-  const qrDataUrl = await QRCode.toDataURL('https://thegifts.site', {
-    width: 140,
-    margin: 1,
-    color: { dark: '#1a2e05', light: '#FFFFFF' }
-  });
-  const qrBase64 = qrDataUrl.split(',')[1];
+  const qrBase64 = await getQrBase64();
 
   const titleText = 'Spiritual Gifts Assessment';
   const yourGiftsText = 'YOUR TOP GIFTS';
@@ -618,6 +626,7 @@ export async function generateStoriesImage(
   };
 
   // ── Render ───────────────────────────────────────────────────────────
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const svg = await satori(jsx as any, {
     width: W,
     height: renderH,
@@ -633,12 +642,8 @@ export async function generateStoriesImage(
     ]
   });
 
-  // Convert SVG → PNG at exact content size
-  const contentPng = await sharp(Buffer.from(svg)).png().toBuffer();
+  const svgBuffer = Buffer.from(svg);
 
-  // If content fits in 1920px, composite centered onto a 1920px canvas.
-  // If content is taller than 1920px, just output the full-height image
-  // (Instagram Stories can scroll, or caller can further crop).
   if (renderH <= H) {
     const topOffset = Math.floor((H - renderH) / 2);
     return sharp({
@@ -646,14 +651,13 @@ export async function generateStoriesImage(
         width: W,
         height: H,
         channels: 4,
-        background: { r: 247, g: 251, b: 238, alpha: 1 } // matches gradient start #f7fbee
+        background: { r: 247, g: 251, b: 238, alpha: 1 }
       }
     })
-      .composite([{ input: contentPng, top: topOffset, left: 0 }])
-      .png({ compressionLevel: 9 })
+      .composite([{ input: svgBuffer, top: topOffset, left: 0 }])
+      .png({ compressionLevel: 6 })
       .toBuffer();
   }
 
-  // Content taller than 1920 — output as-is (no crop, no padding)
-  return sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toBuffer();
+  return sharp(svgBuffer).png({ compressionLevel: 6 }).toBuffer();
 }

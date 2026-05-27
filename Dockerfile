@@ -32,9 +32,11 @@ COPY --from=builder /app/static ./static
 COPY --from=builder /app/scripts ./scripts
 COPY --from=builder /app/migrations ./migrations
 
+RUN addgroup -g 1001 -S appgroup && adduser -S appuser -u 1001 -G appgroup
+USER appuser
+
 EXPOSE 3000
 
 ENV NODE_ENV=production
 
-# Sync migration state, run migrations, then start the app
 CMD npm run db:sync && npm run db:migrate && node build
