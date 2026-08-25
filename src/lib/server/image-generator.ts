@@ -1,48 +1,51 @@
 import satori from 'satori';
-import sharp from 'sharp';
 import QRCode from 'qrcode';
-import fs from 'fs';
-import path from 'path';
+import { Resvg } from '@resvg/resvg-wasm';
 import { BASE_URL } from '$lib/constants/constants';
 import { giftColor } from '$lib/data/gift-colors';
-import { giftMarkDataUri, sparkleDataUri } from './gift-mark-image';
+import { giftMarkDataUri, sparkleDataUri, svgStringDataUri } from './gift-mark-image';
+import { initResvg } from './resvg';
+import { fontData as fontBitterBold } from './fonts/Bitter-Bold.base64';
+import { fontData as fontBitterMedium } from './fonts/Bitter-Medium.base64';
+import { fontData as fontBitterMediumItalic } from './fonts/Bitter-Medium-Italic.base64';
+import { fontData as fontHankenBold } from './fonts/HankenGrotesk-Bold.base64';
+import { fontData as fontHankenMedium } from './fonts/HankenGrotesk-Medium.base64';
 
-let cachedFonts: Record<string, Buffer> | null = null;
-let cachedQrBase64: string | null = null;
-
-async function getQrBase64(): Promise<string> {
-  if (cachedQrBase64) return cachedQrBase64;
-  const qrDataUrl = await QRCode.toDataURL(BASE_URL, {
-    width: 140,
-    margin: 1,
-    color: { dark: '#1b1b1b', light: '#FFFFFF' }
-  });
-  cachedQrBase64 = qrDataUrl.split(',')[1];
-  return cachedQrBase64;
+function decodeFont(base64: string): ArrayBuffer {
+	const bin = atob(base64);
+	const buf = new ArrayBuffer(bin.length);
+	const bytes = new Uint8Array(buf);
+	for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+	return buf;
 }
 
-async function loadFonts(): Promise<Record<string, Buffer>> {
-  if (cachedFonts) return cachedFonts;
-  cachedFonts = {
-    // Hanken Grotesk for body text
-    medium: fs.readFileSync(
-      path.join(process.cwd(), 'static/fonts/HankenGrotesk-Medium.ttf')
-    ),
-    bold: fs.readFileSync(
-      path.join(process.cwd(), 'static/fonts/HankenGrotesk-Bold.ttf')
-    ),
-    // Bitter for headings
-    serif: fs.readFileSync(
-      path.join(process.cwd(), 'static/fonts/Bitter-Medium.ttf')
-    ),
-    serifBold: fs.readFileSync(
-      path.join(process.cwd(), 'static/fonts/Bitter-Bold.ttf')
-    ),
-    serifItalic: fs.readFileSync(
-      path.join(process.cwd(), 'static/fonts/Bitter-Medium-Italic.ttf')
-    )
-  };
-  return cachedFonts;
+type FontEntry = { name: string; data: ArrayBuffer; weight: 400 | 500 | 700; style?: 'normal' | 'italic' };
+let cachedFonts: FontEntry[] | null = null;
+let cachedQrSvg: string | null = null;
+
+async function getQrSvg(): Promise<string> {
+	if (cachedQrSvg) return cachedQrSvg;
+	cachedQrSvg = await QRCode.toString(BASE_URL, {
+		type: 'svg',
+		margin: 1,
+		color: { dark: '#1b1b1b', light: '#FFFFFF' },
+		errorCorrectionLevel: 'M'
+	});
+	return cachedQrSvg;
+}
+
+async function loadFonts() {
+	if (cachedFonts) return cachedFonts;
+	cachedFonts = [
+		// Hanken Grotesk for body text
+		{ name: 'Hanken Grotesk', data: decodeFont(fontHankenMedium), weight: 500 },
+		{ name: 'Hanken Grotesk', data: decodeFont(fontHankenBold), weight: 700 },
+		// Bitter for headings
+		{ name: 'Bitter', data: decodeFont(fontBitterMedium), weight: 500, style: 'normal' },
+		{ name: 'Bitter', data: decodeFont(fontBitterBold), weight: 700, style: 'normal' },
+		{ name: 'Bitter', data: decodeFont(fontBitterMediumItalic), weight: 500, style: 'italic' }
+	];
+	return cachedFonts;
 }
 
 interface TopGift {
@@ -63,12 +66,12 @@ interface GenerateStoriesImageOptions {
 // 2. Empty/single-child divs also need display: flex
 // 3. No block-level tags (h1/h2/p) — use div or span only
 // 4. '#' and '/' are silently dropped — use 'TOP GIFT', '2nd', '3rd', 'of' instead
-// 5. Images must be PNG/JPEG data URIs (gift glyphs are rasterized via sharp)
+// 5. Images must be PNG/JPEG data URIs (gift glyphs are rasterized via resvg-wasm)
 //
 // Dynamic height strategy:
 // - Estimate content height based on what's present (description, practicals count)
 // - Render satori at that height (no overflow, no cropping)
-// - Use sharp to composite onto a 1080×1920 canvas (centered vertically)
+// - Composite the rendered SVG onto a 1080×1920 canvas (centered vertically)
 //   so the output is always a valid Instagram Stories size
 
 const W = 1080;
@@ -104,11 +107,11 @@ const SPARKLE_SM = 52;
 
 export async function generateStoriesImage(
   options: GenerateStoriesImageOptions
-): Promise<Buffer> {
+): Promise<Uint8Array> {
   const fonts = await loadFonts();
   const { name, topGifts, topGiftPracticals } = options;
 
-  const qrBase64 = await getQrBase64();
+  const qrSvg = await getQrSvg();
 
   const yourGiftsText = 'YOUR TOP GIFTS';
   const practicalText = 'PRACTICAL APPLICATIONS';
@@ -615,7 +618,7 @@ export async function generateStoriesImage(
               {
                 type: 'img',
                 props: {
-                  src: `data:image/png;base64,${qrBase64}`,
+                  src: await svgStringDataUri(qrSvg, 130),
                   width: 130, height: 130
                 }
               },
@@ -653,33 +656,34 @@ export async function generateStoriesImage(
   const svg = await satori(jsx as any, {
     width: W,
     height: renderH,
-    fonts: [
-      // Hanken Grotesk
-      { name: 'Hanken Grotesk', data: fonts.medium, weight: 500 },
-      { name: 'Hanken Grotesk', data: fonts.bold, weight: 700 },
-      // Bitter
-      { name: 'Bitter', data: fonts.serif, weight: 500, style: 'normal' },
-      { name: 'Bitter', data: fonts.serifBold, weight: 700, style: 'normal' },
-      { name: 'Bitter', data: fonts.serifItalic, weight: 500, style: 'italic' }
-    ]
+    fonts
   });
 
-  const svgBuffer = Buffer.from(svg);
+  // Rasterize with resvg; when content is shorter than a Stories frame,
+  // wrap it in a paper-colored canvas of exactly 1080×1920 (centered).
+  await initResvg();
 
   if (renderH <= H) {
     const topOffset = Math.floor((H - renderH) / 2);
-    return sharp({
-      create: {
-        width: W,
-        height: H,
-        channels: 4,
-        background: { r: 246, g: 245, b: 244, alpha: 1 }
-      }
-    })
-      .composite([{ input: svgBuffer, top: topOffset, left: 0 }])
-      .png({ compressionLevel: 6 })
-      .toBuffer();
+    const paddedSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><rect width="${W}" height="${H}" fill="${PAPER}"/><svg x="0" y="${topOffset}" width="${W}" height="${renderH}" viewBox="0 0 ${W} ${renderH}">${stripSvgRoot(svg)}</svg></svg>`;
+    const resvg = new Resvg(paddedSvg, { background: PAPER });
+    const png = resvg.render().asPng();
+    resvg.free();
+    return png;
   }
 
-  return sharp(svgBuffer).png({ compressionLevel: 6 }).toBuffer();
+  const resvg = new Resvg(svg, { background: PAPER });
+  const png = resvg.render().asPng();
+  resvg.free();
+  return png;
+}
+
+/**
+ * Remove the outer <svg ...> wrapper from a satori SVG, keeping inner content,
+ * so it can be nested inside a canvas SVG.
+ */
+function stripSvgRoot(svg: string): string {
+  const openEnd = svg.indexOf('>');
+  const closeStart = svg.lastIndexOf('</svg>');
+  return svg.slice(openEnd + 1, closeStart);
 }

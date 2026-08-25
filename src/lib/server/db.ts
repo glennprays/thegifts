@@ -1,23 +1,21 @@
-import pkg from 'pg';
-const { Pool } = pkg;
-import type { Pool as PoolType } from 'pg';
-import { env } from '$env/dynamic/private';
+import { getRequestEvent } from '$app/server';
 
-declare global {
-  var __pgPool: PoolType | undefined;
+/**
+ * Get the D1 database binding for the current request.
+ */
+export function db() {
+	const { platform } = getRequestEvent();
+	if (!platform?.env?.DB) {
+		throw new Error('D1 binding "DB" is not available');
+	}
+	return platform.env.DB;
 }
 
-const pool = new Pool({
-  connectionString: env.DATABASE_URL,
-  max: 10,
-  idleTimeoutMillis: 30000
-});
-
-let activePool: PoolType;
-if (env.NODE_ENV !== 'production') {
-  globalThis.__pgPool ??= pool;
-  activePool = globalThis.__pgPool;
-} else {
-  activePool = pool;
+export interface AssessmentRow {
+	id: string;
+	name: string;
+	answer: string;
+	result: string;
+	createdAt: string;
+	short_id: string | null;
 }
-export default activePool;

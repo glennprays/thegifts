@@ -1,7 +1,7 @@
 import { CalculateCategoryScores } from '$lib/utils/category';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import db from '$lib/server/db';
+import { db } from '$lib/server/db';
 import { nanoid } from 'nanoid';
 import type { AnswerMap } from '$lib/schemas/assesment';
 import questionMap from '$lib/data/category-question.json';
@@ -51,12 +51,14 @@ export const POST: RequestHandler = async ({ request }) => {
     const shortId = nanoid(10);
     const query = `
       INSERT INTO assessment_result (name, answer, result, short_id)
-      VALUES ($1, $2, $3, $4)
+      VALUES (?1, ?2, ?3, ?4)
       RETURNING short_id
     `;
-    const values = [name, JSON.stringify(data), JSON.stringify(results), shortId];
-    const { rows } = await db.query(query, values);
-    return json({ success: true, id: rows[0].short_id });
+    const row = await db()
+      .prepare(query)
+      .bind(name, JSON.stringify(data), JSON.stringify(results), shortId)
+      .first<{ short_id: string }>();
+    return json({ success: true, id: row!.short_id });
   } catch (err) {
     console.error('DB save error', err);
     return json({ error: 'Failed to save' }, { status: 500 });
