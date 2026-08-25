@@ -36,5 +36,12 @@ export default defineConfig(
 				svelteConfig
 			}
 		}
+	},
+	{
+		// Static illustration artwork rendered from our own record — never user input.
+		files: ['src/lib/components/illustrations/GiftMark.svelte'],
+		rules: {
+			'svelte/no-at-html-tags': 'off'
+		}
 	}
 );

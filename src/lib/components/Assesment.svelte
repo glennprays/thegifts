@@ -4,8 +4,6 @@
   export let questions: { id: number; en: string; in: string }[] = [];
   export let results: AnswerMap = {};
 
-  import { fly } from "svelte/transition";
-  import { quintOut } from "svelte/easing";
   import { _, locale } from "svelte-i18n";
 
   $: currentLocale = $locale;
@@ -24,25 +22,27 @@
   }
 </script>
 
-{#each questions as q, i (q.id)}
+{#each questions as q (q.id)}
   {@const answered = !!results[q.id]}
-  <div
-    class="question-card {answered ? 'answered' : ''}"
-    in:fly={{ y: 14, duration: 300, delay: i * 50, easing: quintOut }}
-  >
-    {#if answered}
-      <div class="answered-check">✓</div>
-    {/if}
+  <div class="question-card" class:answered>
+    <div class="q-head">
+      <span class="q-num smallcaps">
+        {$_("components.assesment.questionPrefix", { values: { id: q.id } })}
+      </span>
+      {#if answered}
+        <span class="answered-mark" aria-hidden="true">✓</span>
+      {/if}
+    </div>
 
-    <span class="q-num">{$_("components.assesment.questionPrefix", { values: { id: q.id } })}</span>
     <p class="q-text">{currentLocale === "id" ? q.in : q.en}</p>
 
-    <div class="likert">
-      {#each options as opt}
+    <div class="likert" role="group" aria-label={$_("components.assesment.questionPrefix", { values: { id: q.id } })}>
+      {#each options as opt (opt.value)}
         <label class="likert-option">
           <button
             type="button"
-            class="likert-btn {results[q.id] === opt.value ? 'selected' : ''}"
+            class="likert-btn"
+            class:selected={results[q.id] === opt.value}
             on:click={() => select(q.id, opt.value)}
             aria-pressed={results[q.id] === opt.value}
             aria-label={$_("components.assesment.ariaLabel", { values: { label: opt.label, value: opt.value } })}
@@ -57,71 +57,60 @@
 {/each}
 
 <style>
-  @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap");
-
   .question-card {
-    background: white;
-    border-radius: 22px;
-    border: 1.5px solid #e8f0d8;
-    padding: 28px 26px 24px;
+    background: #ffffff;
+    border: 1px solid var(--color-line);
+    border-radius: 20px;
+    padding: 24px 24px 20px;
     margin-bottom: 14px;
-    position: relative;
-    overflow: hidden;
-    transition:
-      border-color 0.2s,
-      box-shadow 0.2s;
-    font-family: "DM Sans", sans-serif;
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
-
-  /* Answered state */
   .question-card.answered {
-    border-color: #c0dba0;
-    box-shadow: 0 4px 20px rgba(74, 101, 24, 0.07);
+    border-color: var(--color-green);
+    box-shadow: 0 4px 16px rgba(36, 132, 63, 0.08);
   }
 
-  /* Subtle bg tint alternating */
-  .question-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 22px;
-    opacity: 0.25;
-    pointer-events: none;
-  }
-  .question-card:nth-child(odd)::before {
-    background: #f4f9ec;
-  }
-  .question-card:nth-child(even)::before {
-    background: #f0f8e4;
+  .q-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
   }
 
   /* Question number */
   .q-num {
-    font-family: "DM Serif Display", serif;
-    font-style: italic;
-    font-size: 12px;
-    color: rgba(107, 143, 39, 0.4);
-    margin-bottom: 10px;
+    color: var(--color-ink-faint);
     display: block;
+  }
+
+  /* Answered tick */
+  .answered-mark {
+    font-size: 11px;
+    font-weight: 700;
+    color: #ffffff;
+    background: var(--color-green);
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
   }
 
   /* Question text */
   .q-text {
-    font-size: 15px;
-    font-weight: 500;
-    color: #1a2e05;
-    line-height: 1.65;
-    margin-bottom: 22px;
-    position: relative;
-    z-index: 1;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-ink);
+    line-height: 1.6;
+    margin-bottom: 20px;
   }
 
-  /* Likert scale */
+  /* Likert — rounded tick boxes */
   .likert {
     display: flex;
     gap: 8px;
-    position: relative;
-    z-index: 1;
   }
 
   .likert-option {
@@ -129,101 +118,53 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 7px;
     cursor: pointer;
   }
 
   .likert-btn {
     width: 100%;
-    aspect-ratio: 1/1;
+    aspect-ratio: 1 / 1;
     max-width: 52px;
-    border-radius: 12px;
-    border: 1.5px solid #e0ebb8;
-    background: #fafef5;
+    border: 2px solid var(--color-line);
+    border-radius: 14px;
+    background: var(--color-paper);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
-    font-weight: 600;
-    color: #6b8f27;
-    font-family: "DM Sans", sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: var(--font-sans);
+    color: var(--color-ink-soft);
     cursor: pointer;
-    transition: all 0.18s ease;
-    position: relative;
-    overflow: hidden;
-  }
-  .likert-btn::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #3d5a12, #6b8f27);
-    opacity: 0;
-    transition: opacity 0.18s;
-  }
-  .likert-btn span {
-    position: relative;
-    z-index: 1;
-    transition: color 0.18s;
+    transition: all 0.15s ease;
   }
 
   .likert-btn:hover {
-    border-color: #8fb840;
-    background: #f0f8e0;
-    transform: translateY(-2px);
+    border-color: var(--color-ink-faint);
+    color: var(--color-ink);
+    transform: translateY(-1px);
   }
 
   .likert-btn.selected {
-    border-color: #4a6518;
-    box-shadow: 0 4px 14px rgba(74, 101, 24, 0.22);
-    transform: translateY(-2px);
-  }
-  .likert-btn.selected::before {
-    opacity: 1;
-  }
-  .likert-btn.selected span {
-    color: white;
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-paper);
+    transform: translateY(-1px);
   }
 
   .likert-label {
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 500;
-    color: #a0b878;
+    letter-spacing: 0.02em;
+    color: var(--color-ink-faint);
     text-align: center;
-    line-height: 1.3;
+    line-height: 1.35;
     white-space: pre-line;
   }
   .likert-option:first-child .likert-label,
   .likert-option:last-child .likert-label {
-    color: #8aab52;
-    font-weight: 600;
-  }
-
-  /* Check indicator when answered */
-  .answered-check {
-    position: absolute;
-    top: 16px;
-    right: 18px;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #4a6518, #6b8f27);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 11px;
-    z-index: 2;
-    animation: checkPop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-  }
-  @keyframes checkPop {
-    from {
-      transform: scale(0);
-      opacity: 0;
-    }
-    to {
-      transform: scale(1);
-      opacity: 1;
-    }
+    color: var(--color-ink-soft);
+    font-weight: 700;
   }
 </style>

@@ -85,10 +85,10 @@
     "questionnaire": {
       "pageLabel": "Penilaian · Halaman {currentPage}",
       "personalAssessment": "Penilaian {name}",
-      "answerHint": "Jawab dengan jujur — tidak ada jawaban yang benar atau salah.",
+      "answerHint": "Jawab dengan jujur. Tidak ada jawaban yang benar atau salah.",
       "questionsLeft": "{count} pertanyaan tersisa di halaman ini.",
       "questionsLeft_plural": "{count} pertanyaan tersisa di halaman ini.",
-      "allAnswered": "✓ Semua terjawab — Anda dapat melanjutkan.",
+      "allAnswered": "✓ Semua terjawab. Anda dapat melanjutkan.",
       "back": "Kembali",
       "continue": "Lanjutkan",
       "seeResults": "Lihat Hasil"
