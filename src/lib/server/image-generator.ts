@@ -4,6 +4,8 @@ import QRCode from 'qrcode';
 import fs from 'fs';
 import path from 'path';
 import { BASE_URL } from '$lib/constants/constants';
+import { giftColor } from '$lib/data/gift-colors';
+import { giftMarkDataUri, sparkleDataUri } from './gift-mark-image';
 
 let cachedFonts: Record<string, Buffer> | null = null;
 let cachedQrBase64: string | null = null;
@@ -13,7 +15,7 @@ async function getQrBase64(): Promise<string> {
   const qrDataUrl = await QRCode.toDataURL(BASE_URL, {
     width: 140,
     margin: 1,
-    color: { dark: '#1a2e05', light: '#FFFFFF' }
+    color: { dark: '#1b1b1b', light: '#FFFFFF' }
   });
   cachedQrBase64 = qrDataUrl.split(',')[1];
   return cachedQrBase64;
@@ -22,25 +24,22 @@ async function getQrBase64(): Promise<string> {
 async function loadFonts(): Promise<Record<string, Buffer>> {
   if (cachedFonts) return cachedFonts;
   cachedFonts = {
-    // DM Sans for body text
-    light: fs.readFileSync(
-      path.join(process.cwd(), 'static/fonts/DMSans-Light.ttf')
-    ),
-    regular: fs.readFileSync(
-      path.join(process.cwd(), 'static/fonts/DMSans-Regular.ttf')
-    ),
+    // Hanken Grotesk for body text
     medium: fs.readFileSync(
-      path.join(process.cwd(), 'static/fonts/DMSans-Medium.ttf')
+      path.join(process.cwd(), 'static/fonts/HankenGrotesk-Medium.ttf')
     ),
-    semibold: fs.readFileSync(
-      path.join(process.cwd(), 'static/fonts/DMSans-SemiBold.ttf')
+    bold: fs.readFileSync(
+      path.join(process.cwd(), 'static/fonts/HankenGrotesk-Bold.ttf')
     ),
-    // DM Serif Display for headings
+    // Bitter for headings
     serif: fs.readFileSync(
-      path.join(process.cwd(), 'static/fonts/DMSerifDisplay-Regular.ttf')
+      path.join(process.cwd(), 'static/fonts/Bitter-Medium.ttf')
+    ),
+    serifBold: fs.readFileSync(
+      path.join(process.cwd(), 'static/fonts/Bitter-Bold.ttf')
     ),
     serifItalic: fs.readFileSync(
-      path.join(process.cwd(), 'static/fonts/DMSerifDisplay-Italic.ttf')
+      path.join(process.cwd(), 'static/fonts/Bitter-Medium-Italic.ttf')
     )
   };
   return cachedFonts;
@@ -50,6 +49,7 @@ interface TopGift {
   name: string;
   score: number;
   description?: string;
+  category?: string;
 }
 
 interface GenerateStoriesImageOptions {
@@ -63,6 +63,7 @@ interface GenerateStoriesImageOptions {
 // 2. Empty/single-child divs also need display: flex
 // 3. No block-level tags (h1/h2/p) — use div or span only
 // 4. '#' and '/' are silently dropped — use 'TOP GIFT', '2nd', '3rd', 'of' instead
+// 5. Images must be PNG/JPEG data URIs (gift glyphs are rasterized via sharp)
 //
 // Dynamic height strategy:
 // - Estimate content height based on what's present (description, practicals count)
@@ -72,18 +73,17 @@ interface GenerateStoriesImageOptions {
 
 const W = 1080;
 const H = 1920;
-const PAD_X = 64;
-const PAD_Y = 72;
+const PAD_X = 80;
+const PAD_Y = 88;
 
 // Font size scale — all in px, sized for 1080-wide canvas
 const F = {
-  brandName: 48,
-  brandSub: 22,
-  userName: 80,
+  brandName: 54,
+  userName: 84,
   userSubtitle: 26,
   sectionLabel: 28,
   heroPill: 24,
-  heroName: 72,
+  heroName: 76,
   heroDesc: 26,
   heroScore: 30,
   cardName: 30,
@@ -95,6 +95,13 @@ const F = {
   footerSite: 42,
 };
 
+// Illustration sizes
+const MARK_HERO = 116; // glyph size inside the white tile
+const MARK_TILE = 164; // white tile in hero card
+const MARK_SECONDARY = 68;
+const SPARKLE_LG = 76;
+const SPARKLE_SM = 52;
+
 export async function generateStoriesImage(
   options: GenerateStoriesImageOptions
 ): Promise<Buffer> {
@@ -103,7 +110,6 @@ export async function generateStoriesImage(
 
   const qrBase64 = await getQrBase64();
 
-  const titleText = 'Spiritual Gifts Assessment';
   const yourGiftsText = 'YOUR TOP GIFTS';
   const practicalText = 'PRACTICAL APPLICATIONS';
   const scanText = 'Discover your gifts at';
@@ -112,32 +118,31 @@ export async function generateStoriesImage(
     return `${score} of ${max}`;
   }
 
-  const PRIMARY = '#6b8f27';
-  const PRIMARY_DARK = '#4a6518';
-  const PRIMARY_LIGHT = '#8fb840';
-  const PRIMARY_PALE = '#f2f8e8';
-  const TEXT_DARK = '#1a2e05';
-  const TEXT_MED = '#4a5e2a';
-  const TEXT_MUTED = '#8aab52';
+  const PAPER = '#f6f5f4';
+  const INK = '#1b1b1b';
+  const INK_SOFT = '#424242';
+  const INK_FAINT = '#767676';
+  const LINE = '#e0dfdf';
+  const AMBER = '#d97706';
+  const AMBER_PALE = '#ffecc7';
+
+  // Pre-rasterize all illustration assets
+  const heroMark = await (async () => {
+    const gc = giftColor(topGifts[0]?.category ?? '');
+    return giftMarkDataUri(gc.glyph, gc.accent, MARK_HERO);
+  })();
+
+  const secondaryMarks = await Promise.all(
+    topGifts.slice(1, 3).map((gift) => {
+      const gc = giftColor(gift.category ?? '');
+      return giftMarkDataUri(gc.glyph, gc.accent, MARK_SECONDARY);
+    })
+  );
+
+  const sparkleAmber = await sparkleDataUri('#d97706', SPARKLE_LG);
+  const sparkleGreen = await sparkleDataUri('#24843f', SPARKLE_SM);
 
   // ── Helpers ──────────────────────────────────────────────────────────
-
-  function blob(top?: string, right?: string, bottom?: string, left?: string, size = '400px', opacity = '0.12') {
-    return {
-      type: 'div',
-      props: {
-        style: {
-          display: 'flex', position: 'absolute',
-          ...(top !== undefined && { top }),
-          ...(right !== undefined && { right }),
-          ...(bottom !== undefined && { bottom }),
-          ...(left !== undefined && { left }),
-          width: size, height: size, borderRadius: '50%',
-          background: `radial-gradient(circle, rgba(107,143,39,${opacity}) 0%, transparent 70%)`
-        }
-      }
-    };
-  }
 
   function sectionHeader(label: string) {
     return {
@@ -145,23 +150,21 @@ export async function generateStoriesImage(
       props: {
         style: {
           display: 'flex', flexDirection: 'row' as const,
-          alignItems: 'center', marginBottom: '24px'
+          alignItems: 'center', marginBottom: '26px'
         },
         children: [
           {
-            type: 'div',
+            type: 'img',
             props: {
-              style: {
-                display: 'flex', width: '7px', height: '34px',
-                backgroundColor: PRIMARY, borderRadius: '4px',
-                marginRight: '16px', flexShrink: 0
-              }
+              src: sparkleAmber,
+              width: 34, height: 34,
+              style: { marginRight: '16px' }
             }
           },
           {
             type: 'span',
             props: {
-              style: { fontSize: `${F.sectionLabel}px`, fontWeight: 600, color: TEXT_DARK, letterSpacing: '1px' },
+              style: { fontSize: `${F.sectionLabel}px`, fontWeight: 700, color: INK, letterSpacing: '2px' },
               children: label
             }
           }
@@ -172,41 +175,38 @@ export async function generateStoriesImage(
 
   // ── Hero card ────────────────────────────────────────────────────────
   const topGift = topGifts[0];
+  const topAccent = giftColor(topGift.category ?? '').accent;
 
   const heroCard = {
     type: 'div',
     props: {
       style: {
         display: 'flex', flexDirection: 'column' as const,
-        background: `linear-gradient(145deg, ${PRIMARY_DARK} 0%, ${PRIMARY} 55%, ${PRIMARY_LIGHT} 100%)`,
-        borderRadius: '32px',
-        paddingTop: '44px', paddingBottom: '36px',
-        paddingLeft: '44px', paddingRight: '44px',
+        background: topAccent,
+        borderRadius: '40px',
+        paddingTop: '44px', paddingBottom: '44px',
+        paddingLeft: '48px', paddingRight: '48px',
         marginBottom: '18px',
         position: 'relative', overflow: 'hidden'
       },
       children: [
-        // Deco circles
+        // Illustrated gift mark on a white tile
         {
           type: 'div',
           props: {
             style: {
-              display: 'flex', position: 'absolute',
-              top: '-50px', right: '-50px',
-              width: '220px', height: '220px',
-              borderRadius: '50%', background: 'rgba(255,255,255,0.08)'
-            }
-          }
-        },
-        {
-          type: 'div',
-          props: {
-            style: {
-              display: 'flex', position: 'absolute',
-              bottom: '-60px', left: '-30px',
-              width: '180px', height: '180px',
-              borderRadius: '50%', background: 'rgba(255,255,255,0.05)'
-            }
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              width: `${MARK_TILE}px`, height: `${MARK_TILE}px`,
+              backgroundColor: '#ffffff',
+              borderRadius: '40px',
+              padding: '24px',
+              marginBottom: '28px',
+              boxShadow: '0 8px 24px rgba(0,0,0,0.12)'
+            },
+            children: [{
+              type: 'img',
+              props: { src: heroMark, width: MARK_HERO, height: MARK_HERO }
+            }]
           }
         },
         // Rank pill
@@ -217,18 +217,18 @@ export async function generateStoriesImage(
               display: 'flex', flexDirection: 'row' as const,
               alignItems: 'center', justifyContent: 'center',
               alignSelf: 'flex-start',
-              backgroundColor: 'rgba(255,255,255,0.20)',
+              backgroundColor: 'rgba(255,255,255,0.25)',
               borderRadius: '999px',
-              paddingTop: '6px', paddingBottom: '6px',
-              paddingLeft: '22px', paddingRight: '22px',
-              marginBottom: '18px'
+              paddingTop: '8px', paddingBottom: '8px',
+              paddingLeft: '24px', paddingRight: '24px',
+              marginBottom: '20px'
             },
             children: [{
               type: 'span',
               props: {
                 style: {
-                  fontSize: `${F.heroPill}px`, fontWeight: 600,
-                  color: 'rgba(255,255,255,0.95)', letterSpacing: '3px'
+                  fontSize: `${F.heroPill}px`, fontWeight: 700,
+                  color: '#ffffff', letterSpacing: '3px'
                 },
                 children: 'TOP GIFT'
               }
@@ -240,9 +240,9 @@ export async function generateStoriesImage(
           type: 'span',
           props: {
             style: {
-              fontSize: `${F.heroName}px`, fontWeight: 400,
-              fontFamily: '"DM Serif Display", serif',
-              color: '#ffffff', marginBottom: '14px', lineHeight: 1.05
+              fontSize: `${F.heroName}px`, fontWeight: 700,
+              fontFamily: '"Bitter", serif',
+              color: '#ffffff', marginBottom: '16px', lineHeight: 1.05
             },
             children: topGift.name
           }
@@ -253,7 +253,7 @@ export async function generateStoriesImage(
           props: {
             style: {
               fontSize: `${F.heroDesc}px`, lineHeight: 1.55,
-              color: 'rgba(255,255,255,0.88)', marginBottom: '28px'
+              color: 'rgba(255,255,255,0.88)', marginBottom: '30px'
             },
             children: topGift.description
           }
@@ -271,8 +271,8 @@ export async function generateStoriesImage(
                 type: 'div',
                 props: {
                   style: {
-                    display: 'flex', flex: 1, height: '12px',
-                    backgroundColor: 'rgba(255,255,255,0.2)',
+                    display: 'flex', flex: 1, height: '14px',
+                    backgroundColor: 'rgba(255,255,255,0.3)',
                     borderRadius: '999px', overflow: 'hidden'
                   },
                   children: [{
@@ -282,7 +282,7 @@ export async function generateStoriesImage(
                         display: 'flex',
                         width: `${(topGift.score / 25) * 100}%`,
                         height: '100%',
-                        background: 'rgba(255,255,255,0.9)',
+                        background: '#ffffff',
                         borderRadius: '999px'
                       }
                     }
@@ -292,7 +292,7 @@ export async function generateStoriesImage(
               {
                 type: 'span',
                 props: {
-                  style: { fontSize: `${F.heroScore}px`, fontWeight: 600, color: '#ffffff' },
+                  style: { fontSize: `${F.heroScore}px`, fontWeight: 700, color: '#ffffff' },
                   children: scoreText(topGift.score)
                 }
               }
@@ -304,96 +304,108 @@ export async function generateStoriesImage(
   };
 
   // ── Secondary cards ──────────────────────────────────────────────────
-  const secondaryCards = topGifts.slice(1, 3).map((gift, i) => ({
-    type: 'div',
-    props: {
-      style: {
-        display: 'flex', flexDirection: 'row' as const, alignItems: 'center',
-        marginBottom: '16px',
-        paddingTop: '24px', paddingBottom: '24px',
-        paddingLeft: '28px', paddingRight: '28px',
-        backgroundColor: '#ffffff', borderRadius: '24px',
-        border: '2px solid #dceab0'
-      },
-      children: [
-        // Rank badge
-        {
-          type: 'div',
-          props: {
-            style: {
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              width: '54px', height: '54px', borderRadius: '50%',
-              backgroundColor: PRIMARY_PALE,
-              border: `2px solid ${PRIMARY}`,
-              marginRight: '20px', flexShrink: 0
-            },
-            children: [{
-              type: 'span',
-              props: {
-                style: { fontSize: `${F.cardRank}px`, fontWeight: 400, fontStyle: 'italic', fontFamily: '"DM Serif Display", serif', color: PRIMARY_DARK },
-                children: i === 0 ? '2nd' : '3rd'
-              }
-            }]
-          }
+  const secondaryCards = await Promise.all(topGifts.slice(1, 3).map(async (gift, i) => {
+    const gc = giftColor(gift.category ?? '');
+    return {
+      type: 'div',
+      props: {
+        style: {
+          display: 'flex', flexDirection: 'row' as const, alignItems: 'center',
+          marginBottom: '16px',
+          paddingTop: '24px', paddingBottom: '24px',
+          paddingLeft: '28px', paddingRight: '28px',
+          backgroundColor: gc.pale,
+          borderRadius: '32px'
         },
-        // Name + bar
-        {
-          type: 'div',
-          props: {
-            style: { display: 'flex', flexDirection: 'column' as const, flex: 1 },
-            children: [
-              {
-                type: 'div',
-                props: {
-                  style: {
-                    display: 'flex', flexDirection: 'row' as const,
-                    justifyContent: 'space-between', alignItems: 'center',
-                    marginBottom: '12px'
-                  },
-                  children: [
-                    {
-                      type: 'span',
-                      props: {
-                        style: { fontSize: `${F.cardName}px`, fontWeight: 600, color: TEXT_DARK },
-                        children: gift.name
-                      }
-                    },
-                    {
-                      type: 'span',
-                      props: {
-                        style: { fontSize: `${F.cardScore}px`, fontWeight: 600, color: TEXT_MED },
-                        children: scoreText(gift.score)
-                      }
-                    }
-                  ]
-                }
+        children: [
+          // Illustrated mark
+          {
+            type: 'div',
+            props: {
+              style: {
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                width: '104px', height: '104px',
+                backgroundColor: '#ffffff',
+                borderRadius: '26px',
+                padding: '18px',
+                marginRight: '22px', flexShrink: 0
               },
-              {
-                type: 'div',
-                props: {
-                  style: {
-                    display: 'flex', width: '100%', height: '9px',
-                    backgroundColor: '#e8f3d0', borderRadius: '999px', overflow: 'hidden'
-                  },
-                  children: [{
-                    type: 'div',
-                    props: {
-                      style: {
-                        display: 'flex',
-                        width: `${(gift.score / 25) * 100}%`,
-                        height: '100%',
-                        background: `linear-gradient(90deg, ${PRIMARY} 0%, ${PRIMARY_LIGHT} 100%)`,
-                        borderRadius: '999px'
+              children: [{
+                type: 'img',
+                props: { src: secondaryMarks[i], width: MARK_SECONDARY, height: MARK_SECONDARY }
+              }]
+            }
+          },
+          // Rank + name + bar
+          {
+            type: 'div',
+            props: {
+              style: { display: 'flex', flexDirection: 'column' as const, flex: 1 },
+              children: [
+                {
+                  type: 'span',
+                  props: {
+                    style: {
+                      fontSize: `${F.cardRank}px`, fontWeight: 500, fontStyle: 'italic',
+                      fontFamily: '"Bitter", serif', color: INK_FAINT,
+                      marginBottom: '4px'
+                    },
+                    children: i === 0 ? '2nd' : '3rd'
+                  }
+                },
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      display: 'flex', flexDirection: 'row' as const,
+                      justifyContent: 'space-between', alignItems: 'center',
+                      marginBottom: '12px'
+                    },
+                    children: [
+                      {
+                        type: 'span',
+                        props: {
+                          style: { fontSize: `${F.cardName}px`, fontWeight: 700, color: INK },
+                          children: gift.name
+                        }
+                      },
+                      {
+                        type: 'span',
+                        props: {
+                          style: { fontSize: `${F.cardScore}px`, fontWeight: 500, color: INK_SOFT },
+                          children: scoreText(gift.score)
+                        }
                       }
-                    }
-                  }]
+                    ]
+                  }
+                },
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      display: 'flex', width: '100%', height: '10px',
+                      backgroundColor: '#ffffff', borderRadius: '999px', overflow: 'hidden'
+                    },
+                    children: [{
+                      type: 'div',
+                      props: {
+                        style: {
+                          display: 'flex',
+                          width: `${(gift.score / 25) * 100}%`,
+                          height: '100%',
+                          background: gc.accent,
+                          borderRadius: '999px'
+                        }
+                      }
+                    }]
+                  }
                 }
-              }
-            ]
+              ]
+            }
           }
-        }
-      ]
-    }
+        ]
+      }
+    };
   }));
 
   // ── Practical items ──────────────────────────────────────────────────
@@ -405,8 +417,9 @@ export async function generateStoriesImage(
         marginBottom: '14px',
         paddingTop: '20px', paddingBottom: '20px',
         paddingLeft: '26px', paddingRight: '26px',
-        backgroundColor: '#ffffff', borderRadius: '20px',
-        border: '2px solid #dceab0'
+        backgroundColor: '#ffffff',
+        borderRadius: '24px',
+        border: `2px solid ${LINE}`
       },
       children: [
         {
@@ -414,13 +427,13 @@ export async function generateStoriesImage(
           props: {
             style: {
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              width: '44px', height: '44px', borderRadius: '50%',
-              backgroundColor: PRIMARY, marginRight: '20px', flexShrink: 0
+              width: '46px', height: '46px', borderRadius: '999px',
+              backgroundColor: AMBER_PALE, marginRight: '20px', flexShrink: 0
             },
             children: [{
               type: 'span',
               props: {
-                style: { fontSize: `${F.practicalNum}px`, fontWeight: 600, color: '#ffffff' },
+                style: { fontSize: `${F.practicalNum}px`, fontWeight: 700, color: INK },
                 children: String(i + 1)
               }
             }]
@@ -429,7 +442,7 @@ export async function generateStoriesImage(
         {
           type: 'span',
           props: {
-            style: { fontSize: `${F.practicalTxt}px`, fontWeight: 500, color: TEXT_DARK, lineHeight: 1.4 },
+            style: { fontSize: `${F.practicalTxt}px`, fontWeight: 500, color: INK, lineHeight: 1.4 },
             children: app
           }
         }
@@ -438,49 +451,47 @@ export async function generateStoriesImage(
   }));
 
   // ── Estimate content height ──────────────────────────────────────────
-  // This lets us render satori at the EXACT needed height — no overflow, no cropping.
-  // Each section's height is estimated conservatively (rounds up).
   const EST_LINE = (fontSize: number, lineHeight = 1.3) => fontSize * lineHeight;
   const VPAD = PAD_Y * 2;
 
   let contentH = VPAD;
 
-  // Header block
-  contentH += EST_LINE(F.brandName) + 6 + EST_LINE(F.brandSub) + 48;
+  // Brand row
+  contentH += 56 + 52;
 
   // Name block
-  contentH += EST_LINE(F.userName) + 8 + EST_LINE(F.userSubtitle) + 36;
+  contentH += EST_LINE(F.userName) + 8 + EST_LINE(F.userSubtitle) + 40;
 
   // "Your Top Gifts" section header
-  contentH += 34 + 24; // bar height + margin
+  contentH += 34 + 26;
 
-  // Hero card: pill + name + optional description + score row + card padding
+  // Hero card: mark tile + pill + name + optional description + score row
   const descLineCount = topGift.description
-    ? Math.ceil((topGift.description.length * F.heroDesc * 0.55) / (W - PAD_X * 2 - 88))
+    ? Math.ceil((topGift.description.length * F.heroDesc * 0.55) / (W - PAD_X * 2 - 96))
     : 0;
-  contentH += 44 + 36  // top+bottom padding
-    + EST_LINE(F.heroPill) + 18         // pill
-    + EST_LINE(F.heroName) + 14         // name
-    + (descLineCount > 0 ? descLineCount * EST_LINE(F.heroDesc, 1.55) + 28 : 0) // desc
-    + 12 + 18                           // bar + score row
+  contentH += 44 + 44 // top+bottom padding
+    + MARK_TILE + 28                    // mark tile
+    + EST_LINE(F.heroPill) + 20         // pill
+    + EST_LINE(F.heroName) + 16         // name
+    + (descLineCount > 0 ? descLineCount * EST_LINE(F.heroDesc, 1.55) + 30 : 0) // desc
+    + 14 + 18                           // score row
     + 18;                               // marginBottom
 
   // Secondary cards (2)
   const secondaryCount = Math.min(topGifts.length - 1, 2);
-  contentH += secondaryCount * (24 + 24 + EST_LINE(F.cardName) + 12 + 9 + 16);
+  contentH += secondaryCount * (24 + 24 + 104 + 16); // padding + mark height + margin
 
   // Practical section
   if (topGiftPracticals.length > 0) {
-    contentH += 16; // spacer
-    contentH += 34 + 24; // section header
+    contentH += 16;
+    contentH += 34 + 26;
     const practCount = Math.min(topGiftPracticals.length, 4);
     contentH += practCount * (20 + 20 + EST_LINE(F.practicalTxt) + 14);
   }
 
   // Footer card
-  contentH += 40 + 40 + 140 + 14; // pad top/bottom + QR + margin
+  contentH += 40 + 40 + 140 + 14;
 
-  // Always render at least 1920px; never less (short content = centered in canvas)
   const renderH = Math.max(contentH, H);
 
   // ── Build JSX ───────────────────────────────────────────────────────
@@ -490,61 +501,72 @@ export async function generateStoriesImage(
       style: {
         display: 'flex', flexDirection: 'column' as const,
         width: `${W}px`, height: `${renderH}px`,
-        background: 'linear-gradient(170deg, #f7fbee 0%, #eef7d8 35%, #fafdf4 65%, #f0f8e4 100%)',
+        background: PAPER,
         paddingTop: `${PAD_Y}px`, paddingBottom: `${PAD_Y}px`,
         paddingLeft: `${PAD_X}px`, paddingRight: `${PAD_X}px`,
-        fontFamily: '"DM Sans", sans-serif',
+        fontFamily: '"Hanken Grotesk", sans-serif',
         position: 'relative', overflow: 'hidden'
       },
       children: [
-        // Background blobs
-        blob('-120px', '-100px', undefined, undefined, '480px', '0.12'),
-        blob(undefined, undefined, '200px', '-120px', '360px', '0.10'),
-        blob('700px', '-80px', undefined, undefined, '280px', '0.08'),
+        // Decorative sparkles on the paper background (top zone stays clear of cards)
+        {
+          type: 'img',
+          props: {
+            src: sparkleAmber,
+            width: SPARKLE_LG, height: SPARKLE_LG,
+            style: { display: 'flex', position: 'absolute', top: '150px', right: '72px' }
+          }
+        },
+        {
+          type: 'img',
+          props: {
+            src: sparkleGreen,
+            width: SPARKLE_SM, height: SPARKLE_SM,
+            style: { display: 'flex', position: 'absolute', top: '330px', right: '110px' }
+          }
+        },
 
-        // ── Header ──────────────────────────────────────────────────
+        // ── Brand row ───────────────────────────────────────────────
         {
           type: 'div',
           props: {
             style: {
-              display: 'flex', flexDirection: 'column' as const,
-              marginBottom: '48px'
+              display: 'flex', flexDirection: 'row' as const,
+              alignItems: 'center', gap: '16px',
+              marginBottom: '52px'
             },
             children: [
               {
-                type: 'span',
-                props: {
-                  style: { fontSize: `${F.brandName}px`, fontWeight: 400, fontFamily: '"DM Serif Display", serif', color: PRIMARY, letterSpacing: '1px' },
-                  children: 'TheGifts'
-                }
+                type: 'img',
+                props: { src: sparkleAmber, width: 44, height: 44 }
               },
               {
                 type: 'span',
                 props: {
-                  style: { fontSize: `${F.brandSub}px`, fontWeight: 400, color: TEXT_MUTED, marginTop: '5px' },
-                  children: 'Understand the Purpose God Planted in You.'
+                  style: { fontSize: `${F.brandName}px`, fontWeight: 700, fontFamily: '"Bitter", serif', color: INK, letterSpacing: '1px' },
+                  children: 'The Gifts.'
                 }
               }
             ]
           }
         },
 
-        // ── Name + subtitle ──────────────────────────────────────────
+        // ── Name + single label ─────────────────────────────────────
         {
           type: 'div',
           props: {
             style: {
               display: 'flex', flexDirection: 'column' as const,
-              marginBottom: '36px'
+              marginBottom: '40px'
             },
             children: [
               {
                 type: 'span',
                 props: {
                   style: {
-                    fontSize: `${F.userName}px`, fontWeight: 400,
-                    fontFamily: '"DM Serif Display", serif',
-                    color: TEXT_DARK, marginBottom: '8px', lineHeight: 1.0
+                    fontSize: `${F.userName}px`, fontWeight: 700,
+                    fontFamily: '"Bitter", serif',
+                    color: INK, marginBottom: '10px', lineHeight: 1.0
                   },
                   children: name
                 }
@@ -552,8 +574,8 @@ export async function generateStoriesImage(
               {
                 type: 'span',
                 props: {
-                  style: { fontSize: `${F.userSubtitle}px`, fontWeight: 400, color: TEXT_MED },
-                  children: titleText
+                  style: { fontSize: `${F.userSubtitle}px`, fontWeight: 700, color: AMBER, letterSpacing: '3px' },
+                  children: 'SPIRITUAL GIFTS RESULT'
                 }
               }
             ]
@@ -572,7 +594,7 @@ export async function generateStoriesImage(
           ...practicalItems
         ] : []),
 
-        // ── Flex spacer (pushes footer to bottom when content is short) ─
+        // ── Flex spacer ─────────────────────────────────────────────
         { type: 'div', props: { style: { display: 'flex', flex: 1 } } },
 
         // ── Footer ───────────────────────────────────────────────────
@@ -586,7 +608,8 @@ export async function generateStoriesImage(
               paddingTop: '36px', paddingBottom: '36px',
               paddingLeft: '44px', paddingRight: '44px',
               backgroundColor: '#ffffff',
-              borderRadius: '32px', border: '2px solid #dceab0'
+              borderRadius: '32px',
+              border: `2px solid ${LINE}`
             },
             children: [
               {
@@ -604,14 +627,14 @@ export async function generateStoriesImage(
                     {
                       type: 'span',
                       props: {
-                        style: { fontSize: `${F.footerScan}px`, fontWeight: 400, color: TEXT_MUTED, marginBottom: '6px' },
+                        style: { fontSize: `${F.footerScan}px`, fontWeight: 500, color: INK_FAINT, marginBottom: '6px' },
                         children: scanText
                       }
                     },
                     {
                       type: 'span',
                       props: {
-                        style: { fontSize: `${F.footerSite}px`, fontWeight: 600, color: PRIMARY, letterSpacing: '1px' },
+                        style: { fontSize: `${F.footerSite}px`, fontWeight: 700, color: INK, letterSpacing: '1px' },
                         children: 'thegifts.site'
                       }
                     }
@@ -631,14 +654,13 @@ export async function generateStoriesImage(
     width: W,
     height: renderH,
     fonts: [
-      // DM Sans
-      { name: 'DM Sans', data: fonts.light, weight: 300 },
-      { name: 'DM Sans', data: fonts.regular, weight: 400 },
-      { name: 'DM Sans', data: fonts.medium, weight: 500 },
-      { name: 'DM Sans', data: fonts.semibold, weight: 600 },
-      // DM Serif Display
-      { name: 'DM Serif Display', data: fonts.serif, weight: 400, style: 'normal' },
-      { name: 'DM Serif Display', data: fonts.serifItalic, weight: 400, style: 'italic' }
+      // Hanken Grotesk
+      { name: 'Hanken Grotesk', data: fonts.medium, weight: 500 },
+      { name: 'Hanken Grotesk', data: fonts.bold, weight: 700 },
+      // Bitter
+      { name: 'Bitter', data: fonts.serif, weight: 500, style: 'normal' },
+      { name: 'Bitter', data: fonts.serifBold, weight: 700, style: 'normal' },
+      { name: 'Bitter', data: fonts.serifItalic, weight: 500, style: 'italic' }
     ]
   });
 
@@ -651,7 +673,7 @@ export async function generateStoriesImage(
         width: W,
         height: H,
         channels: 4,
-        background: { r: 247, g: 251, b: 238, alpha: 1 }
+        background: { r: 246, g: 245, b: 244, alpha: 1 }
       }
     })
       .composite([{ input: svgBuffer, top: topOffset, left: 0 }])
