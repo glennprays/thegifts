@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import db from '$lib/server/db';
+import { db } from '$lib/server/db';
 import type { CategoryScore } from '$lib/schemas/assesment';
 
 /**
@@ -15,17 +15,22 @@ export const load: PageServerLoad = async ({ params }) => {
 
   // Determine which column to query based on ID format
   const query = isUUID(id)
-    ? 'SELECT name, result, short_id FROM assessment_result WHERE id = $1 LIMIT 1'
-    : 'SELECT name, result, short_id FROM assessment_result WHERE short_id = $1 LIMIT 1';
+    ? 'SELECT name, result, short_id FROM assessment_result WHERE id = ?1 LIMIT 1'
+    : 'SELECT name, result, short_id FROM assessment_result WHERE short_id = ?1 LIMIT 1';
 
-  const { rows } = await db.query(query, [id]);
+  const row = await db().prepare(query).bind(id).first<{
+    name: string;
+    result: string;
+    short_id: string | null;
+  }>();
 
-  if (!rows.length) {
+  if (!row) {
     error(404, 'Not found');
   }
 
-  const row = rows[0];
-  const result: CategoryScore[] = row.result;
+  const result: CategoryScore[] =
+    typeof row.result === 'string' ? JSON.parse(row.result) : row.result;
+
   return {
     name: row.name,
     result,

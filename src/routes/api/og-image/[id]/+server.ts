@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import db from '$lib/server/db';
+import { db } from '$lib/server/db';
 import { generateStoriesImage } from '$lib/server/image-generator';
 import { getCategoryExplanation } from '$lib/utils/category-explanation';
 import type { CategoryScore } from '$lib/schemas/assesment';
@@ -9,7 +9,7 @@ function isUUID(id: string): boolean {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
 }
 
-const imageCache = new Map<string, Buffer>();
+const imageCache = new Map<string, Uint8Array>();
 const MAX_CACHE_SIZE = 50;
 
 export const GET: RequestHandler = async ({ params }) => {
@@ -27,17 +27,21 @@ export const GET: RequestHandler = async ({ params }) => {
   }
 
   const query = isUUID(id)
-    ? 'SELECT name, result, short_id FROM assessment_result WHERE id = $1 LIMIT 1'
-    : 'SELECT name, result, short_id FROM assessment_result WHERE short_id = $1 LIMIT 1';
+    ? 'SELECT name, result, short_id FROM assessment_result WHERE id = ?1 LIMIT 1'
+    : 'SELECT name, result, short_id FROM assessment_result WHERE short_id = ?1 LIMIT 1';
 
-  const { rows } = await db.query(query, [id]);
+  const row = await db().prepare(query).bind(id).first<{
+    name: string;
+    result: string;
+    short_id: string | null;
+  }>();
 
-  if (!rows.length) {
+  if (!row) {
     error(404, 'Not found');
   }
 
-  const row = rows[0];
-  const result: CategoryScore[] = row.result;
+  const result: CategoryScore[] =
+    typeof row.result === 'string' ? JSON.parse(row.result) : row.result;
 
   const topGifts = result.slice(0, 3).map((item, index) => {
     const explanation = getCategoryExplanation(item.category, 'en');
