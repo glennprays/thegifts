@@ -1,15 +1,11 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
-  import logoUrl from "$lib/assets/logo.svg";
-  export let logoSrc: string = logoUrl;
   import { page } from "$app/stores";
   import { onMount } from "svelte";
   import { RESULTS_STORAGE_KEY } from "$lib/constants/constants";
   import Restart from "$lib/icons/Restart.svelte";
   import { RestartTest } from "$lib/utils/utils";
   import LanguageSwitcher from "./LanguageSwitcher.svelte";
-  import { fly, fade } from "svelte/transition";
-  import { quintOut } from "svelte/easing";
 
   let isContinueTestVisible = false;
   let mobileMenuOpen = false;
@@ -26,7 +22,7 @@
       isContinueTestVisible = savedResults !== null;
 
       const onScroll = () => {
-        scrolled = window.scrollY > 20;
+        scrolled = window.scrollY > 12;
       };
       window.addEventListener("scroll", onScroll, { passive: true });
       return () => window.removeEventListener("scroll", onScroll);
@@ -41,19 +37,20 @@
   }
 </script>
 
-<!-- Navbar -->
-<nav class="navbar {scrolled ? 'scrolled' : 'top'}">
+<nav class="navbar" class:scrolled>
   <div class="navbar-inner">
-    <!-- Brand -->
+    <!-- Brand: slab wordmark + little mark -->
     <a href="/" rel="external" class="brand">
-      <div class="brand-logo">
-        <img
-          src={logoSrc}
-          alt="TheGifts Logo"
-          style="width:100%;height:100%;object-fit:cover;"
+      <svg viewBox="0 0 32 32" class="brand-mark" aria-hidden="true">
+        <path
+          d="M16 3 L20 12 L29 13 L22 19.5 L24 29 L16 24 L8 29 L10 19.5 L3 13 L12 12 Z"
+          fill="#d97706"
+          stroke="#1b1b1b"
+          stroke-width="2.5"
+          stroke-linejoin="round"
         />
-      </div>
-      <span class="brand-name">TheGifts</span>
+      </svg>
+      <span class="brand-name display">The&nbsp;Gifts</span>
     </a>
 
     <!-- Right side -->
@@ -64,41 +61,23 @@
         <!-- Desktop actions -->
         <div class="hidden md:flex items-center gap-2">
           {#if isContinueTestVisible}
-            <a href="/questionnaire" class="btn-start">
+            <a href="/questionnaire" class="btn-start smallcaps">
               {$_("components.navbar.continueTest")}
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg
-              >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             </a>
-            <a href="/onboarding" class="btn-restart" on:click={RestartTest}>
+            <a href="/onboarding" class="btn-restart smallcaps" on:click={RestartTest}>
               <Restart />
               {$_("components.navbar.restartTest")}
             </a>
           {:else}
-            <a href="/onboarding" class="btn-start">
+            <a href="/onboarding" class="btn-start smallcaps">
               {$_("components.navbar.startTest")}
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg
-              >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             </a>
           {/if}
         </div>
 
-        <!-- Mobile: hamburger (only when continue test visible) or inline start btn -->
+        <!-- Mobile -->
         <div class="md:hidden flex items-center gap-2">
           {#if isContinueTestVisible}
             <button
@@ -108,37 +87,17 @@
               aria-expanded={mobileMenuOpen}
             >
               {#if mobileMenuOpen}
-                <!-- X icon -->
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
               {:else}
-                <!-- Burger icon -->
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M3 12h18M3 6h18M3 18h18" />
                 </svg>
               {/if}
             </button>
           {:else}
-            <a href="/onboarding" class="btn-start">
+            <a href="/onboarding" class="btn-start smallcaps">
               {$_("components.navbar.startTest")}
             </a>
           {/if}
@@ -146,33 +105,23 @@
       {/if}
     </div>
   </div>
-  <div class="navbar-line"></div>
 </nav>
 
 <!-- Mobile drawer -->
 {#if isHomePage && isContinueTestVisible && mobileMenuOpen}
-  <!-- Backdrop -->
-  <div
-    transition:fade={{ duration: 180 }}
+  <button
     class="fixed inset-0 z-40 bg-black/10"
-    role="button"
-    tabindex="-1"
     aria-label="Close menu"
     on:click={closeMenu}
-    on:keydown={(e) => e.key === "Escape" && closeMenu()}
-  ></div>
+  ></button>
 
-  <!-- Drawer panel -->
-  <div
-    transition:fly={{ y: -12, duration: 260, easing: quintOut }}
-    class="mobile-drawer md:hidden"
-  >
-    <a href="/questionnaire" class="drawer-continue" on:click={closeMenu}>
+  <div class="mobile-drawer md:hidden">
+    <a href="/questionnaire" class="drawer-start smallcaps" on:click={closeMenu}>
       {$_("components.navbar.continueTest")}
     </a>
     <a
       href="/onboarding"
-      class="drawer-restart"
+      class="drawer-restart smallcaps"
       on:click={() => {
         RestartTest();
         closeMenu();
@@ -185,42 +134,23 @@
 {/if}
 
 <style>
-  @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap");
-
   .navbar {
-    font-family: "DM Sans", sans-serif;
     position: sticky;
     top: 0;
     z-index: 50;
     width: 100%;
-    /* Starts transparent, gains background on scroll via .scrolled class */
-    transition:
-      background 0.3s ease,
-      box-shadow 0.3s ease,
-      backdrop-filter 0.3s ease;
+    background: var(--color-paper);
+    transition: box-shadow 0.25s ease;
   }
-
-  /* Transparent on top of hero */
-  .navbar.top {
-    background: rgba(247, 243, 235, 0);
-    box-shadow: none;
-  }
-
-  /* Frosted glass after scrolling */
   .navbar.scrolled {
-    background: rgba(247, 243, 235, 0.88);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow:
-      0 1px 0 rgba(107, 143, 39, 0.12),
-      0 4px 20px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 1px 0 var(--color-line), 0 4px 16px rgba(27, 27, 27, 0.05);
   }
 
   .navbar-inner {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    height: 60px;
+    height: 68px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -230,27 +160,23 @@
   .brand {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 9px;
     text-decoration: none;
     flex-shrink: 0;
   }
-  .brand-logo {
-    width: 34px;
-    height: 34px;
-    border-radius: 10px;
-    overflow: hidden;
-    flex-shrink: 0;
-    box-shadow: 0 2px 8px rgba(74, 101, 24, 0.15);
+  .brand-mark {
+    width: 26px;
+    height: 26px;
   }
   .brand-name {
-    font-family: "DM Serif Display", serif;
-    font-size: 20px;
-    color: #1a2e05;
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--color-ink);
     line-height: 1;
     transition: color 0.2s;
   }
   .brand:hover .brand-name {
-    color: #4a6518;
+    color: var(--color-amber);
   }
 
   /* Nav right area */
@@ -260,123 +186,92 @@
     gap: 10px;
   }
 
-  /* Desktop buttons */
+  /* Primary: ink pill */
   .btn-start {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    background: linear-gradient(135deg, #3d5a12, #6b8f27);
-    color: white;
-    font-weight: 600;
-    font-size: 13px;
-    padding: 8px 18px;
-    border-radius: 10px;
-    border: none;
+    gap: 7px;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-size: 10px;
+    padding: 11px 20px;
+    border-radius: 999px;
     cursor: pointer;
     text-decoration: none;
-    box-shadow: 0 2px 12px rgba(74, 101, 24, 0.22);
-    position: relative;
-    overflow: hidden;
-    transition:
-      transform 0.15s,
-      box-shadow 0.15s;
     white-space: nowrap;
-    font-family: "DM Sans", sans-serif;
-  }
-  .btn-start::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    right: -20%;
-    width: 60%;
-    height: 200%;
-    background: radial-gradient(
-      ellipse,
-      rgba(255, 255, 255, 0.12) 0%,
-      transparent 60%
-    );
-    pointer-events: none;
+    transition: background 0.15s, transform 0.15s;
   }
   .btn-start:hover {
+    background: var(--color-ink-soft);
     transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(74, 101, 24, 0.28);
   }
 
+  /* Secondary: outline pill */
   .btn-restart {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    color: #4a6518;
-    font-weight: 500;
-    font-size: 13px;
-    padding: 7px 14px;
-    border-radius: 10px;
-    border: none;
+    gap: 6px;
+    color: var(--color-ink-soft);
+    font-size: 10px;
+    padding: 10px 16px;
+    border-radius: 999px;
     cursor: pointer;
     text-decoration: none;
-    background: rgba(107, 143, 39, 0.08);
-    border: 1px solid rgba(107, 143, 39, 0.2);
-    transition:
-      background 0.15s,
-      border-color 0.15s,
-      color 0.15s;
+    background: transparent;
+    border: 1.5px solid var(--color-line);
+    transition: border-color 0.15s, color 0.15s;
     white-space: nowrap;
-    font-family: "DM Sans", sans-serif;
   }
   .btn-restart:hover {
-    background: rgba(220, 38, 38, 0.07);
-    border-color: rgba(220, 38, 38, 0.25);
-    color: #dc2626;
+    border-color: var(--color-ink-faint);
+    color: var(--color-ink);
   }
 
-  /* Hamburger button */
+  /* Hamburger */
   .hamburger {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    border: none;
-    background: rgba(107, 143, 39, 0.08);
-    border: 1px solid rgba(107, 143, 39, 0.15);
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 1.5px solid var(--color-line);
+    background: transparent;
     cursor: pointer;
-    color: #4a6518;
-    transition: background 0.15s;
+    color: var(--color-ink);
+    transition: border-color 0.15s;
   }
   .hamburger:hover {
-    background: rgba(107, 143, 39, 0.14);
+    border-color: var(--color-ink-faint);
   }
 
   /* Mobile drawer */
   .mobile-drawer {
     position: fixed;
-    top: 60px;
-    left: 0;
-    right: 0;
-    background: rgba(247, 243, 235, 0.97);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(107, 143, 39, 0.12);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    top: 72px;
+    left: 12px;
+    right: 12px;
+    background: #ffffff;
+    border: 1px solid var(--color-line);
+    border-radius: 20px;
+    box-shadow: 0 16px 40px rgba(27, 27, 27, 0.12);
     z-index: 49;
-    padding: 16px 20px 20px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
-  .drawer-continue {
+  .drawer-start {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 13px;
-    border-radius: 12px;
+    padding: 15px;
     text-decoration: none;
-    background: linear-gradient(135deg, #3d5a12, #6b8f27);
-    color: white;
-    font-weight: 600;
-    font-size: 14px;
-    margin-bottom: 10px;
-    box-shadow: 0 3px 14px rgba(74, 101, 24, 0.22);
-    font-family: "DM Sans", sans-serif;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    border-radius: 999px;
+    font-size: 11px;
   }
 
   .drawer-restart {
@@ -384,35 +279,12 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    padding: 12px;
-    border-radius: 12px;
+    padding: 14px;
     text-decoration: none;
-    background: rgba(107, 143, 39, 0.06);
-    border: 1px solid rgba(107, 143, 39, 0.15);
-    color: #4a6518;
-    font-weight: 500;
-    font-size: 14px;
-    font-family: "DM Sans", sans-serif;
-  }
-
-  /* Organic bottom border on navbar when scrolled */
-  .navbar-line {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(107, 143, 39, 0.15) 30%,
-      rgba(107, 143, 39, 0.15) 70%,
-      transparent 100%
-    );
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .scrolled .navbar-line {
-    opacity: 1;
+    background: transparent;
+    border: 1.5px solid var(--color-line);
+    border-radius: 999px;
+    color: var(--color-ink-soft);
+    font-size: 11px;
   }
 </style>

@@ -44,6 +44,7 @@ export const GET: RequestHandler = async ({ params }) => {
     return {
       name: explanation?.name || item.category,
       score: item.score,
+      category: item.category,
       description: index === 0
         ? explanation?.description
         : undefined

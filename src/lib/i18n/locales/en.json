@@ -85,10 +85,10 @@
     "questionnaire": {
       "pageLabel": "Assessment · Page {currentPage}",
       "personalAssessment": "{name}'s Assessment",
-      "answerHint": "Answer honestly — there are no right or wrong answers.",
+      "answerHint": "Answer honestly. There are no right or wrong answers.",
       "questionsLeft": "{count} question left on this page.",
       "questionsLeft_plural": "{count} questions left on this page.",
-      "allAnswered": "✓ All answered — you can continue.",
+      "allAnswered": "✓ All answered. You can continue.",
       "back": "Back",
       "continue": "Continue",
       "seeResults": "See Results"

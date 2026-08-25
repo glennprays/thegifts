@@ -4,19 +4,21 @@
   import { _ } from "svelte-i18n";
   import type { PageData } from "./$types";
   import { onMount } from "svelte";
-  import { fly, fade, scale } from "svelte/transition";
-  import { quintOut, cubicOut } from "svelte/easing";
+  import { fade } from "svelte/transition";
+  import GiftMark from "$lib/components/illustrations/GiftMark.svelte";
+  import { giftColor } from "$lib/data/gift-colors";
 
   let { data }: { data: PageData } = $props();
   const lang = $page.params.lang;
   const { category } = data;
+
+  const gc = giftColor(category.key);
 
   const fromResult = $page.url.searchParams.get("from") === "result";
   const resultId = $page.url.searchParams.get("id");
 
   let showModal = $state(false);
   let selectedReference = $state<{ verse: string; text: string } | null>(null);
-  let visible = $state(false);
 
   function goBack() {
     if (fromResult && resultId)
@@ -39,9 +41,6 @@
   }
 
   onMount(() => {
-    requestAnimationFrame(() => {
-      visible = true;
-    });
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape" && showModal) closeModal();
     };
@@ -56,163 +55,106 @@
 </svelte:head>
 
 <div class="page">
-  <div class="relative z-10 max-w-3xl mx-auto px-5 py-14 pb-24">
+  <div class="max-w-2xl mx-auto px-6 py-12 pb-24">
     <!-- Nav row -->
-    <div class="flex items-center gap-3 mb-10 reveal {visible ? 'in' : ''}">
-      <button class="back-btn" onclick={goBack}>
-        <svg
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7" /></svg
-        >
+    <div class="flex items-center gap-3 mb-8 press-in">
+      <button class="back-btn smallcaps" onclick={goBack}>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
         {fromResult ? $_("pages.gifts.backToResults") : $_("pages.gifts.back")}
       </button>
       {#if fromResult}
-        <span style="color:#d8ebb0;">·</span>
-        <button class="all-gifts-btn" onclick={viewAllGifts}>
+        <button class="all-gifts-btn smallcaps" onclick={viewAllGifts}>
           {$_("pages.gifts.viewAllGifts")}
-          <svg
-            width="12"
-            height="12"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg
-          >
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
         </button>
       {/if}
     </div>
 
-    <!-- Hero block -->
-    <div class="hero-block mb-8 reveal d1 {visible ? 'in' : ''}">
-      <div
-        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-5 text-xs font-semibold tracking-widest"
-        style="background:rgba(255,255,255,0.16);color:rgba(255,255,255,0.88);"
-      >
+    <!-- Hero card in gift color -->
+    <div class="hero-card press-in press-in-d1 mb-10" style="background: {gc.pale};">
+      <div class="hero-mark">
+        <GiftMark glyph={gc.glyph} color={gc.accent} />
+      </div>
+      <div class="smallcaps hero-eyebrow mb-3" style="color: {gc.accent};">
         {$_("pages.gifts.title")}
       </div>
-      <h1
-        class="serif text-5xl md:text-6xl text-white leading-tight mb-0"
-        style="position:relative;z-index:1;"
-      >
+      <h1 class="display text-4xl sm:text-5xl text-ink font-bold leading-[1.05]">
         {category.name}
       </h1>
     </div>
 
     <!-- Description -->
-    <div class="section-card mb-6 reveal d2 {visible ? 'in' : ''}">
-      <div class="section-eyebrow">
-        {$_("pages.gifts.sections.description")}
-      </div>
-      <p class="text-base text-[#2a4010]/80 leading-relaxed">
+    <section class="chapter-section press-in press-in-d2">
+      <h2 class="section-title display">{$_("pages.gifts.sections.description")}</h2>
+      <p class="text-base text-ink-soft leading-relaxed max-w-xl">
         {category.description}
       </p>
-    </div>
+    </section>
 
     <!-- Characteristics -->
     {#if category.characteristics.length > 0}
-      <div class="section-card mb-6 reveal d3 {visible ? 'in' : ''}">
-        <div class="section-eyebrow">
-          {$_("pages.gifts.sections.characteristics")}
-        </div>
-        <h2 class="section-title">
+      <section class="chapter-section press-in press-in-d3">
+        <h2 class="section-title display">
           {$_("pages.gifts.sections.characteristics")}
         </h2>
-        <div>
-          {#each category.characteristics as char}
-            <div class="char-item">
-              <div class="char-dot"></div>
-              <span class="text-sm text-[#2a4010]/75 leading-relaxed"
-                >{char}</span
-              >
-            </div>
+        <div class="char-grid">
+          {#each category.characteristics as char (char)}
+            <div class="char-item">{char}</div>
           {/each}
         </div>
-      </div>
+      </section>
     {/if}
 
     <!-- Biblical references -->
     {#if category.biblical_references.length > 0}
-      <div class="section-card mb-6 reveal d3 {visible ? 'in' : ''}">
-        <div class="section-eyebrow">
-          {$_("pages.gifts.sections.biblical_references")}
-        </div>
-        <h2 class="section-title">
+      <section class="chapter-section press-in press-in-d3">
+        <h2 class="section-title display">
           {$_("pages.gifts.sections.biblical_references")}
         </h2>
         <div class="flex flex-col gap-3">
-          {#each category.biblical_references as reference}
+          {#each category.biblical_references as reference (reference.verse)}
             <button
               type="button"
               class="scripture-btn"
+              style="--gift: {gc.accent};"
               onclick={() => openModal(reference)}
             >
-              <div class="scripture-icon">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#4a6518"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+              <span class="scripture-book-icon" style="background: {gc.pale};">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={gc.accent} stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
                   <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
                 </svg>
-              </div>
-              <div>
-                <div class="text-sm font-semibold text-[#4a6518] mb-1">
+              </span>
+              <span class="flex-1 text-left">
+                <span class="block text-sm font-bold text-ink mb-0.5">
                   {reference.verse}
-                </div>
-                <div class="text-xs text-[#8aab52]">
+                </span>
+                <span class="block text-xs text-ink-faint">
                   {$_("pages.gifts.clickToRead")}
-                </div>
-              </div>
-              <svg
-                class="ml-auto flex-shrink-0 mt-1"
-                style="color:#c8daa8;"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"><path d="M9 18l6-6-6-6" /></svg
-              >
+                </span>
+              </span>
+              <svg class="flex-shrink-0" style="color:var(--color-ink-faint);" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6" /></svg>
             </button>
           {/each}
         </div>
-      </div>
+      </section>
     {/if}
 
     <!-- Practical applications -->
     {#if category.practical_applications.length > 0}
-      <div class="section-card reveal d4 {visible ? 'in' : ''}">
-        <div class="section-eyebrow">
-          {$_("pages.gifts.sections.practical_applications")}
-        </div>
-        <h2 class="section-title">
+      <section class="chapter-section press-in press-in-d4">
+        <h2 class="section-title display">
           {$_("pages.gifts.sections.practical_applications")}
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {#each category.practical_applications as app, i}
+          {#each category.practical_applications as app, i (app)}
             <div class="app-card">
-              <div class="app-num">{i + 1}</div>
+              <span class="app-num" style="background: {gc.pale}; color: {gc.accent};">{i + 1}</span>
               <p class="app-text">{app}</p>
             </div>
           {/each}
         </div>
-      </div>
+      </section>
     {/if}
   </div>
 </div>
@@ -221,15 +163,14 @@
 {#if showModal && selectedReference}
   <div
     class="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-5"
-    style="background:rgba(15,25,5,0.55);backdrop-filter:blur(4px);"
+    style="background:rgba(27,27,27,0.45);"
     role="button"
     tabindex="-1"
     aria-label="Close modal"
     onclick={closeModal}
     onkeydown={(e) => e.key === "Escape" && closeModal()}
-    transition:fade={{ duration: 180 }}
+    transition:fade={{ duration: 150 }}
   >
-    <!-- svelte-ignore a11y_no_static_element_interactions a11y_click_events_have_key_events -->
     <div
       class="modal-sheet"
       onclick={(e) => e.stopPropagation()}
@@ -237,41 +178,28 @@
       role="dialog"
       aria-modal="true"
       tabindex="-1"
-      in:fly={{ y: 24, duration: 320, easing: quintOut }}
-      out:fly={{ y: 20, duration: 200, easing: cubicOut }}
+      in:fade={{ duration: 180 }}
+      out:fade={{ duration: 130 }}
     >
       <!-- Header -->
       <div class="modal-header">
         <div>
-          <div
-            class="text-xs font-semibold tracking-widest uppercase text-[#8aab52] mb-2"
-          >
-            Scripture
-          </div>
-          <h3 class="modal-verse">{selectedReference.verse}</h3>
+          <div class="smallcaps mb-2" style="color: {gc.accent};">Scripture</div>
+          <h3 class="modal-verse display">{selectedReference.verse}</h3>
         </div>
-        <button class="modal-close" onclick={closeModal} aria-label="Close">
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12" /></svg
-          >
+        <button class="modal-close" onclick={closeModal} aria-label={$_("common.close")}>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
         </button>
       </div>
 
       <!-- Body -->
       <div class="modal-body">
-        <p class="modal-text">{selectedReference.text}</p>
+        <blockquote class="modal-text">{selectedReference.text}</blockquote>
       </div>
 
       <!-- Footer -->
       <div class="modal-footer">
-        <button type="button" class="modal-close-btn" onclick={closeModal}>
+        <button type="button" class="modal-close-btn smallcaps" onclick={closeModal}>
           {$_("common.close")}
         </button>
       </div>
@@ -280,372 +208,191 @@
 {/if}
 
 <style>
-  @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap");
-
   .page {
-    font-family: "DM Sans", sans-serif;
-    background: linear-gradient(160deg, #f7f3eb 0%, #eef5e4 55%, #f2efe6 100%);
+    background: var(--color-paper);
     min-height: 100vh;
-    position: relative;
-    overflow: hidden;
-  }
-  .page::before {
-    content: "";
-    position: fixed;
-    top: -100px;
-    right: -100px;
-    width: 480px;
-    height: 480px;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      rgba(107, 143, 39, 0.09) 0%,
-      transparent 65%
-    );
-    pointer-events: none;
-    z-index: 0;
-  }
-  .page::after {
-    content: "";
-    position: fixed;
-    bottom: -60px;
-    left: -80px;
-    width: 360px;
-    height: 360px;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      rgba(143, 184, 64, 0.07) 0%,
-      transparent 65%
-    );
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .serif {
-    font-family: "DM Serif Display", serif;
-  }
-
-  /* Reveal */
-  .reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    transition:
-      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .reveal.in {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .d1 {
-    transition-delay: 0.06s;
-  }
-  .d2 {
-    transition-delay: 0.14s;
-  }
-  .d3 {
-    transition-delay: 0.22s;
-  }
-  .d4 {
-    transition-delay: 0.3s;
   }
 
   /* Back nav */
   .back-btn {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    font-weight: 500;
-    color: #4a6518;
-    background: rgba(107, 143, 39, 0.08);
-    border: 1px solid rgba(107, 143, 39, 0.18);
-    border-radius: 10px;
-    padding: 7px 14px;
+    gap: 7px;
+    color: var(--color-ink-soft);
+    background: #ffffff;
+    border: 1.5px solid var(--color-line);
+    border-radius: 999px;
+    padding: 10px 18px;
     cursor: pointer;
-    text-decoration: none;
-    transition:
-      background 0.15s,
-      transform 0.15s;
-    font-family: "DM Sans", sans-serif;
+    transition: border-color 0.15s, color 0.15s;
   }
   .back-btn:hover {
-    background: rgba(107, 143, 39, 0.14);
-    transform: translateX(-2px);
+    border-color: var(--color-ink-faint);
+    color: var(--color-ink);
   }
 
   .all-gifts-btn {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 13px;
-    font-weight: 500;
-    color: #8aab52;
-    text-decoration: none;
+    color: var(--color-ink-faint);
     cursor: pointer;
     background: none;
     border: none;
     transition: color 0.15s;
-    font-family: "DM Sans", sans-serif;
   }
   .all-gifts-btn:hover {
-    color: #4a6518;
+    color: var(--color-ink);
   }
 
-  /* Hero block */
-  .hero-block {
-    background: linear-gradient(
-      145deg,
-      #3d5a12 0%,
-      #5a7c1a 40%,
-      #6b8f27 75%,
-      #7ea832 100%
-    );
+  /* Hero card */
+  .hero-card {
     border-radius: 28px;
-    padding: 48px 44px 40px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 12px 40px rgba(61, 90, 18, 0.2);
+    padding: 36px 36px 32px;
   }
-  .hero-block::before {
-    content: "";
-    position: absolute;
-    top: -60px;
-    right: -60px;
-    width: 260px;
-    height: 260px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.07);
-    pointer-events: none;
+  .hero-mark {
+    width: 84px;
+    height: 84px;
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 14px rgba(27, 27, 27, 0.06);
   }
-  .hero-block::after {
-    content: "";
-    position: absolute;
-    bottom: -50px;
-    left: -30px;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.04);
-    pointer-events: none;
+  .hero-eyebrow {
+    letter-spacing: 0.16em;
   }
 
-  /* Section */
-  .section-card {
-    background: white;
+  /* Chapter sections */
+  .chapter-section {
+    background: #ffffff;
+    border: 1px solid var(--color-line);
     border-radius: 24px;
-    padding: 36px 32px;
-    border: 1.5px solid #e8f0d8;
-  }
-
-  .section-eyebrow {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #8aab52;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .section-eyebrow::before {
-    content: "";
-    display: block;
-    width: 20px;
-    height: 1px;
-    background: rgba(138, 171, 82, 0.4);
+    padding: 30px 30px;
+    margin-bottom: 16px;
   }
 
   .section-title {
-    font-family: "DM Serif Display", serif;
-    font-size: 26px;
-    color: #1a2e05;
-    margin-bottom: 20px;
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--color-ink);
+    margin-bottom: 16px;
     line-height: 1.2;
   }
 
-  /* Characteristics */
-  .char-item {
+  /* Characteristics — soft chips */
+  .char-grid {
     display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    padding: 14px 0;
-    border-bottom: 1px solid #f0f5e8;
+    flex-direction: column;
+    gap: 10px;
   }
-  .char-item:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-  .char-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #4a6518, #8fb840);
-    flex-shrink: 0;
-    margin-top: 6px;
+  .char-item {
+    padding: 12px 16px;
+    border-radius: 14px;
+    background: var(--color-paper);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-ink-soft);
+    line-height: 1.55;
   }
 
   /* Scripture cards */
   .scripture-btn {
     width: 100%;
-    text-align: left;
-    background: white;
-    border-radius: 18px;
-    padding: 22px 24px;
-    border: 1.5px solid #e8f0d8;
-    cursor: pointer;
     display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    position: relative;
-    overflow: hidden;
-    transition:
-      transform 0.2s,
-      box-shadow 0.2s,
-      border-color 0.2s;
-    font-family: "DM Sans", sans-serif;
-  }
-  .scripture-btn::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: linear-gradient(180deg, #4a6518, #8fb840);
-    border-radius: 4px 0 0 4px;
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform 0.25s ease;
+    align-items: center;
+    gap: 14px;
+    background: var(--color-paper);
+    border: 1px solid var(--color-line);
+    border-radius: 16px;
+    padding: 16px 18px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
   }
   .scripture-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(74, 101, 24, 0.1);
-    border-color: #c8e0a0;
+    border-color: var(--gift);
+    background: #ffffff;
   }
-  .scripture-btn:hover::after {
-    transform: scaleY(1);
-  }
-
-  .scripture-icon {
+  .scripture-book-icon {
     width: 40px;
     height: 40px;
     border-radius: 12px;
-    flex-shrink: 0;
-    background: linear-gradient(135deg, #f0f8e0, #e0f0c0);
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
   }
 
   /* Application cards */
   .app-card {
-    background: white;
-    border-radius: 18px;
-    padding: 20px 22px;
-    border: 1.5px solid #e8f0d8;
+    background: var(--color-paper);
+    border-radius: 16px;
+    padding: 18px;
     display: flex;
     align-items: flex-start;
-    gap: 14px;
-    position: relative;
-    overflow: hidden;
-  }
-  .app-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 18px;
-    background: linear-gradient(135deg, #f4f9ec, #eef5e4);
-    opacity: 0.5;
-    pointer-events: none;
+    gap: 12px;
   }
   .app-num {
     width: 30px;
     height: 30px;
-    border-radius: 8px;
+    border-radius: 999px;
     flex-shrink: 0;
-    background: linear-gradient(135deg, #4a6518, #6b8f27);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 13px;
     font-weight: 700;
-    color: white;
-    position: relative;
-    z-index: 1;
   }
   .app-text {
     font-size: 14px;
-    color: #1a2e05;
+    color: var(--color-ink-soft);
     line-height: 1.6;
     font-weight: 500;
-    position: relative;
-    z-index: 1;
   }
 
-  /* Organic divider */
-  .divider {
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(107, 143, 39, 0.15) 30%,
-      rgba(107, 143, 39, 0.15) 70%,
-      transparent
-    );
-  }
-
-  /* Scripture modal */
-  .modal-overlay {
-    font-family: "DM Sans", sans-serif;
-  }
+  /* Modal */
   .modal-sheet {
-    background: linear-gradient(170deg, #f9f6ef, #f4f9ec);
-    border-radius: 28px;
-    max-width: 540px;
+    background: var(--color-paper);
+    border-radius: 24px;
+    max-width: 520px;
     width: 100%;
     max-height: 80vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 24px 64px rgba(27, 27, 27, 0.24);
   }
   .modal-header {
-    padding: 28px 28px 20px;
-    border-bottom: 1px solid rgba(107, 143, 39, 0.12);
+    padding: 26px 28px 18px;
+    border-bottom: 1px solid var(--color-line);
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     gap: 12px;
   }
   .modal-verse {
-    font-family: "DM Serif Display", serif;
-    font-size: 22px;
-    color: #1a2e05;
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--color-ink);
     line-height: 1.25;
   }
   .modal-close {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: none;
-    background: rgba(107, 143, 39, 0.1);
+    width: 34px;
+    height: 34px;
+    border: 1.5px solid var(--color-line);
+    border-radius: 999px;
+    background: #ffffff;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #4a6518;
+    color: var(--color-ink-soft);
     flex-shrink: 0;
-    transition:
-      background 0.15s,
-      transform 0.2s;
-    font-family: "DM Sans", sans-serif;
+    transition: border-color 0.15s, color 0.15s;
   }
   .modal-close:hover {
-    background: rgba(107, 143, 39, 0.18);
-    transform: rotate(90deg);
+    border-color: var(--color-ink-faint);
+    color: var(--color-ink);
   }
   .modal-body {
     padding: 24px 28px;
@@ -653,38 +400,29 @@
     flex: 1;
   }
   .modal-text {
-    font-size: 16px;
+    margin: 0;
+    font-family: var(--font-display);
     font-style: italic;
-    line-height: 1.8;
-    color: #2a4010;
-    padding: 20px 24px;
-    border-radius: 16px;
-    background: rgba(107, 143, 39, 0.06);
-    border-left: 3px solid rgba(107, 143, 39, 0.3);
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--color-ink);
   }
   .modal-footer {
     padding: 16px 28px;
-    border-top: 1px solid rgba(107, 143, 39, 0.1);
+    border-top: 1px solid var(--color-line);
   }
   .modal-close-btn {
     display: inline-flex;
     align-items: center;
-    padding: 10px 22px;
-    border-radius: 12px;
+    padding: 12px 24px;
     border: none;
-    background: linear-gradient(135deg, #3d5a12, #6b8f27);
-    color: white;
-    font-weight: 600;
-    font-size: 14px;
+    border-radius: 999px;
+    background: var(--color-ink);
+    color: var(--color-paper);
     cursor: pointer;
-    transition:
-      transform 0.15s,
-      box-shadow 0.15s;
-    font-family: "DM Sans", sans-serif;
-    box-shadow: 0 2px 12px rgba(74, 101, 24, 0.22);
+    transition: background 0.15s;
   }
   .modal-close-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(74, 101, 24, 0.28);
+    background: var(--color-ink-soft);
   }
 </style>
