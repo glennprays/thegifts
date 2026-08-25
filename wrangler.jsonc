@@ -1,0 +1,28 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "thegifts",
+  "compatibility_date": "2026-08-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "rules": [
+    { "type": "CompiledWasm", "globs": ["**/*.wasm"], "fallthrough": false }
+  ],
+  "main": ".svelte-kit/cloudflare/_worker.js",
+  "routes": [
+    { "pattern": "thegifts.site", "custom_domain": true },
+    { "pattern": "www.thegifts.site", "custom_domain": true }
+  ],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": ".svelte-kit/cloudflare"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "thegifts",
+      "database_id": "f082372f-a0a6-49ce-b5fc-cef1f04f735a"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}

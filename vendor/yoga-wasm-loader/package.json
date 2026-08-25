@@ -1,0 +1,12 @@
+{
+  "name": "yoga-wasm-loader",
+  "version": "1.0.0",
+  "description": "Exposes the yoga-layout wasm binary as a CompiledWasm import for Cloudflare Workers",
+  "main": "index.js",
+  "type": "module",
+  "exports": {
+    "workerd": "./index.js",
+    "node": "./node.js",
+    "default": "./index.js"
+  }
+}
