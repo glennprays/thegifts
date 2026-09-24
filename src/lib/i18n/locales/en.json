@@ -91,7 +91,10 @@
       "allAnswered": "✓ All answered. You can continue.",
       "back": "Back",
       "continue": "Continue",
-      "seeResults": "See Results"
+      "seeResults": "See Results",
+      "errors": {
+        "submitFailed": "Failed to submit your answers. Please try again."
+      }
     },
     "result": {
       "title": "Your Spiritual Gifts Result",

@@ -14,6 +14,7 @@
   let { data }: { data: PageData } = $props();
 
   const lang = $page.params.lang as "en" | "id";
+  const resultId = data.short_id || $page.params.id;
   const maxScore = 25;
 
   let showShareModal = $state(false);
@@ -21,7 +22,7 @@
   let barWidths = $state<number[]>([]);
 
   const shareUrl = $derived(
-    `${$page.url.origin}/${lang}/questionnaire/result/${data.short_id}`,
+    `${$page.url.origin}/${lang}/questionnaire/result/${resultId}`,
   );
   const shareText = $derived(
     `${data.name}'s Spiritual Gifts assessment results. Check out their gifts!`,
@@ -36,7 +37,7 @@
 
   function viewGift(category: string) {
     goto(
-      `/${lang}/gifts/${category.toLowerCase()}?from=result&id=${data.short_id}`,
+      `/${lang}/gifts/${category.toLowerCase()}?from=result&id=${resultId}`,
     );
   }
 
@@ -46,7 +47,7 @@
 
   async function shareToStories() {
     try {
-      const response = await fetch(`/api/og-image/${data.short_id}`);
+      const response = await fetch(`/api/og-image/${resultId}`);
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");

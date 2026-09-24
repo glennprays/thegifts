@@ -110,9 +110,12 @@
         localStorage.removeItem(NAME_STORAGE_KEY);
         localStorage.removeItem(RESULTS_STORAGE_KEY);
         goto(`/${$page.params.lang}/questionnaire/result/${result.id}`);
+      } else {
+        alert($_("pages.questionnaire.errors.submitFailed"));
       }
     } catch (error) {
       console.error("Error submitting results:", error);
+      alert($_("pages.questionnaire.errors.submitFailed"));
     } finally {
       isLoading = false;
       isDisabledNext = false;

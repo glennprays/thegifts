@@ -10,6 +10,7 @@
   let isContinueTestVisible = false;
   let mobileMenuOpen = false;
   let scrolled = false;
+  $: lang = $page.params.lang || "en";
 
   $: isHomePage =
     $page.url.pathname === "/" ||
@@ -40,7 +41,7 @@
 <nav class="navbar" class:scrolled>
   <div class="navbar-inner">
     <!-- Brand: slab wordmark + little mark -->
-    <a href="/" rel="external" class="brand">
+    <a href="/{lang}" class="brand">
       <svg viewBox="0 0 32 32" class="brand-mark" aria-hidden="true">
         <path
           d="M16 3 L20 12 L29 13 L22 19.5 L24 29 L16 24 L8 29 L10 19.5 L3 13 L12 12 Z"
@@ -61,16 +62,16 @@
         <!-- Desktop actions -->
         <div class="hidden md:flex items-center gap-2">
           {#if isContinueTestVisible}
-            <a href="/questionnaire" class="btn-start smallcaps">
+            <a href="/{lang}/questionnaire" class="btn-start smallcaps">
               {$_("components.navbar.continueTest")}
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             </a>
-            <a href="/onboarding" class="btn-restart smallcaps" on:click={RestartTest}>
+            <a href="/{lang}/onboarding" class="btn-restart smallcaps" on:click={RestartTest}>
               <Restart />
               {$_("components.navbar.restartTest")}
             </a>
           {:else}
-            <a href="/onboarding" class="btn-start smallcaps">
+            <a href="/{lang}/onboarding" class="btn-start smallcaps">
               {$_("components.navbar.startTest")}
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             </a>
@@ -97,7 +98,7 @@
               {/if}
             </button>
           {:else}
-            <a href="/onboarding" class="btn-start smallcaps">
+            <a href="/{lang}/onboarding" class="btn-start smallcaps">
               {$_("components.navbar.startTest")}
             </a>
           {/if}
@@ -116,11 +117,11 @@
   ></button>
 
   <div class="mobile-drawer md:hidden">
-    <a href="/questionnaire" class="drawer-start smallcaps" on:click={closeMenu}>
+    <a href="/{lang}/questionnaire" class="drawer-start smallcaps" on:click={closeMenu}>
       {$_("components.navbar.continueTest")}
     </a>
     <a
-      href="/onboarding"
+      href="/{lang}/onboarding"
       class="drawer-restart smallcaps"
       on:click={() => {
         RestartTest();
