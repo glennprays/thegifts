@@ -1,13 +1,19 @@
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
+import { SUPPORTED_LOCALES } from '$lib/server/lang';
 
-const supportedLocales = ['en', 'id'];
+export const load: LayoutServerLoad = ({ params, url }) => {
+	const lang = params.lang.toLowerCase();
 
-export const load: LayoutServerLoad = ({ params }) => {
-	const lang = params.lang;
+	if (!(SUPPORTED_LOCALES as readonly string[]).includes(lang)) {
+		error(404, 'Not found');
+	}
 
-	if (!supportedLocales.includes(lang)) {
-		throw error(404, 'Not found');
+	if (lang !== params.lang) {
+		redirect(
+			301,
+			`/${lang}${url.pathname.slice(params.lang.length + 1)}${url.search}`,
+		);
 	}
 
 	return {

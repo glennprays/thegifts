@@ -91,7 +91,10 @@
       "allAnswered": "✓ Semua terjawab. Anda dapat melanjutkan.",
       "back": "Kembali",
       "continue": "Lanjutkan",
-      "seeResults": "Lihat Hasil"
+      "seeResults": "Lihat Hasil",
+      "errors": {
+        "submitFailed": "Gagal mengirim jawaban Anda. Silakan coba lagi."
+      }
     },
     "result": {
       "title": "Hasil Tes Karunia Rohani Anda",

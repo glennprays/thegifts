@@ -16,7 +16,7 @@
 
     // Compute new URL
     const currentPath = $page.url.pathname;
-    const newPath = currentPath.replace(/^\/[a-z]{2}/, `/${newLang}`);
+    const newPath = currentPath.replace(/^\/(en|id)(?=\/|$)/, `/${newLang}`);
 
     // Set cookie (client-side)
     document.cookie = `lang=${newLang}; path=/; max-age=31536000; SameSite=Lax`;
